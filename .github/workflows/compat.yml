@@ -123,9 +123,12 @@ jobs:
           key: playwright-${{ hashFiles('tests/ci/stack.sh') }}
       - name: Chromium
         # in the background: it is only needed once the stack is up
+        # retried: Ubuntu's mirrors sometimes 404 a package the runner's apt index still lists
         run: |
-          nohup uv run --no-project --with "$(sed -n 's/^PLAYWRIGHT=//p' tests/ci/stack.sh)" \
-            python -m playwright install --with-deps chromium > playwright-install.log 2>&1 &
+          nohup sh -c 'for i in 1 2 3; do
+              uv run --no-project --with "$(sed -n "s/^PLAYWRIGHT=//p" tests/ci/stack.sh)" python -m playwright install --with-deps chromium && exit 0
+              sleep 20; sudo apt-get update -q
+            done; exit 1' > playwright-install.log 2>&1 &
 
       - name: Bring up Nextcloud, Memories, Recognize, memories_facetag
         run: tests/ci/stack.sh up
@@ -211,7 +214,12 @@ jobs:
             ~/.cache/ms-playwright
             .cache/ui-harness
           key: standin-${{ hashFiles('tests/ci/stack.sh', 'tests/ui-harness/conftest.py') }}
-      - run: uv run --no-project --with "$(sed -n 's/^PLAYWRIGHT=//p' tests/ci/stack.sh)" python -m playwright install --with-deps chromium
+      - name: Chromium (retried, as above)
+        run: |
+          for i in 1 2 3; do
+            uv run --no-project --with "$(sed -n 's/^PLAYWRIGHT=//p' tests/ci/stack.sh)" python -m playwright install --with-deps chromium && exit 0
+            sleep 20; sudo apt-get update -q
+          done; exit 1
       - run: >
           uv run --no-project --with pytest --with pillow --with "$(sed -n 's/^PLAYWRIGHT=//p' tests/ci/stack.sh)"
           python -m pytest tests/ui-harness -v -p no:cacheprovider
