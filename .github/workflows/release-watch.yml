@@ -39,7 +39,7 @@ permissions:
   actions: write        # dispatch compat.yml on the branches
 
 concurrency:
-  group: release-watch-${{ inputs.fixture || 'live' }}
+  group: release-watch-${{ inputs.fixture || github.ref_name }}
   cancel-in-progress: false
 
 jobs:
