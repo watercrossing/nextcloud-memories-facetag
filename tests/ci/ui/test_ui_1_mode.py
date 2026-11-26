@@ -2,14 +2,19 @@
 
 import pytest
 
+import stackctl as s
 from conftest import BASE, open_photo, tagging_on
 from viewer import click_control
 
 
 @pytest.fixture
 def group(photos) -> int:
-    """A group photo with several faces Recognize found."""
-    return next(fid for fid, p in sorted(photos.items()) if p["file"].startswith("groups/G7Biarritz"))
+    """The group photo where Recognize found the most faces."""
+    groups = [fid for fid, p in photos.items() if p["kind"] == "group"]
+    rows = s.sql(f"""SELECT file_id, count(*) AS n FROM oc_recognize_face_detections
+                     WHERE user_id = '{s.TEST_USER}' AND file_id IN ({",".join(map(str, groups))})
+                     GROUP BY file_id ORDER BY n DESC, file_id LIMIT 1""")
+    return int(rows[0]["file_id"])
 
 
 def test_button_toggles_tagging(desktop, group, photos):

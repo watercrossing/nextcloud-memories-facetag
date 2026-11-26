@@ -69,7 +69,7 @@ def test_locate_finds_missed_faces_and_suggests_the_right_person(located):
     for fid, p, r in located:
         print(f"  {fid} {p['name']:22} face={'yes' if r['face'] else 'no ':3} "
               f"suggested={[(x['name'], x['distance']) for x in r['suggestions'][:3]]}")
-    # On the pinned versions all were found and named right first (27/27 in Nov 2026)
+    # On the pinned versions all were found, 58 of 63 named right first, all in the top 5 (Nov 2026)
     assert len(found) >= 0.9 * len(located)
     assert len(top5) >= 0.9 * len(found)
     assert len(top1) >= 0.85 * len(found)

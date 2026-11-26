@@ -10,11 +10,14 @@ Run once by hand when the set is (re)built; CI only runs fetch.py. Three steps:
 
 Who is in a photo comes from Commons, never from looking at faces: a candidate must carry a
 structured-data "depicts" (P180) statement for the person and name them in its title or
-description. Which face is theirs is then worked out statistically: across all the photos said
-to depict someone, the face that recurs (has a near match in the most other photos) is them;
-their centre is the medoid of those matches, and in each photo their face is the one near that
-centre, accepted only when no other face in the photo comes close. Photos placing a single
-person are "portraits" (others may be in them, unnamed); photos placing two or more are "group".
+description. Candidates come from a search per person and one per pair of people (photos of two
+of them together are rare among each person's first results). Which face is theirs is then
+worked out statistically: their centre starts as the medoid of the faces in their photos that
+show a single face and depict no one else (or, with too few of those, the face that recurs
+across their photos), refined to the medoid of the nearest faces; in each photo their face is
+the one near that centre, accepted only when no other face in the photo comes close. Photos
+placing a single person are "portraits" (others may be in them, unnamed); photos placing two or
+more are "group". Photos touching politics are left out (see POLITICAL).
 
 Standard library only, except detect, which runs node in the stack.
 """
@@ -28,6 +31,7 @@ import re
 import subprocess
 import sys
 import time
+import unicodedata
 import urllib.parse
 import urllib.request
 from pathlib import Path
@@ -36,41 +40,52 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 USER_AGENT = "memories-facetag-ci/1 (+https://github.com/watercrossing/nextcloud-memories-facetag; test photo set)"
 API = "https://commons.wikimedia.org/w/api.php"
+WIKIDATA = "https://www.wikidata.org/w/api.php"
 
-# Wikidata id → name. Public figures with many freely licensed photos, several of whom appear
-# together at summits, so there are group photos.
+# Wikidata id → name. Tennis players with many freely licensed photos, half women, half men, who
+# share podiums, nets, doubles and team events (Laver Cup, Fed Cup), so there are group photos.
 IDENTITIES = {
-    "Q22686": "Donald Trump",
-    "Q3052772": "Emmanuel Macron",
-    "Q567": "Angela Merkel",
-    "Q3099714": "Justin Trudeau",
-    "Q132345": "Shinzō Abe",
-    "Q264766": "Theresa May",
-    "Q180589": "Boris Johnson",
-    "Q57661": "Jean-Claude Juncker",
-    "Q946": "Donald Tusk",
-    "Q1058": "Narendra Modi",
-    "Q7747": "Vladimir Putin",
-    "Q15031": "Xi Jinping",
+    "Q11459": "Serena Williams",
+    "Q26840238": "Iga Świątek",
+    "Q230156": "Simona Halep",
+    "Q30767": "Caroline Wozniacki",
+    "Q30812": "Petra Kvitová",
+    "Q77178": "Angelique Kerber",
+    "Q1426": "Roger Federer",
+    "Q10132": "Rafael Nadal",
+    "Q10125": "Andy Murray",
+    "Q193661": "Stan Wawrinka",
+    "Q88762": "Dominic Thiem",
+    "Q311222": "Kei Nishikori",
 }
-PORTRAITS_PER_IDENTITY = 12
+PORTRAITS_PER_IDENTITY = 16
 GROUP_PHOTOS = 25
-CANDIDATES_PER_IDENTITY = 80
+CANDIDATES_PER_IDENTITY = 150  # many are match shots with faces too small to use
+PAIR_CANDIDATES = 40
+# No politics in the test photos: photos depicting a politician or office holder (Wikidata
+# occupation politician, or any position held), whose title or description names an office, or
+# published by a government body, are left out — trophy presentations, receptions and a town's
+# own photographer bring in mayors, ministers and presidents.
+POLITICIAN = "Q82955"
+POLITICAL = re.compile(r"\b(president|presidente|pr[ée]sident|prime minister|minister|ministr|mayor|alcald|"
+                       r"b[üu]rgermeister|governor|senator|congress|parliament|la moneda|white house|kremlin)", re.I)
+OFFICIAL = re.compile(r"\b(municipio|municipality|city of|council|government|gobierno|presidencia|white house|kremlin|"
+                      r"embassy|ministry|state department)", re.I)
 MAX_BYTES = 10 << 20
 LICENCE_OK = re.compile(r"^(CC0|Public domain|PD\b|CC BY(-SA)? [\d.]+)", re.I)
 
 # Face-model thresholds for choosing photos (descriptor distances are Euclidean, as Recognize's)
 MIN_SCORE = 0.8                  # faces considered at all
 MIN_HEIGHT = 0.05                # ... and their height, relative to the image
-SAME_PERSON = 0.45               # a face to its person's centre
+SAME_PERSON = 0.50               # a face to its person's centre
 MARGIN = 0.10                    # ... and the photo's next face at least this much further
 MIN_PHOTOS = 6                   # identities with fewer usable photos are left out
 DISTINCT = 0.12                  # two portraits closer than this are the same shot; keep one
 
 
-def api(params: dict) -> dict:
+def api(params: dict, endpoint: str = API) -> dict:
     params = {**params, "format": "json", "formatversion": "2"}
-    req = urllib.request.Request(API + "?" + urllib.parse.urlencode(params), headers={"User-Agent": USER_AGENT})
+    req = urllib.request.Request(endpoint + "?" + urllib.parse.urlencode(params), headers={"User-Agent": USER_AGENT})
     for attempt in range(5):
         try:
             with urllib.request.urlopen(req, timeout=60) as r:
@@ -98,6 +113,11 @@ def download(url: str, target: Path) -> None:
                 raise
             print(f"  retry {target.name} after {e}", file=sys.stderr)
             time.sleep(10 * (attempt + 1))
+
+
+def fold(s: str) -> str:
+    """Lower case without accents, so 'Świątek' matches a title spelling it 'Swiatek'."""
+    return "".join(c for c in unicodedata.normalize("NFKD", s.lower()) if not unicodedata.combining(c)).replace("ł", "l")
 
 
 def strip_html(s: str) -> str:
@@ -145,36 +165,80 @@ def depicts(titles: list[str]) -> dict[str, list[str]]:
     return out
 
 
+def search(query: str, limit: int):
+    """Commons files matching a search, best first, that pass meta()."""
+    seen = 0
+    offset = 0
+    while seen < limit and offset is not None and offset < 1000:
+        r = api({"action": "query", "generator": "search", "gsrsearch": query + " filetype:bitmap",
+                 "gsrnamespace": "6", "gsrlimit": "50", "gsroffset": str(offset), "prop": "imageinfo",
+                 "iiprop": "url|size|sha1|mime|extmetadata", "iiurlwidth": "1280"})
+        offset = r.get("continue", {}).get("gsroffset")
+        for page in sorted(r.get("query", {}).get("pages", []), key=lambda p: p.get("index", 0)):
+            m = meta(page)
+            if m is not None:
+                seen += 1
+                yield m
+
+
+def is_political(m: dict) -> bool:
+    return m["depicts_politician"] or bool(POLITICAL.search(m["title"] + " " + m["description"])) \
+        or bool(OFFICIAL.search(m["author"]))
+
+
+def politicians(qids: set[str]) -> set[str]:
+    """Those of qids that Wikidata says are politicians or have held a position."""
+    out = set()
+    qids = sorted(qids)
+    for i in range(0, len(qids), 50):
+        e = api({"action": "wbgetentities", "ids": "|".join(qids[i:i + 50]), "props": "claims"}, WIKIDATA)
+        for q, ent in e.get("entities", {}).items():
+            claims = ent.get("claims", {})
+            jobs = {c["mainsnak"].get("datavalue", {}).get("value", {}).get("id") for c in claims.get("P106", [])}
+            if POLITICIAN in jobs or claims.get("P39"):
+                out.add(q)
+    return out
+
+
 def candidates(work: Path) -> None:
     thumbs = work / "thumbs"
     thumbs.mkdir(parents=True, exist_ok=True)
     found: dict[str, dict] = {}
+
+    def add(m: dict, qids: list[str]) -> int:
+        """Record m as a candidate for each of qids whose surname its title or description gives."""
+        text = fold(m["title"] + " " + m["description"])
+        named = [q for q in qids if fold(IDENTITIES[q].split()[-1]) in text]
+        if not named:
+            return 0
+        entry = found.setdefault(m["title"], m)
+        entry.setdefault("named_qids", [])
+        new = [q for q in named if q not in entry["named_qids"]]
+        entry["named_qids"] += new
+        return len(new)
+
     for qid, name in IDENTITIES.items():
-        surname = name.split()[-1].lower()
         got = 0
-        offset = 0
-        while got < CANDIDATES_PER_IDENTITY and offset is not None and offset < 1000:
-            r = api({"action": "query", "generator": "search", "gsrsearch": f"haswbstatement:P180={qid} filetype:bitmap",
-                     "gsrnamespace": "6", "gsrlimit": "50", "gsroffset": str(offset), "prop": "imageinfo",
-                     "iiprop": "url|size|sha1|mime|extmetadata", "iiurlwidth": "1280"})
-            offset = r.get("continue", {}).get("gsroffset")
-            for page in sorted(r.get("query", {}).get("pages", []), key=lambda p: p.get("index", 0)):
-                m = meta(page)
-                if m is None:
-                    continue
-                text = (m["title"] + " " + m["description"]).lower()
-                if surname not in text and surname.replace("ō", "o") not in text:
-                    continue
-                entry = found.setdefault(m["title"], m)
-                entry.setdefault("named_qids", [])
-                if qid not in entry["named_qids"]:
-                    entry["named_qids"].append(qid)
-                    got += 1
+        for m in search(f"haswbstatement:P180={qid}", 10 * CANDIDATES_PER_IDENTITY):
+            got += add(m, [qid])
+            if got >= CANDIDATES_PER_IDENTITY:
+                break
         print(f"{name}: {got} candidates", file=sys.stderr)
+    # Photos of two of them together are rare among each person's first results: search each pair
+    qids = list(IDENTITIES)
+    for i, a in enumerate(qids):
+        for b in qids[i + 1:]:
+            got = sum(add(m, [a, b]) > 0 for m in search(f"haswbstatement:P180={a} haswbstatement:P180={b}", PAIR_CANDIDATES))
+            if got:
+                print(f"{IDENTITIES[a]} + {IDENTITIES[b]}: {got} candidates", file=sys.stderr)
     titles = list(found)
     d = depicts(titles)
     for t in titles:
         found[t]["depicts"] = [q for q in d.get(t, []) if q in IDENTITIES]
+        found[t]["depicts_others"] = [q for q in d.get(t, []) if q not in IDENTITIES]
+    political = politicians({q for m in found.values() for q in m["depicts_others"]})
+    for m in found.values():
+        m["depicts_politician"] = bool(set(m["depicts_others"]) & political)
     for i, (t, m) in enumerate(found.items()):
         m["file"] = f"{m['sha1']}.jpg"
         download(m["thumb"], thumbs / m["file"])
@@ -218,28 +282,40 @@ def usable(fs: list[dict]) -> list[dict]:
 def select(work: Path) -> None:
     found = json.loads((work / "candidates.json").read_text())
     faces = {f: usable(fs) for f, fs in json.loads((work / "faces.json").read_text()).items()}
-    by_file = {m["file"]: m for m in found.values()}
+    left_out = [m for m in found.values() if is_political(m)]
+    print(f"{len(left_out)} candidates left out as political", file=sys.stderr)
+    by_file = {m["file"]: m for m in found.values() if not is_political(m)}
     depicted = {q: [f for f, m in by_file.items() if q in m["depicts"] and q in m["named_qids"] and faces.get(f)]
                 for q in IDENTITIES}
 
-    # Each person's centre: the face that recurs across the photos said to depict them
+    # Each person's centre. Where they have enough photos showing one face and depicting no one
+    # else, start from the medoid of those faces; otherwise from the face that recurs across the
+    # photos said to depict them. (Recurrence alone can settle on a "hub": a blurred or tiny face
+    # near everyone's, which recurs everywhere; and two people often photographed together, as in
+    # a final, would both get the more frequent face.)
     centres: dict[str, list[float]] = {}
     for q, files in depicted.items():
-        best = None
-        for f in files:
-            for v in faces[f]:
-                support = sum(1 for g in files if g != f and any(dist(v["vector"], w["vector"]) < SAME_PERSON for w in faces[g]))
-                if best is None or support > best[0]:
-                    best = (support, v["vector"])
-        if best is None:
-            continue
-        c = best[1]
+        alone = [faces[f][0]["vector"] for f in files if by_file[f]["depicts"] == [q] and len(faces[f]) == 1]
+        if len(alone) >= 2 * MIN_PHOTOS:
+            c = medoid(alone)
+            how = f"medoid of {len(alone)} single-face photos"
+        else:
+            best = None
+            for f in files:
+                for v in faces[f]:
+                    support = sum(1 for g in files if g != f and any(dist(v["vector"], w["vector"]) < SAME_PERSON for w in faces[g]))
+                    if best is None or support > best[0]:
+                        best = (support, v["vector"])
+            if best is None:
+                continue
+            c = best[1]
+            how = f"recurring face in {best[0] + 1}"
         for _ in range(3):
             near = [min(faces[g], key=lambda w: dist(w["vector"], c))["vector"] for g in files]
             near = [v for v in near if dist(v, c) < SAME_PERSON]
             c = medoid(near) if near else c
         centres[q] = c
-        print(f"{IDENTITIES[q]}: {len(files)} photos depict them; recurring face in {best[0] + 1}", file=sys.stderr)
+        print(f"{IDENTITIES[q]}: {len(files)} photos depict them; centre from the {how}", file=sys.stderr)
 
     def place(f: str, q: str) -> dict | None:
         ranked = sorted(faces[f], key=lambda w: dist(w["vector"], centres[q]))

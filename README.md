@@ -10,12 +10,12 @@ On one 12-person group photo it kept 8.
 
 | Memories and Recognize alone | With this app, after its scan, tagging on |
 |---|---|
-| ![Four people on the photo; the sidebar's People section names one](docs/media/before.webp) | ![Tagging mode: Recognize's named face, and "Who is this?" boxes on the others, one of them a face only the scan found](docs/media/after.webp) |
-| Four people, one of them named; Recognize never found the other three faces. | The second man's face, found by the scan, waits as "Who is this?"; tapping it ranks the likeliest people first (★): |
+| ![A tennis player and spectators on the photo; the sidebar shows no people](docs/media/before.webp) | ![Tagging mode: "Who is this?" boxes on the faces, one of them the player's, which only the scan found](docs/media/after.webp) |
+| Recognize found three faces in the crowd and missed the player's, so nobody on the photo is named. | The player's face, found by the scan, waits as "Who is this?"; tapping it ranks the likeliest people first (★): |
 
 ![The name picker on the scan's face: the right person first, starred](docs/media/picker.webp)
 
-<sub>Real Memories 11 and Recognize 12 in the test stack; regenerate with [`tests/readme-media/capture.py`](tests/readme-media/capture.py). Photos: [G7 Biarritz](https://commons.wikimedia.org/wiki/File:-G7Biarritz_(48616290793).jpg) and [State Dinner](https://commons.wikimedia.org/wiki/File:State_Dinner_-_The_Official_State_Visit_of_France_(26832278157).jpg), The White House, public domain, via Wikimedia Commons; names come from the photos' Commons descriptions.</sub>
+<sub>Real Memories 11 and Recognize 12 in the test stack; regenerate with [`tests/readme-media/capture.py`](tests/readme-media/capture.py). Photos: [Rafael Nadal, BNP Paribas Showdown 2013](https://commons.wikimedia.org/wiki/File:Rafael_Nadal_-_BNP_Paribas_Showdown_2013_-_004.jpg), Ian Gampon, [CC BY 2.0](https://creativecommons.org/licenses/by/2.0), and [Sydney International WTA Players Cruise](https://commons.wikimedia.org/wiki/File:Sydney_International_WTA_Players_Cruise_(46000968805).jpg), Rob Keating, [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0), via Wikimedia Commons; names come from the photos' Commons descriptions.</sub>
 
 ## What you get
 
