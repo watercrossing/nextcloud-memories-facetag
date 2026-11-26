@@ -13,9 +13,14 @@ from viewer import click_control, swipe
 
 @pytest.fixture
 def start(photos):
-    """A group photo in the middle of its folder (neighbours both sides)."""
-    groups = sorted(fid for fid, p in photos.items() if p["kind"] == "group")
-    return groups[len(groups) // 2]
+    """A group photo in the middle of its folder as the viewer orders it, by date taken, so it has
+    neighbours both sides (file ids follow the order the scan met the files, which varies)."""
+    groups = [fid for fid, p in photos.items() if p["kind"] == "group"]
+    rows = s.sql(f"SELECT fileid FROM oc_memories WHERE fileid IN ({','.join(map(str, groups))}) "
+                 "ORDER BY datetaken DESC, fileid DESC")
+    order = [r["fileid"] for r in rows]
+    assert len(order) == len(groups), f"{len(groups)} group photos, {len(order)} in Memories' index"
+    return order[len(order) // 2]
 
 
 def assert_shows(ov, fid: int) -> None:
