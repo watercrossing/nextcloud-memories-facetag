@@ -11,7 +11,7 @@ On one 12-person group photo it kept 8.
 | Memories and Recognize alone | With this app, after its scan, tagging on |
 |---|---|
 | ![Four people on the photo; the sidebar's People section names one](docs/media/before.webp) | ![Tagging mode: Recognize's named face, and "Who is this?" boxes on the others, one of them a face only the scan found](docs/media/after.webp) |
-| Four people, one of them named; Recognize never found the second man's face. | The second man's face, found by the scan, waits as "Who is this?"; tapping it ranks the likeliest people first (★): |
+| Four people, one of them named; Recognize never found the other three faces. | The second man's face, found by the scan, waits as "Who is this?"; tapping it ranks the likeliest people first (★): |
 
 ![The name picker on the scan's face: the right person first, starred](docs/media/picker.webp)
 
