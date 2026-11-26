@@ -6,14 +6,14 @@
     "memories": {
       "34": [
         {
-          "version": "11.1.4",
-          "url": "https://github.com/pulsejet/memories/releases/download/v11.1.4/memories.tar.gz",
-          "sha256": "39b5ec6bf175334432e8c409a0484da866fff903c634942ccb3c41809f906353"
-        },
-        {
           "version": "11.1.3",
           "url": "https://github.com/pulsejet/memories/releases/download/v11.1.3/memories.tar.gz",
           "sha256": "c91ed7a0accc165b5c2bc7325724a8c27953da66e0a05e35ba3f8913ee4655cc"
+        },
+        {
+          "version": "11.1.2",
+          "url": "https://github.com/pulsejet/memories/releases/download/v11.1.2/memories.tar.gz",
+          "sha256": "1f1e3e49bfadac09063783696fce1e320493c9b5fe5e34f92d0463e9e7df81f1"
         }
       ]
     },
