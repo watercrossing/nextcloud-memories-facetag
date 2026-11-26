@@ -1,0 +1,26 @@
+#!/bin/sh
+# Install or update the app in a Nextcloud running in Docker, then enable it.
+#
+#   ./deploy                     # container "nextcloud", apps in /var/www/html/custom_apps
+#   CONTAINER=nc ./deploy
+#
+# Copies the files as www-data via tar inside the container, swaps the app directory in one step,
+# and runs `occ upgrade` when appinfo/info.xml's version differs from the installed one: until it
+# runs, Nextcloud answers every request with "update required".
+set -eu
+cd "$(dirname "$0")"
+CONTAINER=${CONTAINER:-nextcloud}
+APPS=${APPS:-/var/www/html/custom_apps}
+APP=memories_facetag
+DEST=$APPS/$APP
+occ() { docker exec -u www-data "$CONTAINER" php occ "$@"; }
+
+docker exec -u www-data "$CONTAINER" sh -c "rm -rf $DEST.new && mkdir -p $DEST.new"
+tar -cf - appinfo lib js css bin | docker exec -i -u www-data "$CONTAINER" tar -C "$DEST.new" -xf -
+docker exec -u www-data "$CONTAINER" sh -c "rm -rf $DEST.old; if [ -d $DEST ]; then mv $DEST $DEST.old; fi; mv $DEST.new $DEST; rm -rf $DEST.old"
+occ app:enable "$APP"
+want=$(sed -n 's:.*<version>\(.*\)</version>.*:\1:p' appinfo/info.xml)
+have=$(occ config:app:get "$APP" installed_version)
+if [ "$want" != "$have" ]; then
+	occ upgrade -n
+fi

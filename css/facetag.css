@@ -1,0 +1,232 @@
+/* Memories' top bar is absolutely positioned but not a row; make it one so the button sits beside the actions */
+.memories-viewer .top-bar:has(.facetag-button) {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.memories-viewer .top-bar .facetag-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	height: 44px;
+	margin: 0 2px;
+	padding: 0;
+	border: none;
+	border-radius: 50%;
+	background: transparent;
+	color: #fff;
+	cursor: pointer;
+	vertical-align: middle;
+}
+.memories-viewer .top-bar .facetag-button:hover,
+.memories-viewer .top-bar .facetag-button.active {
+	background: rgba(255, 255, 255, 0.18);
+}
+.memories-viewer .top-bar .facetag-button[hidden] {
+	display: none;
+}
+
+/* Covers the viewer; everything inside is positioned in the layer's own coordinates */
+.facetag-layer {
+	position: absolute; /* inside .memories-viewer, which is position: fixed — so it covers the viewer, not the sidebar */
+	inset: 0;
+	z-index: 2147483000;
+	cursor: crosshair;
+	touch-action: none;
+	user-select: none;
+	font-family: var(--font-face, system-ui, sans-serif);
+	font-size: 14px;
+	color: #e4e6eb;
+}
+
+.facetag-tag {
+	position: absolute;
+	pointer-events: none;
+}
+.facetag-box {
+	position: absolute;
+	inset: 0;
+	border: 2px solid rgba(255, 255, 255, 0.85);
+	border-radius: 4px;
+	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.45), inset 0 0 0 1px rgba(0, 0, 0, 0.35);
+	pointer-events: auto;
+	cursor: pointer;
+}
+.facetag-tag.unnamed .facetag-box {
+	border-style: dashed;
+	border-color: rgba(255, 255, 255, 0.6);
+}
+.facetag-label {
+	position: absolute;
+	top: calc(100% + 8px);
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 6px 12px;
+	border-radius: 8px;
+	background: rgba(36, 37, 38, 0.92);
+	white-space: nowrap;
+	pointer-events: auto;
+	cursor: pointer;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+.facetag-label::before {
+	content: '';
+	position: absolute;
+	bottom: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	border: 6px solid transparent;
+	border-bottom-color: rgba(36, 37, 38, 0.92);
+}
+.facetag-tag.unnamed .facetag-label {
+	font-style: italic;
+	color: #b0b3b8;
+}
+.facetag-tag:hover .facetag-box {
+	border-color: #fff;
+}
+
+.facetag-square {
+	position: absolute;
+	border: 2px solid #fff;
+	border-radius: 4px;
+	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5), 0 0 0 9999px rgba(0, 0, 0, 0.25);
+	pointer-events: none;
+	transition: left 0.15s, top 0.15s, width 0.15s, height 0.15s;
+}
+.facetag-square.found {
+	border-color: #4cc2ff;
+}
+
+.facetag-picker {
+	position: absolute;
+	width: 280px;
+	max-height: min(420px, 70vh);
+	display: flex;
+	flex-direction: column;
+	border-radius: 10px;
+	background: #242526;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+	cursor: default;
+	overflow: hidden;
+}
+.facetag-picker.busy {
+	opacity: 0.6;
+	pointer-events: none;
+}
+.facetag-current {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+	padding: 10px 12px 4px;
+	font-weight: 600;
+}
+.facetag-remove {
+	flex: none;
+	padding: 4px 10px;
+	border: none;
+	border-radius: 6px;
+	background: #5c2b2b;
+	color: #ffb4b4;
+	font-size: 13px;
+	cursor: pointer;
+}
+.facetag-remove:hover {
+	background: #7a3333;
+}
+.facetag-search {
+	padding: 10px 10px 6px;
+}
+.facetag-search input {
+	width: 100%;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 8px 12px;
+	border: none;
+	border-radius: 18px;
+	background: #3a3b3c;
+	color: #e4e6eb;
+	font-size: 14px;
+	outline: none;
+}
+.facetag-search input:focus {
+	box-shadow: 0 0 0 2px #2d88ff;
+}
+.facetag-list {
+	overflow-y: auto;
+	padding: 0 6px 8px;
+}
+.facetag-item {
+	padding: 8px 10px;
+	border-radius: 6px;
+	cursor: pointer;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.facetag-item.selected {
+	background: #3a3b3c;
+	box-shadow: inset 0 0 0 2px #2d88ff;
+}
+.facetag-item.suggested::after {
+	content: '★';
+	float: right;
+	color: #4cc2ff;
+	font-size: 12px;
+}
+.facetag-item.new {
+	color: #4cc2ff;
+}
+.facetag-note {
+	padding: 8px 10px;
+	color: #b0b3b8;
+	font-size: 13px;
+}
+.facetag-sep {
+	height: 1px;
+	margin: 4px 6px;
+	background: #3e4042;
+}
+
+.facetag-bar {
+	position: absolute;
+	left: 50%;
+	bottom: 24px;
+	transform: translateX(-50%);
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	max-width: calc(100vw - 32px);
+	padding: 10px 12px 10px 18px;
+	border-radius: 12px;
+	background: rgba(24, 25, 26, 0.9);
+	cursor: default;
+}
+.facetag-hint {
+	color: #e4e6eb;
+}
+.facetag-done {
+	flex: none;
+	padding: 8px 18px;
+	border: none;
+	border-radius: 8px;
+	background: #0866ff;
+	color: #fff;
+	font-weight: 600;
+	cursor: pointer;
+}
+.facetag-done:hover {
+	background: #1877f2;
+}
+@media (max-width: 600px) {
+	.facetag-hint {
+		display: none;
+	}
+}
+
+/* Crowded photos: labels of neighbouring faces overlap, so whichever face is under the pointer comes to the front */
+.facetag-tag:hover {
+	z-index: 1;
+}
