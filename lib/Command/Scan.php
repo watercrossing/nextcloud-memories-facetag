@@ -29,6 +29,7 @@ class Scan extends Command {
 			->addOption('file', null, InputOption::VALUE_REQUIRED, 'Only this file id (scanned even if done before)')
 			->addOption('limit', null, InputOption::VALUE_REQUIRED, 'Stop after this many photos', '0')
 			->addOption('max-minutes', null, InputOption::VALUE_REQUIRED, 'Stop after this long', '0')
+			->addOption('settle-hours', null, InputOption::VALUE_REQUIRED, 'Skip photos Memories indexed less than this long ago, leaving them to Recognize first (0 = none; for a freshly indexed library)', (string)($d['settleSeconds'] / 3600))
 			->addOption('min-score', null, InputOption::VALUE_REQUIRED, 'Detector confidence floor', (string)$d['minScore'])
 			->addOption('max-yaw', null, InputOption::VALUE_REQUIRED, 'Drop faces turned further than this', (string)$d['maxYaw'])
 			->addOption('min-size', null, InputOption::VALUE_REQUIRED, 'Drop faces smaller than this fraction of the image, both ways (Recognize never clusters below 0.03)', (string)$d['minSize'])
@@ -64,6 +65,7 @@ class Scan extends Command {
 			'file' => $input->getOption('file') !== null ? (int)$input->getOption('file') : null,
 			'limit' => (int)$input->getOption('limit'),
 			'deadline' => $minutes > 0 ? time() + 60 * $minutes : PHP_INT_MAX,
+			'settleSeconds' => (int)round(3600 * (float)$input->getOption('settle-hours')),
 			'minScore' => (float)$input->getOption('min-score'),
 			'maxYaw' => (float)$input->getOption('max-yaw'),
 			'minSize' => (float)$input->getOption('min-size'),

@@ -1,0 +1,177 @@
+# Run the app against real Nextcloud + Memories + Recognize (PostgreSQL, Recognize's real face
+# pipeline) for every pinned combination in tests/ci/versions.json. See CLAUDE.md.
+name: Compatibility
+
+on:
+  # Branches are covered by their pull request; pushing to both would run every cell twice
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      nextcloud:
+        description: "Nextcloud image tag version (e.g. 34 or 34.0.6)"
+        default: "34"
+      memories:
+        description: "Memories release (empty: every pinned one)"
+        default: ""
+      recognize:
+        description: "Recognize release (empty: every pinned one)"
+        default: ""
+      readme_media:
+        description: "Also regenerate the README screenshots and animation (artifact readme-media)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: compat-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.m.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      # Fetch the photos once here, so the matrix jobs restore them rather than all asking
+      # Wikimedia Commons at once (it rate-limits)
+      - name: Cache photo set
+        id: photos
+        uses: actions/cache@v4
+        with:
+          path: .cache/photos
+          key: photos-${{ hashFiles('tests/data/manifest.json', 'tests/data/fetch.py') }}
+      - name: Fetch photo set
+        if: steps.photos.outputs.cache-hit != 'true'
+        run: uv run --no-project --with pillow python tests/data/fetch.py .cache/photos
+      - id: m
+        env:
+          NC: ${{ inputs.nextcloud }}
+          MEM: ${{ inputs.memories }}
+          REC: ${{ inputs.recognize }}
+        run: |
+          python3 tests/ci/versions.py matrix > all.json
+          # workflow_dispatch: narrow to the versions asked for (an unpinned one is resolved from the App Store)
+          python3 - <<'EOF' >> "$GITHUB_OUTPUT"
+          import json, os
+          cells = json.load(open("all.json"))["include"]
+          nc, mem, rec = (os.environ.get(k) or "" for k in ("NC", "MEM", "REC"))
+          if nc or mem or rec:
+              mems = [mem] if mem else sorted({c["memories"] for c in cells}, reverse=True)
+              recs = [rec] if rec else sorted({c["recognize"] for c in cells}, reverse=True)
+              cells = [{"nextcloud": nc or "34", "memories": m, "recognize": r} for m in mems for r in recs]
+          print("matrix=" + json.dumps({"include": cells}))
+          EOF
+          cat "$GITHUB_OUTPUT"
+
+  compat:
+    needs: matrix
+    name: NC ${{ matrix.nextcloud }} · Memories ${{ matrix.memories }} · Recognize ${{ matrix.recognize }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.matrix.outputs.matrix) }}
+    env:
+      NEXTCLOUD_VERSION: ${{ matrix.nextcloud }}
+      MEMORIES_VERSION: ${{ matrix.memories }}
+      RECOGNIZE_VERSION: ${{ matrix.recognize }}
+      FACETAG_CACHE: ${{ github.workspace }}/.cache
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+
+      # Release tarballs and Recognize's native runtime (node, CPU libtensorflow, tfjs-node binding)
+      - name: Cache Memories release
+        uses: actions/cache@v4
+        with:
+          path: .cache/apps/memories-${{ matrix.memories }}.tar.gz
+          key: app-memories-${{ matrix.memories }}
+      - name: Cache Recognize release and runtime
+        uses: actions/cache@v4
+        with:
+          path: |
+            .cache/apps/recognize-${{ matrix.recognize }}.tar.gz
+            .cache/runtime
+          key: app-recognize-${{ matrix.recognize }}-runtime-v1
+      - name: Cache photo set
+        uses: actions/cache@v4
+        with:
+          path: .cache/photos
+          key: photos-${{ hashFiles('tests/data/manifest.json', 'tests/data/fetch.py') }}
+
+      - name: Bring up Nextcloud, Memories, Recognize, memories_facetag
+        run: tests/ci/stack.sh up
+      - name: Load photos, run Recognize, name its clusters
+        run: tests/ci/stack.sh dataset
+      - name: Server-side tests
+        run: tests/ci/stack.sh test --junitxml=test-results.xml
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### NC ${NEXTCLOUD_VERSION} · Memories ${MEMORIES_VERSION} · Recognize ${RECOGNIZE_VERSION}"
+            echo '```'
+            tests/ci/stack.sh occ status 2>/dev/null | grep versionstring || true
+            python3 - <<'EOF' || true
+          import xml.etree.ElementTree as ET
+          root = ET.parse("test-results.xml").getroot()
+          s = root if root.tag == "testsuite" else root.find("testsuite")
+          print(f"tests: {s.get('tests')}, failures: {s.get('failures')}, errors: {s.get('errors')}, time: {float(s.get('time')):.0f}s")
+          EOF
+            du -sh .cache/apps .cache/runtime .cache/photos 2>/dev/null || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Collect logs
+        if: failure()
+        run: tests/ci/stack.sh logs ci-logs
+      - name: Upload logs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: logs-nc${{ matrix.nextcloud }}-memories${{ matrix.memories }}-recognize${{ matrix.recognize }}
+          path: |
+            ci-logs
+            test-results.xml
+      - name: Tear down
+        if: always()
+        run: tests/ci/stack.sh down
+
+  # By hand only: the README's screenshots and animation from the real Memories, as an artifact
+  # to commit into docs/media/ (newest pinned versions). See CLAUDE.md.
+  readme-media:
+    if: github.event_name == 'workflow_dispatch' && inputs.readme_media
+    needs: matrix
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      FACETAG_CACHE: ${{ github.workspace }}/.cache
+      NC_PORT: "18080"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - name: Cache photo set
+        uses: actions/cache@v4
+        with:
+          path: .cache/photos
+          key: photos-${{ hashFiles('tests/data/manifest.json', 'tests/data/fetch.py') }}
+      - name: ffmpeg and Chromium
+        run: |
+          sudo apt-get update -q && sudo apt-get install -y -q ffmpeg
+          uv run --no-project --with playwright python -m playwright install --with-deps chromium
+      - run: tests/ci/stack.sh up
+      - run: tests/ci/stack.sh dataset
+      - run: uv run --no-project --with playwright python tests/readme-media/capture.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: readme-media
+          path: docs/media
+      - if: always()
+        run: tests/ci/stack.sh down

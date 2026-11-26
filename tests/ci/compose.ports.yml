@@ -1,0 +1,6 @@
+# Added by stack.sh when NC_PORT is set: Nextcloud's web server on 127.0.0.1:NC_PORT, for a browser
+# (tests/readme-media). The server-side tests don't need it.
+services:
+  nextcloud:
+    ports:
+      - "127.0.0.1:${NC_PORT}:80"

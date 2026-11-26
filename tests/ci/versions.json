@@ -1,0 +1,35 @@
+{
+  "nextcloud": [
+    "34"
+  ],
+  "apps": {
+    "memories": {
+      "34": [
+        {
+          "version": "11.1.4",
+          "url": "https://github.com/pulsejet/memories/releases/download/v11.1.4/memories.tar.gz",
+          "sha256": "39b5ec6bf175334432e8c409a0484da866fff903c634942ccb3c41809f906353"
+        },
+        {
+          "version": "11.1.3",
+          "url": "https://github.com/pulsejet/memories/releases/download/v11.1.3/memories.tar.gz",
+          "sha256": "c91ed7a0accc165b5c2bc7325724a8c27953da66e0a05e35ba3f8913ee4655cc"
+        }
+      ]
+    },
+    "recognize": {
+      "34": [
+        {
+          "version": "12.0.3",
+          "url": "https://github.com/nextcloud/recognize/releases/download/v12.0.3/recognize-12.0.3.tar.gz",
+          "sha256": "f53fcc3f58cf8e592f4f23bca66e325bd680ef408086dfd162d8d3ada831b370"
+        },
+        {
+          "version": "12.0.2",
+          "url": "https://github.com/nextcloud/recognize/releases/download/v12.0.2/recognize-12.0.2.tar.gz",
+          "sha256": "d01854c151962a7b9a1f5be0fcc7203521c4d3f7f7d7b6b881d75c6e0545d342"
+        }
+      ]
+    }
+  }
+}

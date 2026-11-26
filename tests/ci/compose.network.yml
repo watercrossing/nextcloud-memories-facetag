@@ -1,0 +1,5 @@
+# Added by stack.sh when FACETAG_NETWORK is set: run on that existing docker network.
+networks:
+  default:
+    name: ${FACETAG_NETWORK}
+    external: true

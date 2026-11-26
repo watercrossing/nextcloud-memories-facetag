@@ -1,0 +1,2769 @@
+{
+ "about": "Test photo set for memories_facetag's compatibility tests; fetched by fetch.py. Built by curate.py from Wikimedia Commons; see ATTRIBUTION.md.",
+ "identities": {
+  "Q22686": "Donald Trump",
+  "Q3052772": "Emmanuel Macron",
+  "Q567": "Angela Merkel",
+  "Q3099714": "Justin Trudeau",
+  "Q132345": "Shinzō Abe",
+  "Q264766": "Theresa May",
+  "Q180589": "Boris Johnson",
+  "Q57661": "Jean-Claude Juncker",
+  "Q946": "Donald Tusk",
+  "Q1058": "Narendra Modi",
+  "Q7747": "Vladimir Putin",
+  "Q15031": "Xi Jinping"
+ },
+ "photos": [
+  {
+   "file": "groups/2018_BRICS_summit_6_27188686.jpg",
+   "kind": "group",
+   "page": "https://commons.wikimedia.org/wiki/File:2018_BRICS_summit_(6).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/5/50/2018_BRICS_summit_%286%29.jpg",
+   "sha1": "27188686034a809004a679a7ede97489940bf888",
+   "sha256": "7c7320cf4e5853108cdbb26b98b0f7e7c85791192b76422b4ea0162ceedc42e7",
+   "bytes": 2808628,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "Пресс-служба Президента Российской Федерации",
+   "people": [
+    {
+     "qid": "Q15031",
+     "name": "Xi Jinping",
+     "x": 0.155,
+     "y": 0.24,
+     "size": 0.112
+    },
+    {
+     "qid": "Q1058",
+     "name": "Narendra Modi",
+     "x": 0.307,
+     "y": 0.285,
+     "size": 0.104
+    }
+   ],
+   "faces": 3
+  },
+  {
+   "file": "groups/Angela_Merkel_Vladimir_Putin_November_2018_c4010f11.jpg",
+   "kind": "group",
+   "page": "https://commons.wikimedia.org/wiki/File:Angela_Merkel_%26_Vladimir_Putin_-_November_2018.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Angela_Merkel_%26_Vladimir_Putin_-_November_2018.jpg",
+   "sha1": "c4010f11e7e506c1470d886bc26f623fd2f9d325",
+   "sha256": "8102ef39216587b439471556b321ed24241430cf122ea5b77a57222a1b53cec9",
+   "bytes": 285447,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "The Kremlin, Moscow",
+   "people": [
+    {
+     "qid": "Q567",
+     "name": "Angela Merkel",
+     "x": 0.2,
+     "y": 0.341,
+     "size": 0.227
+    },
+    {
+     "qid": "Q7747",
+     "name": "Vladimir Putin",
+     "x": 0.554,
+     "y": 0.309,
+     "size": 0.22
+    }
+   ],
+   "faces": 4
+  },
+  {
+   "file": "groups/Brussels_European_Council_18_12_14_joint_press_conference_P__e5b05931.jpg",
+   "kind": "group",
+   "page": "https://commons.wikimedia.org/wiki/File:Brussels_European_Council,_18-12-14-_joint_press_conference_(P-027126-00-15).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/4/45/Brussels_European_Council%2C_18-12-14-_joint_press_conference_%28P-027126-00-15%29.jpg",
+   "sha1": "e5b059310543667867e3a0739f6fb9a4c463520e",
+   "sha256": "14054fa71675a876b30a9c3e7767db7fa5f001c5b0e806e9e77ef44d48d63edd",
+   "bytes": 2732751,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "Europäische Kommission - Audiovisueller Dienst, Etienne Ansotte, CE - Service audiovisuel, EC - Audiovisual Service, Shimera",
+   "people": [
+    {
+     "qid": "Q57661",
+     "name": "Jean-Claude Juncker",
+     "x": 0.837,
+     "y": 0.427,
+     "size": 0.095
+    },
+    {
+     "qid": "Q946",
+     "name": "Donald Tusk",
+     "x": 0.559,
+     "y": 0.416,
+     "size": 0.098
+    }
+   ],
+   "faces": 3
+  },
+  {
+   "file": "groups/Cumbre_de_l_deres_del_G20_44348051480_48aa6209.jpg",
+   "kind": "group",
+   "page": "https://commons.wikimedia.org/wiki/File:Cumbre_de_l%C3%ADderes_del_G20_(44348051480).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/6/68/Cumbre_de_l%C3%ADderes_del_G20_%2844348051480%29.jpg",
+   "sha1": "48aa620970abbb5e3c48e43f3d1da8dcee2c0072",
+   "sha256": "ec52e955a0cbc57dadd800d819e754c6efb786217a42d77f7adc50f6ec0d907a",
+   "bytes": 1674855,
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "Presidencia de la República Mexicana",
+   "people": [
+    {
+     "qid": "Q22686",
+     "name": "Donald Trump",
+     "x": 0.516,
+     "y": 0.557,
+     "size": 0.156
+    },
+    {
+     "qid": "Q3099714",
+     "name": "Justin Trudeau",
+     "x": 0.771,
+     "y": 0.522,
+     "size": 0.138
+    }
+   ],
+   "faces": 5
+  },
+  {
+   "file": "groups/Donald_Trump_and_Justin_Trudeau_in_the_Oval_Office_2017_19137e58.jpg",
+   "kind": "group",
+   "page": "https://commons.wikimedia.org/wiki/File:Donald_Trump_and_Justin_Trudeau_in_the_Oval_Office_-_2017.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/e/ee/Donald_Trump_and_Justin_Trudeau_in_the_Oval_Office_-_2017.jpg",
+   "sha1": "19137e58d661528009c0d6b7ab09d112a827f369",
+   "sha256": "c80f6257ec7f045f09fb21c981ec4f42050abe1ba53460bf9aa26e0eaa28ce70",
+   "bytes": 153017,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "White House",
+   "people": [
+    {
+     "qid": "Q22686",
+     "name": "Donald Trump",
+     "x": 0.733,
+     "y": 0.325,
+     "size": 0.176
+    },
+    {
+     "qid": "Q3099714",
+     "name": "Justin Trudeau",
+     "x": 0.319,
+     "y": 0.282,
+     "size": 0.167
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "groups/Foreign_Leader_Visits_34617655472_73b81ac7.jpg",
+   "kind": "group",
+   "page": "https://commons.wikimedia.org/wiki/File:Foreign_Leader_Visits_(34617655472).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/8/89/Foreign_Leader_Visits_%2834617655472%29.jpg",
+   "sha1": "73b81ac77127f0bcb99e1c5c6292795bbc845163",
+   "sha256": "9e6ea6848f45588396d8bbc7e940f1128f5732445cecec743c2c8d7b54a09a69",
+   "bytes": 457266,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "The White House from Washington, DC",
+   "people": [
+    {
+     "qid": "Q22686",
+     "name": "Donald Trump",
+     "x": 0.281,
+     "y": 0.186,
+     "size": 0.176
+    },
+    {
+     "qid": "Q132345",
+     "name": "Shinzō Abe",
+     "x": 0.471,
+     "y": 0.246,
+     "size": 0.171
+    }
+   ],
+   "faces": 4
+  },
+  {
+   "file": "groups/Foto_de_fam_lia_dos_Chefes_de_Estado_e_Governo_do_BRICS_2018_7281a75c.jpg",
+   "kind": "group",
+   "page": "https://commons.wikimedia.org/wiki/File:Foto_de_fam%C3%ADlia_dos_Chefes_de_Estado_e_Governo_do_BRICS_2018.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/4/48/Foto_de_fam%C3%ADlia_dos_Chefes_de_Estado_e_Governo_do_BRICS_2018.jpg",
+   "sha1": "7281a75c12ebdfe8af92d7a8ad89a570c9e9ba2a",
+   "sha256": "c9c3137fae87560169e711d7d3054041f4cc35d1b54f63aa6cf885195a13e893",
+   "bytes": 1627725,
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "Cesar Itiberê/PR",
+   "people": [
+    {
+     "qid": "Q15031",
+     "name": "Xi Jinping",
+     "x": 0.182,
+     "y": 0.272,
+     "size": 0.1
+    },
+    {
+     "qid": "Q1058",
+     "name": "Narendra Modi",
+     "x": 0.336,
+     "y": 0.305,
+     "size": 0.095
+    }
+   ],
+   "faces": 5
+  },
+  {
+   "file": "groups/Fran_ois_Hollande_Jean_Claude_Juncker_and_Angela_Merkel_2015_8976d9f9.jpg",
+   "kind": "group",
+   "page": "https://commons.wikimedia.org/wiki/File:Fran%C3%A7ois_Hollande,_Jean-Claude_Juncker_and_Angela_Merkel_-_2015.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/5/58/Fran%C3%A7ois_Hollande%2C_Jean-Claude_Juncker_and_Angela_Merkel_-_2015.jpg",
+   "sha1": "8976d9f99d743f6031b7a1b9607076cf5ed4f274",
+   "sha256": "a5812e95238efd8eca25bf4cc559f779ef52cb3eb945c4117eb5edc91ca9bb04",
+   "bytes": 9359563,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "Silvère Gérard / European Union, 2015 / EC - Audiovisual Service",
+   "people": [
+    {
+     "qid": "Q57661",
+     "name": "Jean-Claude Juncker",
+     "x": 0.423,
+     "y": 0.32,
+     "size": 0.133
+    },
+    {
+     "qid": "Q567",
+     "name": "Angela Merkel",
+     "x": 0.589,
+     "y": 0.355,
+     "size": 0.144
+    }
+   ],
+   "faces": 3
+  },
+  {
+   "file": "groups/G7Biarritz_48616290793_d0b933b8.jpg",
+   "kind": "group",
+   "page": "https://commons.wikimedia.org/wiki/File:-G7Biarritz_(48616290793).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/a/ae/-G7Biarritz_%2848616290793%29.jpg",
+   "sha1": "d0b933b8a6d539797504c2370ea123bad6ca3da0",
+   "sha256": "65ab4239059c6986ac7cc3488a6556cd6d1f3bd483648f60310ce3233bdc4556",
+   "bytes": 1498127,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "The White House from Washington, DC",
+   "people": [
+    {
+     "qid": "Q22686",
+     "name": "Donald Trump",
+     "x": 0.473,
+     "y": 0.169,
+     "size": 0.103
+    },
+    {
+     "qid": "Q3052772",
+     "name": "Emmanuel Macron",
+     "x": 0.604,
+     "y": 0.204,
+     "size": 0.104
+    }
+   ],
+   "faces": 4
+  },
+  {
+   "file": "groups/PM_at_One_World_Summit_in_Paris_24144566277_26e79fb4.jpg",
+   "kind": "group",
+   "page": "https://commons.wikimedia.org/wiki/File:PM_at_One_World_Summit_in_Paris_(24144566277).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/6/6b/PM_at_One_World_Summit_in_Paris_%2824144566277%29.jpg",
+   "sha1": "26e79fb418069b72674d97b8a780a8947c1992dd",
+   "sha256": "32ee55ab9d3521b222532efd098173ca9714a6c6718c5ce2af3fe80562ffdf74",
+   "bytes": 1560510,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "Number 10",
+   "people": [
+    {
+     "qid": "Q264766",
+     "name": "Theresa May",
+     "x": 0.573,
+     "y": 0.183,
+     "size": 0.189
+    },
+    {
+     "qid": "Q3052772",
+     "name": "Emmanuel Macron",
+     "x": 0.374,
+     "y": 0.159,
+     "size": 0.21
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "groups/P_032764_00_23_01_ORIGINAL_788014_3eb26ada.jpg",
+   "kind": "group",
+   "page": "https://commons.wikimedia.org/wiki/File:P-032764_00-23_01-ORIGINAL-788014.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/1/14/P-032764_00-23_01-ORIGINAL-788014.jpg",
+   "sha1": "3eb26adad3fffb4379e4625a6c7e4048871377b8",
+   "sha256": "a6f52be4e9f117a8b0ed4ba0e0a14cc09a2ede596408611527a769f022fa1990",
+   "bytes": 938154,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "Jennifer Jacquemart / European Union",
+   "people": [
+    {
+     "qid": "Q57661",
+     "name": "Jean-Claude Juncker",
+     "x": 0.221,
+     "y": 0.283,
+     "size": 0.096
+    },
+    {
+     "qid": "Q3099714",
+     "name": "Justin Trudeau",
+     "x": 0.427,
+     "y": 0.251,
+     "size": 0.095
+    }
+   ],
+   "faces": 5
+  },
+  {
+   "file": "groups/Participation_of_Jean_Claude_Juncker_President_of_the_EC_in__2c083cfb.jpg",
+   "kind": "group",
+   "page": "https://commons.wikimedia.org/wiki/File:Participation_of_Jean-Claude_Juncker,_President_of_the_EC,_in_the_G7_Summit_in_Japan_(P-031637-00-37).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/2/28/Participation_of_Jean-Claude_Juncker%2C_President_of_the_EC%2C_in_the_G7_Summit_in_Japan_%28P-031637-00-37%29.jpg",
+   "sha1": "2c083cfbf030043b6bc81a0a7ef30fe70cac2409",
+   "sha256": "e408cb1262a593328e8c76d1a2c659e60bd2feaf0dc75635721e9ad3ea13f703",
+   "bytes": 3017530,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "Europäische Kommission - Audiovisueller Dienst, Council of the EU, CE - Service audiovisuel, Europäische Rat, EC - Audiovisual Service, Conseil de l'UE",
+   "people": [
+    {
+     "qid": "Q57661",
+     "name": "Jean-Claude Juncker",
+     "x": 0.153,
+     "y": 0.587,
+     "size": 0.056
+    },
+    {
+     "qid": "Q567",
+     "name": "Angela Merkel",
+     "x": 0.382,
+     "y": 0.6,
+     "size": 0.05
+    }
+   ],
+   "faces": 7
+  },
+  {
+   "file": "groups/President_Donald_Trump_and_PM_Theresa_May_Joint_Press_Confer_9486c102.jpg",
+   "kind": "group",
+   "page": "https://commons.wikimedia.org/wiki/File:President_Donald_Trump_and_PM_Theresa_May_Joint_Press_Conference,_January_27,_2017.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/f/fb/President_Donald_Trump_and_PM_Theresa_May_Joint_Press_Conference%2C_January_27%2C_2017.jpg",
+   "sha1": "9486c1024a1c3e6c5e06d939ade4cf1609ab5b74",
+   "sha256": "16d8c81510a95648ced09b3878f83e87b6737b4bf6ded950a60abf3dec60b863",
+   "bytes": 342274,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "The White House from Washington, DC",
+   "people": [
+    {
+     "qid": "Q22686",
+     "name": "Donald Trump",
+     "x": 0.816,
+     "y": 0.406,
+     "size": 0.133
+    },
+    {
+     "qid": "Q264766",
+     "name": "Theresa May",
+     "x": 0.212,
+     "y": 0.494,
+     "size": 0.103
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "groups/President_Joe_Biden_with_the_President_of_France_Chancellor__41a8f7f9.jpg",
+   "kind": "group",
+   "page": "https://commons.wikimedia.org/wiki/File:President_Joe_Biden_with_the_President_of_France,_Chancellor_of_Germany,_and_the_Prime_Minister_of_the_United_Kingdom.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/3/35/President_Joe_Biden_with_the_President_of_France%2C_Chancellor_of_Germany%2C_and_the_Prime_Minister_of_the_United_Kingdom.jpg",
+   "sha1": "41a8f7f9976633f47d64b85abdd0a126132f2a4a",
+   "sha256": "75db5d632a302132191a68cb93378158df59e1b671258eda77ee53dbd931354c",
+   "bytes": 1516206,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "Office of the President of the United States",
+   "people": [
+    {
+     "qid": "Q567",
+     "name": "Angela Merkel",
+     "x": 0.594,
+     "y": 0.259,
+     "size": 0.093
+    },
+    {
+     "qid": "Q180589",
+     "name": "Boris Johnson",
+     "x": 0.224,
+     "y": 0.233,
+     "size": 0.081
+    }
+   ],
+   "faces": 4
+  },
+  {
+   "file": "groups/Shinz_Abe_and_Angela_Merkel_at_Kantei_2019_1_38e3da85.jpg",
+   "kind": "group",
+   "page": "https://commons.wikimedia.org/wiki/File:Shinz%C5%8D_Abe_and_Angela_Merkel_at_Kantei_2019_(1).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Shinz%C5%8D_Abe_and_Angela_Merkel_at_Kantei_2019_%281%29.jpg",
+   "sha1": "38e3da85e202c567e4b7929db7c41bc990edcc26",
+   "sha256": "dfad46bcf24e0f0c036c0eb34cfbb255e2298de0ec72cb30215aba5bf65cdd08",
+   "bytes": 772983,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "内閣官房内閣広報室",
+   "people": [
+    {
+     "qid": "Q567",
+     "name": "Angela Merkel",
+     "x": 0.41,
+     "y": 0.402,
+     "size": 0.141
+    },
+    {
+     "qid": "Q132345",
+     "name": "Shinzō Abe",
+     "x": 0.632,
+     "y": 0.349,
+     "size": 0.145
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "groups/State_Dinner_The_Official_State_Visit_of_France_26832278157_23fcfeb1.jpg",
+   "kind": "group",
+   "page": "https://commons.wikimedia.org/wiki/File:State_Dinner_-_The_Official_State_Visit_of_France_(26832278157).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/3/35/State_Dinner_-_The_Official_State_Visit_of_France_%2826832278157%29.jpg",
+   "sha1": "23fcfeb181a731626d4aceb0be86c6e6b29a8cee",
+   "sha256": "4ea9d3c8ba2cb9b4156991d8243088b01fa092dc120533dabc193be162b1e96e",
+   "bytes": 1201606,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "The White House from Washington, DC",
+   "people": [
+    {
+     "qid": "Q3052772",
+     "name": "Emmanuel Macron",
+     "x": 0.371,
+     "y": 0.45,
+     "size": 0.063
+    },
+    {
+     "qid": "Q22686",
+     "name": "Donald Trump",
+     "x": 0.609,
+     "y": 0.424,
+     "size": 0.065
+    }
+   ],
+   "faces": 6
+  },
+  {
+   "file": "groups/The_President_and_First_Lady_in_the_U_K_48051546872_0ebcd8b5.jpg",
+   "kind": "group",
+   "page": "https://commons.wikimedia.org/wiki/File:The_President_and_First_Lady_in_the_U.K._(48051546872).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/a/a2/The_President_and_First_Lady_in_the_U.K._%2848051546872%29.jpg",
+   "sha1": "0ebcd8b528e5d4770cc832abdc630d91869669a9",
+   "sha256": "c80df912ebb321a6744aee60dd1c4be9028d7c80892c466a80d866dd638acba3",
+   "bytes": 1600257,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "The White House from Washington, DC",
+   "people": [
+    {
+     "qid": "Q22686",
+     "name": "Donald Trump",
+     "x": 0.602,
+     "y": 0.301,
+     "size": 0.134
+    },
+    {
+     "qid": "Q264766",
+     "name": "Theresa May",
+     "x": 0.42,
+     "y": 0.362,
+     "size": 0.134
+    }
+   ],
+   "faces": 4
+  },
+  {
+   "file": "groups/The_Sumo_Grand_Championship_47938161052_300f92ac.jpg",
+   "kind": "group",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Sumo_Grand_Championship_(47938161052).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/7/7c/The_Sumo_Grand_Championship_%2847938161052%29.jpg",
+   "sha1": "300f92acd6e7d6a257720bc4052f46a09b303b3a",
+   "sha256": "889a1c84639886c4070c964aedd952d653978adba7598daaba1437c756948593",
+   "bytes": 622205,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "The White House from Washington, DC",
+   "people": [
+    {
+     "qid": "Q132345",
+     "name": "Shinzō Abe",
+     "x": 0.667,
+     "y": 0.319,
+     "size": 0.175
+    },
+    {
+     "qid": "Q22686",
+     "name": "Donald Trump",
+     "x": 0.457,
+     "y": 0.268,
+     "size": 0.183
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "groups/The_seventh_meeting_between_the_heads_of_state_of_China_Russ_0f6c77d7.jpg",
+   "kind": "group",
+   "page": "https://commons.wikimedia.org/wiki/File:The_seventh_meeting_between_the_heads_of_state_of_China,_Russia_and_Mongolia_in_Beijing_20250902_01.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/e/ec/The_seventh_meeting_between_the_heads_of_state_of_China%2C_Russia_and_Mongolia_in_Beijing_20250902_01.jpg",
+   "sha1": "0f6c77d7ff6f6580c628729e33c7e8ebd5f50bc9",
+   "sha256": "9b1a74fa7c0e10787290f11fa7b7c437360f73914ce5620b4779879c8d7a3ccb",
+   "bytes": 519357,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "Kremlin.ru",
+   "people": [
+    {
+     "qid": "Q7747",
+     "name": "Vladimir Putin",
+     "x": 0.183,
+     "y": 0.303,
+     "size": 0.213
+    },
+    {
+     "qid": "Q15031",
+     "name": "Xi Jinping",
+     "x": 0.465,
+     "y": 0.261,
+     "size": 0.219
+    }
+   ],
+   "faces": 3
+  },
+  {
+   "file": "groups/Vladimir_Putin_and_Theresa_May_2016_09_04_01_be5e43da.jpg",
+   "kind": "group",
+   "page": "https://commons.wikimedia.org/wiki/File:Vladimir_Putin_and_Theresa_May_(2016-09-04)_01.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Vladimir_Putin_and_Theresa_May_%282016-09-04%29_01.jpg",
+   "sha1": "be5e43da3e2eb25cc27a57d4364120bd0f210437",
+   "sha256": "7fa193bd3f29d91eb79563b3152db62f09bcf2cb47b4992b53d8542c9918b201",
+   "bytes": 211132,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "Пресс-служба Президента России",
+   "people": [
+    {
+     "qid": "Q264766",
+     "name": "Theresa May",
+     "x": 0.402,
+     "y": 0.264,
+     "size": 0.127
+    },
+    {
+     "qid": "Q7747",
+     "name": "Vladimir Putin",
+     "x": 0.514,
+     "y": 0.292,
+     "size": 0.157
+    }
+   ],
+   "faces": 5
+  },
+  {
+   "file": "groups/Vladimir_Putin_and_Theresa_May_2016_09_04_02_8bbae6bb.jpg",
+   "kind": "group",
+   "page": "https://commons.wikimedia.org/wiki/File:Vladimir_Putin_and_Theresa_May_(2016-09-04)_02.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/5/54/Vladimir_Putin_and_Theresa_May_%282016-09-04%29_02.jpg",
+   "sha1": "8bbae6bb13a334f29d603183db101cdc825c61bd",
+   "sha256": "c164523e15165d33ed0dbe2e21b72d92d2b351cf16de5ea324511c8f29081002",
+   "bytes": 237821,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "Пресс-служба Президента России",
+   "people": [
+    {
+     "qid": "Q264766",
+     "name": "Theresa May",
+     "x": 0.312,
+     "y": 0.146,
+     "size": 0.154
+    },
+    {
+     "qid": "Q7747",
+     "name": "Vladimir Putin",
+     "x": 0.552,
+     "y": 0.186,
+     "size": 0.171
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "groups/Vladimir_Putin_and_Theresa_May_2016_09_04_03_fba45945.jpg",
+   "kind": "group",
+   "page": "https://commons.wikimedia.org/wiki/File:Vladimir_Putin_and_Theresa_May_(2016-09-04)_03.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Vladimir_Putin_and_Theresa_May_%282016-09-04%29_03.jpg",
+   "sha1": "fba45945c22132689eba802cc5402166f66cba5c",
+   "sha256": "e1f36c8676ebe268202d0901e3644a9d0b9bd4e40b29e55c84738235a8bc5566",
+   "bytes": 272895,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "Пресс-служба Президента России",
+   "people": [
+    {
+     "qid": "Q264766",
+     "name": "Theresa May",
+     "x": 0.2,
+     "y": 0.266,
+     "size": 0.127
+    },
+    {
+     "qid": "Q7747",
+     "name": "Vladimir Putin",
+     "x": 0.872,
+     "y": 0.271,
+     "size": 0.145
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/01_Besuch_von_US_Pr_sident_Obama_2016_in_Deutschland_Hannove_69781cff.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:01-Besuch_von_US-Pr%C3%A4sident_Obama_2016_in_Deutschland_-_Hannover_-_Pressekonferenz_18.JPG",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/a/a0/01-Besuch_von_US-Pr%C3%A4sident_Obama_2016_in_Deutschland_-_Hannover_-_Pressekonferenz_18.JPG",
+   "sha1": "69781cffbc10e0c70c94a0a32d4ec89be6326b82",
+   "sha256": "40d88fed45b4e5c0735ae982ed951a20529da673f390f61bddc3bf6930976fda",
+   "bytes": 7261959,
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "WDKrause",
+   "people": [
+    {
+     "qid": "Q567",
+     "name": "Angela Merkel",
+     "x": 0.498,
+     "y": 0.32,
+     "size": 0.196
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/10_09_2023_Reuni_o_com_o_Presidente_da_Rep_blica_Francesa_Em_fc7e2442.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:10.09.2023_-_Reuni%C3%A3o_com_o_Presidente_da_Rep%C3%BAblica_Francesa,_Emmanuel_Macron,_no_Bharat_Mandapam._-_53177596304.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/c/cd/10.09.2023_-_Reuni%C3%A3o_com_o_Presidente_da_Rep%C3%BAblica_Francesa%2C_Emmanuel_Macron%2C_no_Bharat_Mandapam._-_53177596304.jpg",
+   "sha1": "fc7e2442f5827fb05460fd7089416fa0ebb9d622",
+   "sha256": "55edd157ecf7837b3e950d08d3e73870ebc3fe58e9dda590901108dd99eb8867",
+   "bytes": 2815384,
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "Lula Oficial",
+   "people": [
+    {
+     "qid": "Q3052772",
+     "name": "Emmanuel Macron",
+     "x": 0.338,
+     "y": 0.2,
+     "size": 0.222
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/14_06_2024_Reuni_o_bilateral_com_o_Presidente_da_Rep_blica_F_3a4616ce.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:14.06.2024_-_Reuni%C3%A3o_bilateral_com_o_Presidente_da_Rep%C3%BAblica_Francesa,_Emmanuel_Macron_(53791557278).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/8/83/14.06.2024_-_Reuni%C3%A3o_bilateral_com_o_Presidente_da_Rep%C3%BAblica_Francesa%2C_Emmanuel_Macron_%2853791557278%29.jpg",
+   "sha1": "3a4616ce33111e50a41a0e7b9f2f80442d7ee67b",
+   "sha256": "eedf7857824ab733ea206547974b6b61d8415d2a97ad038cbb32b8875fd16cc2",
+   "bytes": 7486305,
+   "licence": "CC BY-SA 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/2.0",
+   "author": "Lula Oficial",
+   "people": [
+    {
+     "qid": "Q3052772",
+     "name": "Emmanuel Macron",
+     "x": 0.341,
+     "y": 0.215,
+     "size": 0.179
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/15_06_2026_Reuni_o_bilateral_com_o_Presidente_da_Fran_a_Emma_4a69ba21.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:15.06.2026_-_Reuni%C3%A3o_bilateral_com_o_Presidente_da_Fran%C3%A7a,_Emmanuel_Macron_-_55336729994.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/0/0e/15.06.2026_-_Reuni%C3%A3o_bilateral_com_o_Presidente_da_Fran%C3%A7a%2C_Emmanuel_Macron_-_55336729994.jpg",
+   "sha1": "4a69ba213d98ea356e4150a25339b8cd1771bcb4",
+   "sha256": "ba5292b45c61f3b560fc47161218cb56ad161c0286ea6c2f41d81cc75421a4ff",
+   "bytes": 2278988,
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "Lula Oficial",
+   "people": [
+    {
+     "qid": "Q3052772",
+     "name": "Emmanuel Macron",
+     "x": 0.505,
+     "y": 0.601,
+     "size": 0.171
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/2014_Donald_Tusk_19_5d5c8a37.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:2014_-_Donald_Tusk_(19).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/2/26/2014_-_Donald_Tusk_%2819%29.jpg",
+   "sha1": "5d5c8a377b3fc1100f94a2c4557b2f20593d3f78",
+   "sha256": "3c725872781d39cfe577cfdc05b74aa60bebf1fbda81414da90b136ed7ee3678",
+   "bytes": 4725712,
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "Mateusz Włodarczyk - www.wlodarczykfoto.pl",
+   "people": [
+    {
+     "qid": "Q946",
+     "name": "Donald Tusk",
+     "x": 0.463,
+     "y": 0.342,
+     "size": 0.148
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/2014_Donald_Tusk_3_b3efe5ea.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:2014_-_Donald_Tusk_(3).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/f/fd/2014_-_Donald_Tusk_%283%29.jpg",
+   "sha1": "b3efe5ea1989d2a0b1deef2b3403f29795193ab2",
+   "sha256": "4167789d6ee4dfc0e11e7d663e320b1b91be857b0beab6052939e8bc5ecc1bcb",
+   "bytes": 1453244,
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "Mateusz Włodarczyk - www.wlodarczykfoto.pl",
+   "people": [
+    {
+     "qid": "Q946",
+     "name": "Donald Tusk",
+     "x": 0.484,
+     "y": 0.364,
+     "size": 0.291
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/2014_Donald_Tusk_7_27be6f7a.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:2014_-_Donald_Tusk_(7).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/7/7d/2014_-_Donald_Tusk_%287%29.jpg",
+   "sha1": "27be6f7a28712da5d24f091f70e4fe684ae2e14e",
+   "sha256": "74c2d33d7e03573bfaa4311a44b209be43e9f487ce12a030270f86f4862dd205",
+   "bytes": 1481412,
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "Mateusz Włodarczyk - www.wlodarczykfoto.pl",
+   "people": [
+    {
+     "qid": "Q946",
+     "name": "Donald Tusk",
+     "x": 0.455,
+     "y": 0.379,
+     "size": 0.497
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/2016_12_06_Angela_Merkel_CDU_Parteitag_by_OlafKosinsky_BT0A5_ef764654.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:2016-12-06_Angela_Merkel_CDU_Parteitag_by_OlafKosinsky_BT0A5704.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/f/ff/2016-12-06_Angela_Merkel_CDU_Parteitag_by_OlafKosinsky_BT0A5704.jpg",
+   "sha1": "ef764654617b810b19038d724786c0f493714661",
+   "sha256": "08e3e387f4adef009a4f7eac50846b8476fc5082d53fab6cdf049ed772725c1e",
+   "bytes": 6984681,
+   "licence": "CC BY-SA 3.0 de",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en",
+   "author": "Olaf Kosinsky",
+   "people": [
+    {
+     "qid": "Q567",
+     "name": "Angela Merkel",
+     "x": 0.474,
+     "y": 0.407,
+     "size": 0.737
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/2017_09_24_Angela_Merkel_by_Sandro_Halank_7_c179c1d4.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:2017-09-24_Angela_Merkel_by_Sandro_Halank%E2%80%937.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/a/a2/2017-09-24_Angela_Merkel_by_Sandro_Halank%E2%80%937.jpg",
+   "sha1": "c179c1d42d227385d53642b31ae39e8bde3760e1",
+   "sha256": "3f6b79f9bb13118f181d4bcac2c7a6a11bbfe7112465f53aba1a43a245787481",
+   "bytes": 8828913,
+   "licence": "CC BY-SA 3.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+   "author": "Sandro Halank, Wikimedia Commons",
+   "people": [
+    {
+     "qid": "Q567",
+     "name": "Angela Merkel",
+     "x": 0.499,
+     "y": 0.408,
+     "size": 0.407
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/2018_12_07_Angela_Merkel_CDU_Pateitag_in_Hamburg_2604_50a9d05c.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:2018-12-07_Angela_Merkel_CDU_Pateitag_in_Hamburg-2604.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/7/77/2018-12-07_Angela_Merkel_CDU_Pateitag_in_Hamburg-2604.jpg",
+   "sha1": "50a9d05c06d77a1d414ad2906c81aa6ad1b1ae52",
+   "sha256": "692c777490f5e9d566f209f4511330e1fc5215b3299776d77d73a7ac1fa87ad3",
+   "bytes": 9719681,
+   "licence": "CC BY-SA 3.0 de",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en",
+   "author": "Olaf Kosinsky",
+   "people": [
+    {
+     "qid": "Q567",
+     "name": "Angela Merkel",
+     "x": 0.535,
+     "y": 0.454,
+     "size": 0.354
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/20190531_Rodrigo_Duterte_and_Abe_Shinzo_0ccf77ad.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:20190531_Rodrigo_Duterte_and_Abe_Shinzo.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/e/e1/20190531_Rodrigo_Duterte_and_Abe_Shinzo.jpg",
+   "sha1": "0ccf77ad519b83b843614f321a4cb760f8ac92da",
+   "sha256": "a2ae68c1d678d0fb0a091330d1146edd1164503b9811df92c4d6612b91834177",
+   "bytes": 644833,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "GOVJP",
+   "people": [
+    {
+     "qid": "Q132345",
+     "name": "Shinzō Abe",
+     "x": 0.599,
+     "y": 0.344,
+     "size": 0.159
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/20220524_quad_8_04_f22d9518.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:20220524_quad_8_04.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/f/fd/20220524_quad_8_04.jpg",
+   "sha1": "f22d9518359c64dad2556526da97a25aa0397c06",
+   "sha256": "4dc8a04ea8b608f59a24febf5163f19cc56edc1c838d51ebff6fc41794ca76ca",
+   "bytes": 403168,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "内閣官房内閣広報室",
+   "people": [
+    {
+     "qid": "Q1058",
+     "name": "Narendra Modi",
+     "x": 0.29,
+     "y": 0.22,
+     "size": 0.102
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/5_Country_Ministerial_24468803543_d048efc8.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:5_Country_Ministerial_(24468803543).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/4/42/5_Country_Ministerial_%2824468803543%29.jpg",
+   "sha1": "d048efc8f0cf2e02e9852a559d4efb93bc997577",
+   "sha256": "d2e0363f203c7cc0c806002f35e674124aa726c1dbba5a79fd7edb83e87018a2",
+   "bytes": 1375357,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "U.S. Department of Homeland Security (DHS)",
+   "people": [
+    {
+     "qid": "Q264766",
+     "name": "Theresa May",
+     "x": 0.639,
+     "y": 0.235,
+     "size": 0.098
+    }
+   ],
+   "faces": 8
+  },
+  {
+   "file": "portraits/AFFHA_IHO_Pres_Macron_4334526_1cd8ef4c.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:AFFHA_IHO_Pres_Macron_(4334526).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/8/85/AFFHA_IHO_Pres_Macron_%284334526%29.jpg",
+   "sha1": "1cd8ef4c26274cced9d390e4dca3cb1f756d2027",
+   "sha256": "dab5a97c128cc802a2eef095c2cb4cd19e8802642c73d2e8a039a08acb3d3630",
+   "bytes": 2189204,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "U.S. Army photo by Zane Ecklund",
+   "people": [
+    {
+     "qid": "Q3052772",
+     "name": "Emmanuel Macron",
+     "x": 0.74,
+     "y": 0.374,
+     "size": 0.094
+    }
+   ],
+   "faces": 9
+  },
+  {
+   "file": "portraits/Angela_Merkel_15_c0ba1ca6.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Angela_Merkel_15.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/0/01/Angela_Merkel_15.jpg",
+   "sha1": "c0ba1ca6337cf97b0e4e704caf62f3ae65770db8",
+   "sha256": "9ac3a359078eaef604733e9e0af300520a86e1ae47f8827ae9e733a11e3389c7",
+   "bytes": 2593727,
+   "licence": "CC BY-SA 3.0",
+   "licence_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+   "author": "Kuebi = Armin Kübelbeck",
+   "people": [
+    {
+     "qid": "Q567",
+     "name": "Angela Merkel",
+     "x": 0.344,
+     "y": 0.58,
+     "size": 0.607
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/Angela_Merkel_and_Mauricio_Macri_08_f3705f6e.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Angela_Merkel_and_Mauricio_Macri_08.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Angela_Merkel_and_Mauricio_Macri_08.jpg",
+   "sha1": "f3705f6ee2f519ee0d07bc5c6f40386cd6d88297",
+   "sha256": "05dd9fd85f4df0f0b0d80c77e52088511e989010e4ace92dbee792cbee46312b",
+   "bytes": 360302,
+   "licence": "CC BY 2.5 ar",
+   "licence_url": "https://creativecommons.org/licenses/by/2.5/ar/deed.en",
+   "author": "Casa Rosada",
+   "people": [
+    {
+     "qid": "Q567",
+     "name": "Angela Merkel",
+     "x": 0.697,
+     "y": 0.251,
+     "size": 0.092
+    }
+   ],
+   "faces": 3
+  },
+  {
+   "file": "portraits/Aussenministerin_Kneissl_Arbeitsbesuch_in_Japan_40547777053_fd727137.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Aussenministerin_Kneissl_Arbeitsbesuch_in_Japan_(40547777053).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Aussenministerin_Kneissl_Arbeitsbesuch_in_Japan_%2840547777053%29.jpg",
+   "sha1": "fd72713701f78ede806da74d57d4707a5bd79618",
+   "sha256": "caad58c8ccb5714170a7500236dddc9ab4e1e7c66e9467574c41a8829b801b1d",
+   "bytes": 2333029,
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "Bundesministerium für Europa, Integration und Äußeres",
+   "people": [
+    {
+     "qid": "Q132345",
+     "name": "Shinzō Abe",
+     "x": 0.493,
+     "y": 0.174,
+     "size": 0.176
+    }
+   ],
+   "faces": 3
+  },
+  {
+   "file": "portraits/Boris_Johnson_2019_2_fb6b78e2.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Boris_Johnson_2019_(2).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Boris_Johnson_2019_%282%29.jpg",
+   "sha1": "fb6b78e2c52da88da55817db74b8f9ea0d234a56",
+   "sha256": "c0afac85d35dd26236ab1b9c522ebe9c2f7e21f50d1e5cd4d725ac0526a62bd9",
+   "bytes": 769726,
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "David Sedlecký",
+   "people": [
+    {
+     "qid": "Q180589",
+     "name": "Boris Johnson",
+     "x": 0.455,
+     "y": 0.165,
+     "size": 0.116
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Boris_Johnson_COP26_World_Leaders_Summit_Day_1_51647956541_11d799e3.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Boris_Johnson_-COP26_World_Leaders_Summit_Day_1_(51647956541).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Boris_Johnson_-COP26_World_Leaders_Summit_Day_1_%2851647956541%29.jpg",
+   "sha1": "11d799e3baabcc07c4deb66bf0a9042fa06ae283",
+   "sha256": "97d9f2a43e77b47ce78e062cf145e2e23757d0926d2094e4dba57b1add2a8f00",
+   "bytes": 1642433,
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "Number 10",
+   "people": [
+    {
+     "qid": "Q180589",
+     "name": "Boris Johnson",
+     "x": 0.269,
+     "y": 0.283,
+     "size": 0.232
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Boris_Johnson_Mayor_of_London_and_Hans_Ole_Jochumsen_Executi_731a47e4.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Boris_Johnson,_Mayor_of_London_and_Hans-Ole_Jochumsen,_Executive_Vice_President,_NASDAQ_OMX_(3921874823).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Boris_Johnson%2C_Mayor_of_London_and_Hans-Ole_Jochumsen%2C_Executive_Vice_President%2C_NASDAQ_OMX_%283921874823%29.jpg",
+   "sha1": "731a47e44e2100da430d230748555fde5dfdb752",
+   "sha256": "b8e03462b6bf3cb377e64c14008f5b58b8275bef41afbc2c5a8bcf91b6e93ad5",
+   "bytes": 1013528,
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "Think London",
+   "people": [
+    {
+     "qid": "Q180589",
+     "name": "Boris Johnson",
+     "x": 0.62,
+     "y": 0.46,
+     "size": 0.151
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Boris_Johnson_presents_Sir_Winston_Churchill_Leadership_Awar_14a5c13d.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Boris_Johnson_presents-Sir_Winston_Churchill_Leadership_Award_(52242778938).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/7/77/Boris_Johnson_presents-Sir_Winston_Churchill_Leadership_Award_%2852242778938%29.jpg",
+   "sha1": "14a5c13d67fe6ba379b3d62a5a6fbc95bc7718b3",
+   "sha256": "dfc994f1b614e71945a23df21c82aaea23767469f031a3580b6f848b6f3eb44a",
+   "bytes": 2104550,
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "Number 10",
+   "people": [
+    {
+     "qid": "Q180589",
+     "name": "Boris Johnson",
+     "x": 0.703,
+     "y": 0.263,
+     "size": 0.196
+    }
+   ],
+   "faces": 4
+  },
+  {
+   "file": "portraits/Borissov_Juncker_press_conference_27869327319_325bff4c.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Borissov_-_Juncker_press_conference_(27869327319).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Borissov_-_Juncker_press_conference_%2827869327319%29.jpg",
+   "sha1": "325bff4c0613989598baa333bd9573ac961d5cb3",
+   "sha256": "ba2129c82089bcad3a3b51ad6030f22160a40478d557a29e5c908d0212828c95",
+   "bytes": 1528374,
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "EU2018BG Bulgarian Presidency",
+   "people": [
+    {
+     "qid": "Q57661",
+     "name": "Jean-Claude Juncker",
+     "x": 0.472,
+     "y": 0.441,
+     "size": 0.21
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/Dmitry_Medvedev_and_Xi_Jinping_2013_03_23_02_f09d5118.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Dmitry_Medvedev_and_Xi_Jinping_(2013-03-23)_02.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/4/48/Dmitry_Medvedev_and_Xi_Jinping_%282013-03-23%29_02.jpg",
+   "sha1": "f09d511869f79b46210319fbf9e9964cf076fee0",
+   "sha256": "60e871b8b205446f9d73422010becc44feeb70afc8d41c628004377a7ee06a6e",
+   "bytes": 5498471,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "government.ru",
+   "people": [
+    {
+     "qid": "Q15031",
+     "name": "Xi Jinping",
+     "x": 0.186,
+     "y": 0.268,
+     "size": 0.166
+    }
+   ],
+   "faces": 3
+  },
+  {
+   "file": "portraits/Donald_Trump_official_portrait_e4428799.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Donald_Trump_official_portrait.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/5/56/Donald_Trump_official_portrait.jpg",
+   "sha1": "e4428799156fd03464042dd9fa25dd2651f7e920",
+   "sha256": "dac8cb8479f133d91d768777f2a64adec68d19ea29c4994108f2aea5811ff5f2",
+   "bytes": 5891405,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "Shealeah Craighead",
+   "people": [
+    {
+     "qid": "Q22686",
+     "name": "Donald Trump",
+     "x": 0.483,
+     "y": 0.394,
+     "size": 0.36
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/Donald_Tusk_6165309851_562885fd.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Donald_Tusk_(6165309851).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Donald_Tusk_%286165309851%29.jpg",
+   "sha1": "562885fd7aacdcc135c61f0f60c3ecf767cf9a89",
+   "sha256": "d6543826ace76cf9e8bfa83c694c64c0827de5294861b8a5b12e29726d408c04",
+   "bytes": 600707,
+   "licence": "CC BY-SA 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/2.0",
+   "author": "Platforma Obywatelska RP",
+   "people": [
+    {
+     "qid": "Q946",
+     "name": "Donald Tusk",
+     "x": 0.527,
+     "y": 0.491,
+     "size": 0.524
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/Donald_Tusk_Andrzej_Doma_ski_konferencja_prasowa_03_09_2024_9ea0cb62.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Donald_Tusk,_Andrzej_Doma%C5%84ski_%E2%80%93_konferencja_prasowa_03.09.2024.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/8/81/Donald_Tusk%2C_Andrzej_Doma%C5%84ski_%E2%80%93_konferencja_prasowa_03.09.2024.jpg",
+   "sha1": "9ea0cb6212aa9c83c5c376ec1b5cc173bf4075d3",
+   "sha256": "e799ee10b63a66f558c74985536c26ce48fc593280b735f5f100c17db047d0b2",
+   "bytes": 3869504,
+   "licence": "CC BY 3.0 pl",
+   "licence_url": "https://creativecommons.org/licenses/by/3.0/pl/deed.en",
+   "author": "The Chancellery of the Prime Minister of the Republic of Poland",
+   "people": [
+    {
+     "qid": "Q946",
+     "name": "Donald Tusk",
+     "x": 0.309,
+     "y": 0.335,
+     "size": 0.204
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Donald_Tusk_Andrzej_Doma_ski_konferencja_prasowa_03_09_2024__0d1d36ae.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Donald_Tusk,_Andrzej_Doma%C5%84ski_%E2%80%93_konferencja_prasowa_03.09.2024_2.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Donald_Tusk%2C_Andrzej_Doma%C5%84ski_%E2%80%93_konferencja_prasowa_03.09.2024_2.jpg",
+   "sha1": "0d1d36ae2a9521c1bf7905070edb0da680c7b4fd",
+   "sha256": "74cc3b3e11e367a12b26613283ae579fc91a2b96750e632f8362d15891fd8b9d",
+   "bytes": 2765792,
+   "licence": "CC BY 3.0 pl",
+   "licence_url": "https://creativecommons.org/licenses/by/3.0/pl/deed.en",
+   "author": "The Chancellery of the Prime Minister of the Republic of Poland",
+   "people": [
+    {
+     "qid": "Q946",
+     "name": "Donald Tusk",
+     "x": 0.26,
+     "y": 0.221,
+     "size": 0.19
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/Donald_Tusk_KPRM_HQ_2023_7e0359bb.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Donald_Tusk_KPRM_HQ_2023.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Donald_Tusk_KPRM_HQ_2023.jpg",
+   "sha1": "7e0359bbbc30d3a3762c4cd54815281ca552aca8",
+   "sha256": "faa42c0191299b89c63bde046b0fe72a1faa1692471f7e5574299bafeeed9759",
+   "bytes": 227125,
+   "licence": "CC BY 3.0 pl",
+   "licence_url": "https://creativecommons.org/licenses/by/3.0/pl/deed.en",
+   "author": "Chancellery of the Prime Minister of the Republic of Poland",
+   "people": [
+    {
+     "qid": "Q946",
+     "name": "Donald Tusk",
+     "x": 0.51,
+     "y": 0.454,
+     "size": 0.503
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/Donald_Tusk_cropped_57425601.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Donald_Tusk_(cropped).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Donald_Tusk_%28cropped%29.jpg",
+   "sha1": "574256017eeb61cbbb9e6bd12ad8fd4fb1a7a97a",
+   "sha256": "ae57b734209e039c950b4db023023a5d29b423b6b83cec53c4dfc5a8d5483c68",
+   "bytes": 368428,
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "European People's Party",
+   "people": [
+    {
+     "qid": "Q946",
+     "name": "Donald Tusk",
+     "x": 0.471,
+     "y": 0.405,
+     "size": 0.472
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/Emmanuel_Macron_March_2024_4_e4453ea9.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Emmanuel_Macron_March_2024_(4).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Emmanuel_Macron_March_2024_%284%29.jpg",
+   "sha1": "e4453ea93cb06caa9e85e8172128a45f27d00829",
+   "sha256": "d5fc4e70fc2a3688ecb0f9bdf2ebcefd8ed0b1804e9efe5e5e91d86a8612cd77",
+   "bytes": 1238500,
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "Belgian Presidency of the Council of the EU 2024 from Belgium",
+   "people": [
+    {
+     "qid": "Q3052772",
+     "name": "Emmanuel Macron",
+     "x": 0.511,
+     "y": 0.406,
+     "size": 0.523
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/Foreign_Secretary_Boris_Johnson_visits_Japan_35892672922_a9daff96.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Foreign_Secretary_Boris_Johnson_visits_Japan_(35892672922).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Foreign_Secretary_Boris_Johnson_visits_Japan_%2835892672922%29.jpg",
+   "sha1": "a9daff965f667119482253097f4cee68a8127e88",
+   "sha256": "d33b608c72c45c1bcb2283adc599e10189ac7f91e72e290a62a2caf437878708",
+   "bytes": 4426387,
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "UK in Japan- FCO",
+   "people": [
+    {
+     "qid": "Q180589",
+     "name": "Boris Johnson",
+     "x": 0.398,
+     "y": 0.186,
+     "size": 0.206
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Fran_ois_Hollande_Jean_Claude_Juncker_and_Angela_Merkel_2015_93d33581.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Fran%C3%A7ois_Hollande,_Jean-Claude_Juncker_and_Angela_Merkel,_2015.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/6/67/Fran%C3%A7ois_Hollande%2C_Jean-Claude_Juncker_and_Angela_Merkel%2C_2015.jpg",
+   "sha1": "93d3358107c8d572704649c2c69a62ec5a0af7dd",
+   "sha256": "c0bd1224c8eeee335ad361f39ed4e7323896ccbd901d13e82b4d753c8f189a19",
+   "bytes": 2341643,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "Silvère Gérard / European Union, 2015 / EC - Audiovisual Service",
+   "people": [
+    {
+     "qid": "Q57661",
+     "name": "Jean-Claude Juncker",
+     "x": 0.491,
+     "y": 0.384,
+     "size": 0.087
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Ibrahim_Ghandour_with_Boris_Johnson_in_London_2017_383609816_f69e4ff4.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Ibrahim_Ghandour_with_Boris_Johnson_in_London_-_2017_(38360981694).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Ibrahim_Ghandour_with_Boris_Johnson_in_London_-_2017_%2838360981694%29.jpg",
+   "sha1": "f69e4ff4b7b0136cd85b5fb560e869fce6b13d76",
+   "sha256": "c62b5c7c88c80158d9ba3c0d561a0d9df64eb9bf5c14d22f5216acacf6a9abcc",
+   "bytes": 5475413,
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "Foreign and Commonwealth Office",
+   "people": [
+    {
+     "qid": "Q180589",
+     "name": "Boris Johnson",
+     "x": 0.665,
+     "y": 0.295,
+     "size": 0.217
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Indian_Prime_Minister_Narendra_Modi_and_Philippines_Presiden_27981210.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Indian_Prime_Minister_Narendra_Modi_and_Philippines_President_Rodrigo_Roa_Duterte_meeting_in_Manila,_2017_(9).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Indian_Prime_Minister_Narendra_Modi_and_Philippines_President_Rodrigo_Roa_Duterte_meeting_in_Manila%2C_2017_%289%29.jpg",
+   "sha1": "2798121011ce2e2cbaf98a0ff221752500703918",
+   "sha256": "44c81685c637f420e941113b48eced234bed1a899ac00839ab12f7bcd569af1d",
+   "bytes": 219260,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "Presidential Communications Operations Office",
+   "people": [
+    {
+     "qid": "Q1058",
+     "name": "Narendra Modi",
+     "x": 0.37,
+     "y": 0.219,
+     "size": 0.185
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Justin_Trudeau_2014_2_86933808.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Justin_Trudeau_2014-2.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/e/ee/Justin_Trudeau_2014-2.jpg",
+   "sha1": "86933808aa332963514b958194e28fa2124cacd4",
+   "sha256": "9dbb8a6c95903b15bb113c44b54e42d041afc37ccb3276d398596330d6fc5347",
+   "bytes": 955408,
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "Alex Guibord",
+   "people": [
+    {
+     "qid": "Q3099714",
+     "name": "Justin Trudeau",
+     "x": 0.522,
+     "y": 0.359,
+     "size": 0.426
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/Justin_Trudeau_Global_Citizen_Festival_Hamburg_06_74644b4e.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Justin_Trudeau_-_Global_Citizen_Festival_Hamburg_06.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Justin_Trudeau_-_Global_Citizen_Festival_Hamburg_06.jpg",
+   "sha1": "74644b4edc2b87a6c74c5c411d8de71d80dea79b",
+   "sha256": "17f15e7be73cc76f7fb8d749f6878ae50987790f2378999d914c7cf5120a17e2",
+   "bytes": 7765410,
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "Frank Schwichtenberg",
+   "people": [
+    {
+     "qid": "Q3099714",
+     "name": "Justin Trudeau",
+     "x": 0.483,
+     "y": 0.547,
+     "size": 0.254
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/Justin_Trudeau_Volodymyr_Zelensky_2022_05_08_48_4572e609.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Justin_Trudeau,_Volodymyr_Zelensky_(2022-05-08)_48.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Justin_Trudeau%2C_Volodymyr_Zelensky_%282022-05-08%29_48.jpg",
+   "sha1": "4572e609b59e395e79b489bd35c95592c58e0f0e",
+   "sha256": "71c80e605688664b8320e7e4d4cac34a015dc61da1b6dd00dc7365db94631750",
+   "bytes": 364543,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "PRESIDENT OF UKRAINE VOLODYMYR ZELENSKYY Official website",
+   "people": [
+    {
+     "qid": "Q3099714",
+     "name": "Justin Trudeau",
+     "x": 0.22,
+     "y": 0.34,
+     "size": 0.11
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/Justin_Trudeau_at_Eurasia_Group_2023_US_Canada_Summit_527964_49aa1963.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Justin_Trudeau_at_Eurasia_Group_2023_US-Canada_Summit_(52796409895).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/0/03/Justin_Trudeau_at_Eurasia_Group_2023_US-Canada_Summit_%2852796409895%29.jpg",
+   "sha1": "49aa1963e6e1570dc4e8be08b41f36b6a696b6d8",
+   "sha256": "313939ed4c327b2abcd08a8c466dc53b951b2e45f86548e42be79abe1ffbd897",
+   "bytes": 2944694,
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "Eurasia Group",
+   "people": [
+    {
+     "qid": "Q3099714",
+     "name": "Justin Trudeau",
+     "x": 0.428,
+     "y": 0.492,
+     "size": 0.096
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/Justin_Trudeau_at_Eurasia_Group_2023_US_Canada_Summit_528074_1499b830.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Justin_Trudeau_at_Eurasia_Group_2023_US-Canada_Summit_(52807415535).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Justin_Trudeau_at_Eurasia_Group_2023_US-Canada_Summit_%2852807415535%29.jpg",
+   "sha1": "1499b830985ad1a27789f0255feab507b8f3263b",
+   "sha256": "818e83eb7461d4cb3126325958555f0e1ae143d49d82c3730be0845fb063e362",
+   "bytes": 3107099,
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "Eurasia Group",
+   "people": [
+    {
+     "qid": "Q3099714",
+     "name": "Justin Trudeau",
+     "x": 0.448,
+     "y": 0.259,
+     "size": 0.212
+    }
+   ],
+   "faces": 3
+  },
+  {
+   "file": "portraits/Justin_Trudeau_at_Eurasia_Group_2023_US_Canada_Summit_528074_f88f04f9.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Justin_Trudeau_at_Eurasia_Group_2023_US-Canada_Summit_(52807415495)_(cropped)_(cropped).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Justin_Trudeau_at_Eurasia_Group_2023_US-Canada_Summit_%2852807415495%29_%28cropped%29_%28cropped%29.jpg",
+   "sha1": "f88f04f95adca84205a2b75e377db39e6cafb9ea",
+   "sha256": "f9bcb40a5494ca0ecac2781818f0ff2c6daf89a4b847a602ca5729dc458ff4ed",
+   "bytes": 973903,
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "Eurasia Group",
+   "people": [
+    {
+     "qid": "Q3099714",
+     "name": "Justin Trudeau",
+     "x": 0.507,
+     "y": 0.509,
+     "size": 0.585
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/Justin_Trudeau_with_Enrique_Pe_a_Nieto_in_Lima_Peru_2018_415_51af20cc.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Justin_Trudeau_with_Enrique_Pe%C3%B1a_Nieto_in_Lima,_Peru_-_2018_(41507133581).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/0/04/Justin_Trudeau_with_Enrique_Pe%C3%B1a_Nieto_in_Lima%2C_Peru_-_2018_%2841507133581%29.jpg",
+   "sha1": "51af20cc1d9b2b0accd4a466dc219068917cbf11",
+   "sha256": "bd485c7c994d79490eebc02075e9419d0641a42c8aaf02799ea633c2962160ad",
+   "bytes": 1726107,
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "Presidencia de la República Mexicana",
+   "people": [
+    {
+     "qid": "Q3099714",
+     "name": "Justin Trudeau",
+     "x": 0.412,
+     "y": 0.293,
+     "size": 0.217
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Leader_Pelosi_and_Members_of_Congressional_Delegation_Meet_J_4eece7bf.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Leader_Pelosi_and_Members_of_Congressional_Delegation_Meet_Japan%27s_PM_Abe_(17062055242).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Leader_Pelosi_and_Members_of_Congressional_Delegation_Meet_Japan%27s_PM_Abe_%2817062055242%29.jpg",
+   "sha1": "4eece7bf69b8833374658836d7a1635c5dacb218",
+   "sha256": "7b8f4d9249f4ec9cde24c86b8315dbfb780838aed111039285f6d3542db0f7a7",
+   "bytes": 8221584,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "U.S. Embassy Tokyo from Japan",
+   "people": [
+    {
+     "qid": "Q132345",
+     "name": "Shinzō Abe",
+     "x": 0.591,
+     "y": 0.331,
+     "size": 0.196
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Leader_Pelosi_and_Members_of_Congressional_Delegation_Meet_J_e53c3e91.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Leader_Pelosi_and_Members_of_Congressional_Delegation_Meet_Japan%27s_PM_Abe_(16443367793).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Leader_Pelosi_and_Members_of_Congressional_Delegation_Meet_Japan%27s_PM_Abe_%2816443367793%29.jpg",
+   "sha1": "e53c3e91f12d72208b88f2a76f8f5a19aadeb67a",
+   "sha256": "90a7510e98f7212c69fcbe632a5f87486251f7c90349bb1d9028fa6d929cebf6",
+   "bytes": 10004508,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "U.S. Embassy Tokyo from Japan",
+   "people": [
+    {
+     "qid": "Q132345",
+     "name": "Shinzō Abe",
+     "x": 0.582,
+     "y": 0.249,
+     "size": 0.193
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Leon_Panetta_and_Xi_Jinping_in_Beijing_Sept_19_2012_181ef4c8.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Leon_Panetta_and_Xi_Jinping_in_Beijing,_Sept._19,_2012.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Leon_Panetta_and_Xi_Jinping_in_Beijing%2C_Sept._19%2C_2012.jpg",
+   "sha1": "181ef4c8b82dad635ac40167a47f5978225b616e",
+   "sha256": "651daff4f569e39452c5bed957a9087db100813ca6eea9ead4870dca05c9f393",
+   "bytes": 1221147,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "DoD photo by Erin A. Kirk-Cuomo",
+   "people": [
+    {
+     "qid": "Q15031",
+     "name": "Xi Jinping",
+     "x": 0.617,
+     "y": 0.178,
+     "size": 0.198
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Lionel_Barber_Boris_Johnson_Lakshmi_Mittal_8577548426_6089a7d1.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Lionel_Barber_Boris_Johnson_Lakshmi_Mittal_(8577548426).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Lionel_Barber_Boris_Johnson_Lakshmi_Mittal_%288577548426%29.jpg",
+   "sha1": "6089a7d13b0d1fa8bfec144f17b9086cb79880e0",
+   "sha256": "fa6b3c0f653fb44b93dc72b390c0b07a4acc818661e6c1708dc994a9827f5d72",
+   "bytes": 5290101,
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "Financial Times",
+   "people": [
+    {
+     "qid": "Q180589",
+     "name": "Boris Johnson",
+     "x": 0.493,
+     "y": 0.261,
+     "size": 0.179
+    }
+   ],
+   "faces": 3
+  },
+  {
+   "file": "portraits/Macri_with_Trudeau_01_e9722115.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Macri_with_Trudeau_01.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/9/92/Macri_with_Trudeau_01.jpg",
+   "sha1": "e9722115832240abce1bb0e6a4feee4abe960c9e",
+   "sha256": "9001a129ad431174602fbff465e8aff046a93ae5aa6b5b90d192b3a97512856c",
+   "bytes": 573664,
+   "licence": "CC BY 2.5 ar",
+   "licence_url": "https://creativecommons.org/licenses/by/2.5/ar/deed.en",
+   "author": "Casa Rosada",
+   "people": [
+    {
+     "qid": "Q3099714",
+     "name": "Justin Trudeau",
+     "x": 0.652,
+     "y": 0.358,
+     "size": 0.081
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/May_at_the_EP_46972553232_84cadf79.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:May_at_the_EP_(46972553232).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/8/81/May_at_the_EP_%2846972553232%29.jpg",
+   "sha1": "84cadf797aeaa842ae54338dfbf42181aa9efbdf",
+   "sha256": "f97522c9992f84ab2946ed1de249dc73fadd48938fdeef11da6aafe39da24ef5",
+   "bytes": 3257606,
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "European Parliament from EU",
+   "people": [
+    {
+     "qid": "Q264766",
+     "name": "Theresa May",
+     "x": 0.748,
+     "y": 0.256,
+     "size": 0.206
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/Meeting_of_European_Commission_President_Jean_Claude_Juncker_05798e47.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Meeting_of_European_Commission_President_Jean_Claude_Juncker_and_Estonian_President_Kersti_Kaljulaid_IMGL4047_(35457752672).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Meeting_of_European_Commission_President_Jean_Claude_Juncker_and_Estonian_President_Kersti_Kaljulaid_IMGL4047_%2835457752672%29.jpg",
+   "sha1": "05798e4780278fd4d4a34fe9f0efea7a426b9de1",
+   "sha256": "a5799a9915dd48f21714e7705a361f45a459a2d2afb5421730881b50a52291fc",
+   "bytes": 1115427,
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "EU2017EE Estonian Presidency",
+   "people": [
+    {
+     "qid": "Q57661",
+     "name": "Jean-Claude Juncker",
+     "x": 0.588,
+     "y": 0.238,
+     "size": 0.207
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/Michel_Kafando_Jean_Claude_Juncker_2015_869dcf93.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Michel_Kafando_%26_Jean-Claude_Juncker_-_2015.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/8/80/Michel_Kafando_%26_Jean-Claude_Juncker_-_2015.jpg",
+   "sha1": "869dcf93a038552e9a437a8d5ede06f3f8eb4d1f",
+   "sha256": "093fd7c551dc5148e64b42ba379d08e10d45b12651b14483012da9f52db05adc",
+   "bytes": 7952278,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "Etienne Ansotte / European Union, 2015 / EC - Audiovisual Service",
+   "people": [
+    {
+     "qid": "Q57661",
+     "name": "Jean-Claude Juncker",
+     "x": 0.832,
+     "y": 0.35,
+     "size": 0.149
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Mikhail_Mishustin_and_Xi_Jinping_2023_03_21_01_1d446a3b.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Mikhail_Mishustin_and_Xi_Jinping_(2023-03-21)_01.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Mikhail_Mishustin_and_Xi_Jinping_%282023-03-21%29_01.jpg",
+   "sha1": "1d446a3b9a4e2b9975939a2d44ad1fde88472d56",
+   "sha256": "1dfe832da8bc9b97a1c73cf79294fb72e88192d504d4b85cc2cdd40a5a6fe35a",
+   "bytes": 124375,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "Government of Russia",
+   "people": [
+    {
+     "qid": "Q15031",
+     "name": "Xi Jinping",
+     "x": 0.314,
+     "y": 0.237,
+     "size": 0.218
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/NASDAQ_Bell_Group_Shot_3919090777_de95ac90.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:NASDAQ_Bell_Group_Shot_(3919090777).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/a/ae/NASDAQ_Bell_Group_Shot_%283919090777%29.jpg",
+   "sha1": "de95ac901379bc73d9bc218840f66be688423546",
+   "sha256": "436136ab8903785331810d81cf1ff010a4a1df2120938f969eac63229c3d9fa3",
+   "bytes": 512016,
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "Think London",
+   "people": [
+    {
+     "qid": "Q180589",
+     "name": "Boris Johnson",
+     "x": 0.506,
+     "y": 0.447,
+     "size": 0.132
+    }
+   ],
+   "faces": 4
+  },
+  {
+   "file": "portraits/Nancy_Pelosi_and_Members_of_Congressional_Delegation_Meet_Ja_29c8ac5a.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Nancy_Pelosi_and_Members_of_Congressional_Delegation_Meet_Japan%27s_PM_Abe_April_2015.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/3/33/Nancy_Pelosi_and_Members_of_Congressional_Delegation_Meet_Japan%27s_PM_Abe_April_2015.jpg",
+   "sha1": "29c8ac5a4d87ae237393c57ccb32efdd16b2b9f2",
+   "sha256": "b7a777b7c0514ed4393acffce8b1b88e1297df364581b13ec765d36e8712b9aa",
+   "bytes": 8581701,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "U.S. Embassy Tokyo",
+   "people": [
+    {
+     "qid": "Q132345",
+     "name": "Shinzō Abe",
+     "x": 0.568,
+     "y": 0.252,
+     "size": 0.177
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Neven_Mimica_Jean_Claude_Juncker_Jacob_Zuma_2017_4557fc87.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Neven_Mimica,_Jean-Claude_Juncker,_Jacob_Zuma,_2017.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/9/97/Neven_Mimica%2C_Jean-Claude_Juncker%2C_Jacob_Zuma%2C_2017.jpg",
+   "sha1": "4557fc878a29dea9c24dd7c1157cd6178012f8b3",
+   "sha256": "4575b30983a09889787f09f6fd9c06f2136ee8077a6d0d294b88cf650d24c6d2",
+   "bytes": 5222124,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "Etienne Ansotte",
+   "people": [
+    {
+     "qid": "Q57661",
+     "name": "Jean-Claude Juncker",
+     "x": 0.447,
+     "y": 0.234,
+     "size": 0.162
+    }
+   ],
+   "faces": 4
+  },
+  {
+   "file": "portraits/PM_visit_to_Brussels_38875902182_5fde48a3.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:PM_visit_to_Brussels_(38875902182).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/e/ea/PM_visit_to_Brussels_%2838875902182%29.jpg",
+   "sha1": "5fde48a3b7dbe59ebc28c45dffb8f1f29b9f04d6",
+   "sha256": "460c1e9be0b066f80f8b730a283b2220a9e5aea0b4d44cb8f3ddab07937de5ad",
+   "bytes": 1553235,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "Number 10",
+   "people": [
+    {
+     "qid": "Q264766",
+     "name": "Theresa May",
+     "x": 0.534,
+     "y": 0.22,
+     "size": 0.209
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Participation_of_Jos_Manuel_Barroso_at_the_opening_of_the_Pe_abdb4e95.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Participation_of_Jos%C3%A9_Manuel_Barroso,_at_the_opening_of_the_Permanent_Representation_of_Poland_to_the_EU_(P-018948-00-08).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Participation_of_Jos%C3%A9_Manuel_Barroso%2C_at_the_opening_of_the_Permanent_Representation_of_Poland_to_the_EU_%28P-018948-00-08%29.jpg",
+   "sha1": "abdb4e950135aafde9f79f4348c7533ccec15361",
+   "sha256": "458b651b025a1805c20f8b3d5b2850c438cdabf41d1d1abb1c5baf3de22f9156",
+   "bytes": 3715488,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "Europäische Kommission - Audiovisueller Dienst, Etienne Ansotte, CE - Service audiovisuel, EC - Audiovisual Service, Shimera",
+   "people": [
+    {
+     "qid": "Q946",
+     "name": "Donald Tusk",
+     "x": 0.436,
+     "y": 0.238,
+     "size": 0.111
+    }
+   ],
+   "faces": 6
+  },
+  {
+   "file": "portraits/Patricia_Bullrich_and_Boris_Johnson_5e04aaa4.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Patricia_Bullrich_and_Boris_Johnson.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Patricia_Bullrich_and_Boris_Johnson.jpg",
+   "sha1": "5e04aaa4f57a9fcf13309c75d8cf25e072ef6c14",
+   "sha256": "6952e21fad7f5fb1b670eac6e3aacd597eec3c44b7df0fff061ef7437da23191",
+   "bytes": 182361,
+   "licence": "CC BY 2.5 ar",
+   "licence_url": "https://creativecommons.org/licenses/by/2.5/ar/deed.en",
+   "author": "Presidencia de la Nación",
+   "people": [
+    {
+     "qid": "Q180589",
+     "name": "Boris Johnson",
+     "x": 0.306,
+     "y": 0.338,
+     "size": 0.219
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Predsednik_vlade_Robert_Golob_se_mudi_na_delovnem_obisku_v_P_fb44cfd8.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Predsednik_vlade_Robert_Golob_se_mudi_na_delovnem_obisku_v_Parizu,_kjer_se_je_sre%C4%8Dal_s_francoskim_predsednikom_Emmanuelom_Macronom_(55117972077).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Predsednik_vlade_Robert_Golob_se_mudi_na_delovnem_obisku_v_Parizu%2C_kjer_se_je_sre%C4%8Dal_s_francoskim_predsednikom_Emmanuelom_Macronom_%2855117972077%29.jpg",
+   "sha1": "fb44cfd8bb950c9e27d8cc581e6309bb223f0abe",
+   "sha256": "40b1d740cf2c2edfee956c5a9735b73e3963af301f25e4e02403b673eb7f24fb",
+   "bytes": 2452510,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "Vlada Republike Slovenije from Ljubljana, Slovenia",
+   "people": [
+    {
+     "qid": "Q3052772",
+     "name": "Emmanuel Macron",
+     "x": 0.809,
+     "y": 0.256,
+     "size": 0.1
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/President_Donald_Trump_and_French_President_Emmanuel_Macron__e3c1f590.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:President_Donald_Trump_and_French_President_Emmanuel_Macron_hold_a_joint_press_conference_(54349872992).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/b/b3/President_Donald_Trump_and_French_President_Emmanuel_Macron_hold_a_joint_press_conference_%2854349872992%29.jpg",
+   "sha1": "e3c1f590ce657fbc90da18223df42b88ab81e164",
+   "sha256": "d2fe24fdb1f8a066fdb753c67a6512c0d0aaabff431ec0f224f5ddb9e9d91e25",
+   "bytes": 8743962,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "The White House",
+   "people": [
+    {
+     "qid": "Q3052772",
+     "name": "Emmanuel Macron",
+     "x": 0.177,
+     "y": 0.373,
+     "size": 0.11
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/President_Donald_Trump_and_Volodymyr_Zelenskyy_of_Ukraine_on_50ddf28f.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:President_Donald_Trump_and_Volodymyr_Zelenskyy_of_Ukraine_on_Friday,_28_February_2025_at_the_White_House_in_Washington,_D.C.,_USA.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/a/aa/President_Donald_Trump_and_Volodymyr_Zelenskyy_of_Ukraine_on_Friday%2C_28_February_2025_at_the_White_House_in_Washington%2C_D.C.%2C_USA.jpg",
+   "sha1": "50ddf28f0828ba044f8538cd7c37a15c30c51f84",
+   "sha256": "cc2693329d7e9e838c16194e05c5bd4968eafd0570526b576261700ddba939de",
+   "bytes": 3089039,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "The White House",
+   "people": [
+    {
+     "qid": "Q22686",
+     "name": "Donald Trump",
+     "x": 0.778,
+     "y": 0.221,
+     "size": 0.197
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/President_Trump_Visits_St_John_s_Episcopal_Church_4996364902_4b2a1f79.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:President_Trump_Visits_St._John%27s_Episcopal_Church_(49963649028).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/f/fb/President_Trump_Visits_St._John%27s_Episcopal_Church_%2849963649028%29.jpg",
+   "sha1": "4b2a1f7973ffef4f7be6d48d20f03182f6f3046e",
+   "sha256": "abddbaacca97c52ca8778952f066a84d32ee668eb6668eb8540d1cb122255e53",
+   "bytes": 1200439,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "The White House from Washington, DC",
+   "people": [
+    {
+     "qid": "Q22686",
+     "name": "Donald Trump",
+     "x": 0.399,
+     "y": 0.242,
+     "size": 0.191
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/President_Trump_and_the_First_Lady_in_India_49583644633_1b14842e.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:President_Trump_and_the_First_Lady_in_India_(49583644633).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/2/28/President_Trump_and_the_First_Lady_in_India_%2849583644633%29.jpg",
+   "sha1": "1b14842e8902034e9db12698b0f223ef2876b22f",
+   "sha256": "16a77cb6ffc0ba32d97c40ad43e5b2c155c4748ddfe5eda4324707d5ffd2b62d",
+   "bytes": 1370789,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "The White House from Washington, DC",
+   "people": [
+    {
+     "qid": "Q1058",
+     "name": "Narendra Modi",
+     "x": 0.258,
+     "y": 0.422,
+     "size": 0.174
+    }
+   ],
+   "faces": 3
+  },
+  {
+   "file": "portraits/President_Trump_at_the_G20_48144095476_48ea6c19.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:President_Trump_at_the_G20_(48144095476).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/President_Trump_at_the_G20_%2848144095476%29.jpg",
+   "sha1": "48ea6c191a52b32169053590222b89c0cb7c1bb8",
+   "sha256": "d8a808b71ee77460f019737920f656a805b02086b39c40dc8440eed7ac032d04",
+   "bytes": 687172,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "The White House from Washington, DC",
+   "people": [
+    {
+     "qid": "Q1058",
+     "name": "Narendra Modi",
+     "x": 0.359,
+     "y": 0.406,
+     "size": 0.067
+    }
+   ],
+   "faces": 3
+  },
+  {
+   "file": "portraits/President_Xi_Jinping_Greets_Secretary_Tillerson_33139050550_c72ba5e3.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:President_Xi_Jinping_Greets_Secretary_Tillerson_(33139050550).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/6/64/President_Xi_Jinping_Greets_Secretary_Tillerson_%2833139050550%29.jpg",
+   "sha1": "c72ba5e3d69a98bd9f82bc17133ad545bf19804d",
+   "sha256": "22ede16c60a7bced31b296da87e933fbf00c35909ef30f7d3901ac99682821bc",
+   "bytes": 2110685,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "U.S. Department of State from United States",
+   "people": [
+    {
+     "qid": "Q15031",
+     "name": "Xi Jinping",
+     "x": 0.629,
+     "y": 0.263,
+     "size": 0.169
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Presidential_Council_of_the_National_Assembly_and_College_of_1490f6c8.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Presidential_Council_of_the_National_Assembly_and_College_of_Commissioners_Meetings_(38939916484).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Presidential_Council_of_the_National_Assembly_and_College_of_Commissioners_Meetings_%2838939916484%29.jpg",
+   "sha1": "1490f6c810ef9e032e6b3ff46d5be449e38db6a3",
+   "sha256": "cc74e98e426ded8d8994cf4bea7de5ee70609c87a695a3a5daea81a845d8b1b3",
+   "bytes": 879589,
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "EU2018BG Bulgarian Presidency",
+   "people": [
+    {
+     "qid": "Q57661",
+     "name": "Jean-Claude Juncker",
+     "x": 0.401,
+     "y": 0.316,
+     "size": 0.155
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Prime_Minister_Narendra_Modi_visits_Jakarta_May_2018_4_646a8c83.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Prime_Minister_Narendra_Modi_visits_Jakarta,_May_2018_(4).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Prime_Minister_Narendra_Modi_visits_Jakarta%2C_May_2018_%284%29.jpg",
+   "sha1": "646a8c83fec24a9293ee6329bd1a41b1c09ac2b5",
+   "sha256": "9f26cc7f530509cbec7fde4e785bc708566fb1943ded2c581c026ac78a73bb70",
+   "bytes": 184819,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "President of Indonesia",
+   "people": [
+    {
+     "qid": "Q1058",
+     "name": "Narendra Modi",
+     "x": 0.285,
+     "y": 0.418,
+     "size": 0.089
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/Putin_Christmas_greetings_2023_04_065c7455.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Putin_Christmas_greetings_(2023)_04.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Putin_Christmas_greetings_%282023%29_04.jpg",
+   "sha1": "065c745575cb93a30d08ae3930ab24440e839eb2",
+   "sha256": "7aad775d3c174e25dc9fbf1fedd168510f6dfde16602c5211c8cc3f6678bdc14",
+   "bytes": 364858,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "Presidential Executive Office of Russia",
+   "people": [
+    {
+     "qid": "Q7747",
+     "name": "Vladimir Putin",
+     "x": 0.797,
+     "y": 0.394,
+     "size": 0.167
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/Putin_and_Sofia_Pozdniakova_2021cr_2723fea3.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Putin_and_Sofia_Pozdniakova_2021cr.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Putin_and_Sofia_Pozdniakova_2021cr.jpg",
+   "sha1": "2723fea354eb8000a7a09b6be29aa4dc7957d17f",
+   "sha256": "6a8cdc28da281bc762a1e4119ce46b24b9f17eb3aac248d6e04ea2380e8f6f2d",
+   "bytes": 499705,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "Unknown (RIA Novosti)",
+   "people": [
+    {
+     "qid": "Q7747",
+     "name": "Vladimir Putin",
+     "x": 0.326,
+     "y": 0.258,
+     "size": 0.22
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/Reuni_n_Bilateral_Sebasti_n_Pi_era_y_Theresa_May_31192237507_2c1dc530.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Reuni%C3%B3n_Bilateral_Sebasti%C3%A1n_Pi%C3%B1era_y_Theresa_May_(31192237507).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Reuni%C3%B3n_Bilateral_Sebasti%C3%A1n_Pi%C3%B1era_y_Theresa_May_%2831192237507%29.jpg",
+   "sha1": "2c1dc530e0f9019e1b1b72f394b2e5825e332556",
+   "sha256": "f810677532ba4a0258fcc9ab2a069a138d4ff287498a29ea830b1db7f8d7082f",
+   "bytes": 1118547,
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "G20 Argentina",
+   "people": [
+    {
+     "qid": "Q264766",
+     "name": "Theresa May",
+     "x": 0.539,
+     "y": 0.345,
+     "size": 0.126
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Ricky_Kej_with_Indian_Prime_Minister_Shri_Narendra_Modi_d9e2ffe4.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Ricky_Kej_with_Indian_Prime_Minister,_Shri_Narendra_Modi.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/9/98/Ricky_Kej_with_Indian_Prime_Minister%2C_Shri_Narendra_Modi.jpg",
+   "sha1": "d9e2ffe484f8b58867dfbbf0753c8fb07e8af8ef",
+   "sha256": "35aed21f8f7806649a36dd56e55d7b23d78c6f5576505be6eca05fbc0b86b381",
+   "bytes": 180013,
+   "licence": "CC0",
+   "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "author": "Ricky Kej",
+   "people": [
+    {
+     "qid": "Q1058",
+     "name": "Narendra Modi",
+     "x": 0.68,
+     "y": 0.341,
+     "size": 0.228
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/SD_London_Day_2_3_170331_D_SV709_323_32942436413_92fec1ba.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:SD_London_Day_2_%26_3_170331-D-SV709-323_(32942436413).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/3/36/SD_London_Day_2_%26_3_170331-D-SV709-323_%2832942436413%29.jpg",
+   "sha1": "92fec1baeb62a2002f73e836ee955e3cd53a2c35",
+   "sha256": "dfa0909bba1a01b8edbf70f406d879df0a9c7cf6b8069bfc03c242ef35620ecf",
+   "bytes": 8298179,
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "Jim Mattis",
+   "people": [
+    {
+     "qid": "Q264766",
+     "name": "Theresa May",
+     "x": 0.62,
+     "y": 0.29,
+     "size": 0.183
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Secretary_Tillerson_Participates_in_a_Joint_Press_Availabili_fe7c9828.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Secretary_Tillerson_Participates_in_a_Joint_Press_Availability_With_United_Kingdom_Foreign_Secretary_Johnson_in_London_(37226872145).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Secretary_Tillerson_Participates_in_a_Joint_Press_Availability_With_United_Kingdom_Foreign_Secretary_Johnson_in_London_%2837226872145%29.jpg",
+   "sha1": "fe7c98285a0572af4b056cd06e44b1a8aaebe211",
+   "sha256": "588e585a3516ba9c5b5b4aba704550b915da35fd121370ee02fcb7196b09c885",
+   "bytes": 1276204,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "U.S. Department of State from United States",
+   "people": [
+    {
+     "qid": "Q180589",
+     "name": "Boris Johnson",
+     "x": 0.248,
+     "y": 0.384,
+     "size": 0.125
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Shinz_Abe_and_Yang_Jiechi_2020_1_e9e953b5.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Shinz%C5%8D_Abe_and_Yang_Jiechi_2020_(1).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Shinz%C5%8D_Abe_and_Yang_Jiechi_2020_%281%29.jpg",
+   "sha1": "e9e953b5ee88e36585513084494616110a0f7ead",
+   "sha256": "46d257bb905fd18753dd496d1b486bd367df3ed88bf78d3681788b4eb6896bbf",
+   "bytes": 460778,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "首相官邸ホームページ",
+   "people": [
+    {
+     "qid": "Q132345",
+     "name": "Shinzō Abe",
+     "x": 0.625,
+     "y": 0.281,
+     "size": 0.202
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Shinzo_Abe_April_2015_cropped_5a1bd0cd.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Shinzo_Abe_April_2015_(cropped).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Shinzo_Abe_April_2015_%28cropped%29.jpg",
+   "sha1": "5a1bd0cdc8b7fea0e9d92e0ceedef84fca8ff449",
+   "sha256": "fb2b3e01342599ae7121e05d7713382677593bb7f3d3d20cabb2654e3ed13b19",
+   "bytes": 641181,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "https://www.flickr.com/photos/41088260@N06",
+   "people": [
+    {
+     "qid": "Q132345",
+     "name": "Shinzō Abe",
+     "x": 0.444,
+     "y": 0.348,
+     "size": 0.298
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/Shinzo_Abe_and_Armen_Sarkissian_at_the_Enthronement_of_Naruh_36a85aec.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Shinzo_Abe_and_Armen_Sarkissian_at_the_Enthronement_of_Naruhito_(1).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Shinzo_Abe_and_Armen_Sarkissian_at_the_Enthronement_of_Naruhito_%281%29.jpg",
+   "sha1": "36a85aec4f819b5dc8b1c9b6803b11dc72375d83",
+   "sha256": "c40121c30b250df5a94bbf0015018b8513d6847d6677744097831e4d16e33ee8",
+   "bytes": 794136,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "内閣官房内閣広報室",
+   "people": [
+    {
+     "qid": "Q132345",
+     "name": "Shinzō Abe",
+     "x": 0.666,
+     "y": 0.291,
+     "size": 0.185
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/Shinzo_Abe_and_Yang_Jiechi_20190517_1_9561efa5.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Shinzo_Abe_and_Yang_Jiechi_20190517_(1).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Shinzo_Abe_and_Yang_Jiechi_20190517_%281%29.jpg",
+   "sha1": "9561efa5b9524bf49eb2412965653699f75b3ac9",
+   "sha256": "fce890098280d75ad7cefc0ada520deb6eb3f835bb0ed0355a030b554e9281e7",
+   "bytes": 524213,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "内閣官房内閣広報室",
+   "people": [
+    {
+     "qid": "Q132345",
+     "name": "Shinzō Abe",
+     "x": 0.587,
+     "y": 0.24,
+     "size": 0.169
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/The_President_and_First_Lady_in_the_U_K_48051546637_595aa72f.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:The_President_and_First_Lady_in_the_U.K._(48051546637).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/2/2b/The_President_and_First_Lady_in_the_U.K._%2848051546637%29.jpg",
+   "sha1": "595aa72f1d539ade59865e47bd4f0bda66c29dba",
+   "sha256": "888196a3b89ebbf4bc489bd8040b521810a4e51a7d60ad1a0ec80a3093869866",
+   "bytes": 1634993,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "The White House from Washington, DC",
+   "people": [
+    {
+     "qid": "Q22686",
+     "name": "Donald Trump",
+     "x": 0.613,
+     "y": 0.307,
+     "size": 0.139
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Theresa_May_meets_with_Ilham_Aliyev_6_a8a23c17.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Theresa_May_meets_with_Ilham_Aliyev_(6).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/4/44/Theresa_May_meets_with_Ilham_Aliyev_%286%29.jpg",
+   "sha1": "a8a23c17c2def45977405620369fb07b409c510f",
+   "sha256": "1085827a974ac4b6a9f5a8df5a58b9f3643f94eed4b41e3c6af6657eb5d15204",
+   "bytes": 980893,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "Press Service of the President of the Republic of Azerbaijan",
+   "people": [
+    {
+     "qid": "Q264766",
+     "name": "Theresa May",
+     "x": 0.661,
+     "y": 0.498,
+     "size": 0.075
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/Tusk_Lipiec_2015_0f840243.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Tusk_Lipiec_2015.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Tusk_Lipiec_2015.jpg",
+   "sha1": "0f840243bbb31a62fc4890b91d2761333ed5adf1",
+   "sha256": "dcd1908813808a75ea8aa56cfd3487ba4cdcab1842f8bb3ecc547ddfeb74d98e",
+   "bytes": 231642,
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "European People's Party",
+   "people": [
+    {
+     "qid": "Q946",
+     "name": "Donald Tusk",
+     "x": 0.472,
+     "y": 0.433,
+     "size": 0.532
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/UNGA_48791304221_0bc33371.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:-UNGA_(48791304221).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/-UNGA_%2848791304221%29.jpg",
+   "sha1": "0bc33371511959e61663c4aafeb498e398b1032a",
+   "sha256": "f1e85ca849f7a32a81a27f03fff9e86183e70de341c3c407a3aa4f1ae1ac21be",
+   "bytes": 535746,
+   "licence": "Public domain",
+   "licence_url": "",
+   "author": "The White House from Washington, DC",
+   "people": [
+    {
+     "qid": "Q180589",
+     "name": "Boris Johnson",
+     "x": 0.333,
+     "y": 0.295,
+     "size": 0.11
+    }
+   ],
+   "faces": 3
+  },
+  {
+   "file": "portraits/Unterzeichnung_des_Koalitionsvertrages_der_18_Wahlperiode_de_7ff2e69a.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Unterzeichnung_des_Koalitionsvertrages_der_18._Wahlperiode_des_Bundestages_(Martin_Rulsch)_055.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/4/42/Unterzeichnung_des_Koalitionsvertrages_der_18._Wahlperiode_des_Bundestages_%28Martin_Rulsch%29_055.jpg",
+   "sha1": "7ff2e69a7c9fb051d15033d7024415eb9148567c",
+   "sha256": "c73b9ddc37bc358a05360dd9efe1171afccb54a09184a71fef379380d68ac49a",
+   "bytes": 3712456,
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "Martin Rulsch, Wikimedia Commons",
+   "people": [
+    {
+     "qid": "Q567",
+     "name": "Angela Merkel",
+     "x": 0.447,
+     "y": 0.183,
+     "size": 0.105
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/VISITA_DE_ESTADO_XI_JINPING_31072546255_97ab38ad.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:VISITA_DE_ESTADO_-_XI_JINPING_(31072546255).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/0/00/VISITA_DE_ESTADO_-_XI_JINPING_%2831072546255%29.jpg",
+   "sha1": "97ab38ade40f24c4953e245b078dfc48b2ecbba4",
+   "sha256": "bde6d0ea49c97f7b729533460c87f5006a82a5091c398b5146205a79b73e326c",
+   "bytes": 2401274,
+   "licence": "CC BY-SA 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/2.0",
+   "author": "Agencia de Noticias ANDES",
+   "people": [
+    {
+     "qid": "Q15031",
+     "name": "Xi Jinping",
+     "x": 0.214,
+     "y": 0.317,
+     "size": 0.187
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Vice_President_Joe_Biden_with_Jean_Claude_Juncker_3fdf8f09.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Vice_President_Joe_Biden_with_Jean-Claude_Juncker.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Vice_President_Joe_Biden_with_Jean-Claude_Juncker.jpg",
+   "sha1": "3fdf8f0934a11d5ab155df5d852e12d18dda1c22",
+   "sha256": "50b8f20b83401d8611d9ec90c160b31638d49b1923ec432faf3f6dea05c949b6",
+   "bytes": 4365024,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "European Communities",
+   "people": [
+    {
+     "qid": "Q57661",
+     "name": "Jean-Claude Juncker",
+     "x": 0.411,
+     "y": 0.276,
+     "size": 0.2
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Visit_by_Jean_Claude_Juncker_President_of_the_EC_to_French_G_07b7d7e8.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Visit_by_Jean-Claude_Juncker,_President_of_the_EC,_to_French_Guiana_(P-035507-00-71).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/6/67/Visit_by_Jean-Claude_Juncker%2C_President_of_the_EC%2C_to_French_Guiana_%28P-035507-00-71%29.jpg",
+   "sha1": "07b7d7e8c08f887b62a287d5934ac46d8a7f8561",
+   "sha256": "fd6dac76149c4b5639355b5c952bde67b396977c70acd10998835ed0aa2c58f5",
+   "bytes": 4314395,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "Europäische Kommission - Audiovisueller Dienst, Etienne Ansotte, CE - Service audiovisuel, EC - Audiovisual Service",
+   "people": [
+    {
+     "qid": "Q57661",
+     "name": "Jean-Claude Juncker",
+     "x": 0.441,
+     "y": 0.192,
+     "size": 0.142
+    }
+   ],
+   "faces": 4
+  },
+  {
+   "file": "portraits/Visit_of_Donald_Tusk_Polish_Prime_Minister_to_the_EC_P_01713_f51c501a.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Visit_of_Donald_Tusk,_Polish_Prime_Minister,_to_the_EC_(P-017134-00-14).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/6/61/Visit_of_Donald_Tusk%2C_Polish_Prime_Minister%2C_to_the_EC_%28P-017134-00-14%29.jpg",
+   "sha1": "f51c501a74b6ac49b806d8d0e5cd12680b1a7329",
+   "sha256": "dd6e54726470cde7b89d8725178c7973638be02eb87cbd318da12d53558bd0fe",
+   "bytes": 1844024,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "Europäische Kommission - Audiovisueller Dienst, Sipa Press, Benoît Bourgeois, CE - Service audiovisuel, EC - Audiovisual Service",
+   "people": [
+    {
+     "qid": "Q946",
+     "name": "Donald Tusk",
+     "x": 0.344,
+     "y": 0.366,
+     "size": 0.136
+    }
+   ],
+   "faces": 10
+  },
+  {
+   "file": "portraits/Visit_of_Ursula_von_der_Leyen_to_Ukraine_24_02_24_52_cropped_bda6fd64.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Visit_of_Ursula_von_der_Leyen_to_Ukraine,_24.02.24_(52)_(cropped).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/4/48/Visit_of_Ursula_von_der_Leyen_to_Ukraine%2C_24.02.24_%2852%29_%28cropped%29.jpg",
+   "sha1": "bda6fd6458140a40ee92071cb46f3c111ffa3a74",
+   "sha256": "6646d06772ce6b4592282c314679ded70212ff20ef236a7cae69e91c198e38c0",
+   "bytes": 504873,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "European Commission (Christophe Licoppe)",
+   "people": [
+    {
+     "qid": "Q3099714",
+     "name": "Justin Trudeau",
+     "x": 0.286,
+     "y": 0.175,
+     "size": 0.104
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Visita_de_Trabajo_a_Francia_35633552471_03736f28.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Visita_de_Trabajo_a_Francia_(35633552471).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/6/60/Visita_de_Trabajo_a_Francia_%2835633552471%29.jpg",
+   "sha1": "03736f281c13a5196927af2045e032d94a45c9e1",
+   "sha256": "3972192fa0caf387f645d2d52d690cebcc662104e546011b6a2670c55f7648d0",
+   "bytes": 1671733,
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "Presidencia de la República Mexicana",
+   "people": [
+    {
+     "qid": "Q3052772",
+     "name": "Emmanuel Macron",
+     "x": 0.623,
+     "y": 0.743,
+     "size": 0.083
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Visitas_Visitantes_14710912082_8f8e9996.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Visitas.Visitantes_(14710912082).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/c/cc/Visitas.Visitantes_%2814710912082%29.jpg",
+   "sha1": "8f8e999604bec7b9cac7dd7b2fe6867cad7fd3b2",
+   "sha256": "e52c858f4133b21efeb460e1c9c4115a90c75f3a851b8aee12ac6101ab4ee1e0",
+   "bytes": 6141458,
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "Senado Federal",
+   "people": [
+    {
+     "qid": "Q15031",
+     "name": "Xi Jinping",
+     "x": 0.32,
+     "y": 0.338,
+     "size": 0.134
+    }
+   ],
+   "faces": 6
+  },
+  {
+   "file": "portraits/Vladimir_Putin_Aleksey_Chervotkin_in_2022_30c798af.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Vladimir_Putin,_Aleksey_Chervotkin_in_2022.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/1/14/Vladimir_Putin%2C_Aleksey_Chervotkin_in_2022.jpg",
+   "sha1": "30c798afe26d54321920012217afbd623bc592a9",
+   "sha256": "217f180973fed74ef473788cf4989858ca70b350e8f5a21e37530582615ad63b",
+   "bytes": 414499,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "Kremlin.ru",
+   "people": [
+    {
+     "qid": "Q7747",
+     "name": "Vladimir Putin",
+     "x": 0.268,
+     "y": 0.209,
+     "size": 0.29
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Vladimir_Putin_and_Sergei_Andronov_2018_02_28_4502e206.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Vladimir_Putin_and_Sergei_Andronov_(2018-02-28).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/6/65/Vladimir_Putin_and_Sergei_Andronov_%282018-02-28%29.jpg",
+   "sha1": "4502e2066b810a71824d1d1603ab875785d8b514",
+   "sha256": "807cda453bdd394ec2336c9a1442089b0383aadfda950cf994e24bde07b9c9aa",
+   "bytes": 2749962,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "Пресс-служба Президента России",
+   "people": [
+    {
+     "qid": "Q7747",
+     "name": "Vladimir Putin",
+     "x": 0.388,
+     "y": 0.342,
+     "size": 0.142
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Vladimir_Putin_and_Wang_Yi_2015_04_07_01_81c79b6f.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Vladimir_Putin_and_Wang_Yi_(2015-04-07)_01.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Vladimir_Putin_and_Wang_Yi_%282015-04-07%29_01.jpg",
+   "sha1": "81c79b6fe5893f41bff87eaccc46655d76713adc",
+   "sha256": "bc238b01fce25314859a2734fee02d28c165930023e7c7832d73ccd9e667843e",
+   "bytes": 411961,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "Presidential Executive Office",
+   "people": [
+    {
+     "qid": "Q7747",
+     "name": "Vladimir Putin",
+     "x": 0.29,
+     "y": 0.338,
+     "size": 0.217
+    }
+   ],
+   "faces": 4
+  },
+  {
+   "file": "portraits/Vladimir_Putin_and_Xi_Jinping_2019_06_05_42_6717a27c.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Vladimir_Putin_and_Xi_Jinping_(2019-06-05)_42.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/5/55/Vladimir_Putin_and_Xi_Jinping_%282019-06-05%29_42.jpg",
+   "sha1": "6717a27c04ec7b792a4cde9e8423be5efba8971c",
+   "sha256": "27a9a9c9419815e855a2aa472e9df243c40611f7862be5c1c74b410e26d8e698",
+   "bytes": 365061,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "The Presidential Press and Information Office",
+   "people": [
+    {
+     "qid": "Q15031",
+     "name": "Xi Jinping",
+     "x": 0.463,
+     "y": 0.274,
+     "size": 0.283
+    }
+   ],
+   "faces": 1
+  },
+  {
+   "file": "portraits/Vladimir_Putin_and_Xi_Jinping_2019_06_05_45_92d36e86.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Vladimir_Putin_and_Xi_Jinping_(2019-06-05)_45.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/5/53/Vladimir_Putin_and_Xi_Jinping_%282019-06-05%29_45.jpg",
+   "sha1": "92d36e861b1e86989e24ac83b385e56ab5dc2363",
+   "sha256": "b64374bc83d2fbee9762d7670d37564d818a3ed5017ce42952be71b58304de92",
+   "bytes": 466935,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "The Presidential Press and Information Office",
+   "people": [
+    {
+     "qid": "Q15031",
+     "name": "Xi Jinping",
+     "x": 0.347,
+     "y": 0.283,
+     "size": 0.15
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Vladimir_Putin_at_award_ceremonies_2017_01_26_34_73bf2b72.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Vladimir_Putin_at_award_ceremonies_(2017-01-26)_34.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/5/52/Vladimir_Putin_at_award_ceremonies_%282017-01-26%29_34.jpg",
+   "sha1": "73bf2b727f89eb760e5fc24843ac9b2d725a27a9",
+   "sha256": "0f82c6fc19b7e9c3dbed316be0ab2bb33e51eb18f7898348f10351c0dcbc361f",
+   "bytes": 2580716,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "Пресс-служба Президента России",
+   "people": [
+    {
+     "qid": "Q7747",
+     "name": "Vladimir Putin",
+     "x": 0.372,
+     "y": 0.387,
+     "size": 0.168
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Vladimir_Putin_at_award_ceremonies_2024_05_30_14_55d8b1d2.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Vladimir_Putin_at_award_ceremonies_(2024-05-30)_14.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Vladimir_Putin_at_award_ceremonies_%282024-05-30%29_14.jpg",
+   "sha1": "55d8b1d2d4cb24f96b65f42ae7b0dfcd69b1257d",
+   "sha256": "4e84c2f314317f86556e7da33bcddd49a305e2fafd98b10623a1af573f204620",
+   "bytes": 334943,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "kremlin.ru",
+   "people": [
+    {
+     "qid": "Q7747",
+     "name": "Vladimir Putin",
+     "x": 0.325,
+     "y": 0.203,
+     "size": 0.258
+    }
+   ],
+   "faces": 2
+  },
+  {
+   "file": "portraits/Vladmimr_Putin_and_Emmanuel_Macron_at_2018_G20_Summit_01_0212f593.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Vladmimr_Putin_and_Emmanuel_Macron_at_2018_G20_Summit_01.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/6/62/Vladmimr_Putin_and_Emmanuel_Macron_at_2018_G20_Summit_01.jpg",
+   "sha1": "0212f593b88b811924dd03befcf0cad01648549f",
+   "sha256": "53f09ea16d719c85810aac14588c3fa2ad6eff5766cfdb432da048c5825a5188",
+   "bytes": 336214,
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "Russian Presidential Executive Office",
+   "people": [
+    {
+     "qid": "Q3052772",
+     "name": "Emmanuel Macron",
+     "x": 0.263,
+     "y": 0.314,
+     "size": 0.158
+    }
+   ],
+   "faces": 3
+  },
+  {
+   "file": "portraits/Xi_Jinping_y_Cristina_Fern_ndez_en_Argentina_3ee3ee1a.jpg",
+   "kind": "portrait",
+   "page": "https://commons.wikimedia.org/wiki/File:Xi_Jinping_y_Cristina_Fern%C3%A1ndez_en_Argentina.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Xi_Jinping_y_Cristina_Fern%C3%A1ndez_en_Argentina.jpg",
+   "sha1": "3ee3ee1a866fa9052e5d5ab6458346cce8ee7544",
+   "sha256": "32451c03e50caa6f403379adf74610d2951db74548a34ee3a1a37b412972b3d7",
+   "bytes": 391636,
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "Casa Rosada Presidencia de la nación Argentina.",
+   "people": [
+    {
+     "qid": "Q15031",
+     "name": "Xi Jinping",
+     "x": 0.416,
+     "y": 0.18,
+     "size": 0.179
+    }
+   ],
+   "faces": 2
+  }
+ ]
+}
