@@ -18,6 +18,10 @@ on:
       recognize:
         description: "Recognize release (empty: every pinned one)"
         default: ""
+      readme_media:
+        description: "Also regenerate the README screenshots and animation (artifact readme-media)"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -137,4 +141,37 @@ jobs:
             test-results.xml
       - name: Tear down
         if: always()
+        run: tests/ci/stack.sh down
+
+  # By hand only: the README's screenshots and animation from the real Memories, as an artifact
+  # to commit into docs/media/ (newest pinned versions). See CLAUDE.md.
+  readme-media:
+    if: github.event_name == 'workflow_dispatch' && inputs.readme_media
+    needs: matrix
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      FACETAG_CACHE: ${{ github.workspace }}/.cache
+      NC_PORT: "18080"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - name: Cache photo set
+        uses: actions/cache@v4
+        with:
+          path: .cache/photos
+          key: photos-${{ hashFiles('tests/data/manifest.json', 'tests/data/fetch.py') }}
+      - name: ffmpeg and Chromium
+        run: |
+          sudo apt-get update -q && sudo apt-get install -y -q ffmpeg
+          uv run --no-project --with playwright python -m playwright install --with-deps chromium
+      - run: tests/ci/stack.sh up
+      - run: tests/ci/stack.sh dataset
+      - run: uv run --no-project --with playwright python tests/readme-media/capture.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: readme-media
+          path: docs/media
+      - if: always()
         run: tests/ci/stack.sh down

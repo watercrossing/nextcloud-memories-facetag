@@ -22,6 +22,8 @@ def _compose() -> list[str]:
     cmd = ["docker", "compose", "-f", str(HERE / "compose.yml")]
     if os.environ.get("FACETAG_NETWORK"):
         cmd += ["-f", str(HERE / "compose.network.yml")]
+    if os.environ.get("NC_PORT"):
+        cmd += ["-f", str(HERE / "compose.ports.yml")]
     return cmd
 
 

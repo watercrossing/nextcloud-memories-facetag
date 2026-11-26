@@ -6,6 +6,17 @@ It addresses recognize issue [#611](https://github.com/nextcloud/recognize/issue
 Recognize misses a lot of faces in group photos: it detects on a 1024px preview, drops any face it scores under 0.9 or that is tilted more than 30°, and never revisits a photo once it has found a face in it.
 On one 12-person group photo it kept 8.
 
+![Tagging a face Recognize missed: zoom in, tap the face, pick the suggested name](docs/media/tagging.webp)
+
+| Memories and Recognize alone | With this app, after its scan, tagging on |
+|---|---|
+| ![Four people on the photo; the sidebar's People section names one](docs/media/before.webp) | ![Tagging mode: Recognize's named face, and "Who is this?" boxes on the others, one of them a face only the scan found](docs/media/after.webp) |
+| Four people, one of them named; Recognize never found the second man's face. | The second man's face, found by the scan, waits as "Who is this?"; tapping it ranks the likeliest people first (★): |
+
+![The name picker on the scan's face: the right person first, starred](docs/media/picker.webp)
+
+<sub>Real Memories 11 and Recognize 12 in the test stack; regenerate with [`tests/readme-media/capture.py`](tests/readme-media/capture.py). Photos: [G7 Biarritz](https://commons.wikimedia.org/wiki/File:-G7Biarritz_(48616290793).jpg) and [State Dinner](https://commons.wikimedia.org/wiki/File:State_Dinner_-_The_Official_State_Visit_of_France_(26832278157).jpg), The White House, public domain, via Wikimedia Commons; names come from the photos' Commons descriptions.</sub>
+
 ## What you get
 
 **Tagging in the viewer.**

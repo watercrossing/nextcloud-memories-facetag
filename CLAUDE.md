@@ -28,9 +28,21 @@ MEMORIES_VERSION=11.1.3 RECOGNIZE_VERSION=12.0.2 tests/ci/stack.sh all
 
 ## Adding to the harness (sessions 2 and 3)
 
-- **UI tests:** `stack.sh up && stack.sh dataset` gives a Memories with 118 indexed photos and 12 named people for `alice`. A browser needs a login: `stack.sh` gives alice a random password, so set a known one for Playwright (`OC_PASS=… occ user:resetpassword --password-from-env alice`) and reach Apache from the host (no port is published: add one bound to 127.0.0.1 in a compose override, or run Playwright in a container sharing Nextcloud's network namespace like `db` does). Ground-truth face positions per photo are in `tests/data/manifest.json` (`people[].x/y/size`, relative to the upright image).
+- **UI tests:** `tests/readme-media/capture.py` already drives the real Memories with Playwright and is the starting point: with `NC_PORT` set, `stack.sh` publishes Nextcloud on `127.0.0.1:NC_PORT`, and the stack is browser-ready (no first-run wizard, Memories' timeline set to `/Photos`, no sample files on first login). It logs in as `alice` with a password it sets, opens photos by URL (`#v/<dayid>/<fileid>`, after `about:blank` — a hash change alone doesn't switch photos; the folder view only renders thumbnails scrolled into view), and finds faces on screen from the ground truth via `currSlide.content.element`. Ground-truth positions per photo are in `tests/data/manifest.json` (`people[].x/y/size`, relative to the upright image).
 - **Embedding baseline:** Recognize's descriptors are in `recognize_face_detections.face_vector`; match them to ground-truth people with `stackctl.identity_of` and compare to a stored baseline. `curate.py detect` shows how to run the face model on arbitrary files in the stack.
 - **New versions:** `versions.py pin` re-resolves the matrix from `TESTED_MAJORS`; `versions.py resolve APP VERSION` checks one release.
+
+## README screenshots and animation (`tests/readme-media/`)
+
+`capture.py` regenerates `docs/media/` (before/after/picker stills and the `tagging.webp` clip) from the real Memories in the stack — after a UI change, a Memories/Recognize upgrade, or to show new timings:
+
+```sh
+export NC_PORT=18080
+tests/ci/stack.sh up && tests/ci/stack.sh dataset
+uv run --no-project --with playwright python tests/readme-media/capture.py   # --reset to run again on the same stack
+```
+
+Needs ffmpeg with libwebp. Scripted motion (zoom, the drawn fingertip) is captured in even steps; waits (face detection) in real time, so the clip shows real speed. Stills are lossy WebP to keep git history small. It refuses if the expected person isn't suggested first, saving `docs/media/failed-animation.png`. CI can run it by hand (workflow_dispatch, `readme_media`), uploading `docs/media` as an artifact.
 
 ## Traps (all found the hard way)
 

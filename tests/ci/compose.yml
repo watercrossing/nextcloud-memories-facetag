@@ -1,7 +1,7 @@
 # Throwaway Nextcloud + PostgreSQL for the compatibility tests, brought up by tests/ci/stack.sh
 # (see CLAUDE.md). PostgreSQL shares Nextcloud's network namespace and is reached on localhost,
-# and the tests talk to Nextcloud through `docker compose exec`, so no port is published and the
-# containers need no traffic between them. FACETAG_NETWORK puts Nextcloud on an existing docker
+# and the tests talk to Nextcloud through `docker compose exec`, so no port is published (unless
+# NC_PORT is set, for a browser: compose.ports.yml) and the containers need no traffic between them. FACETAG_NETWORK puts Nextcloud on an existing docker
 # network instead of the project's own (stack.sh adds compose.network.yml for that).
 name: ${COMPOSE_PROJECT_NAME:-facetag-ci}
 

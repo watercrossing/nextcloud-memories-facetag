@@ -16,7 +16,7 @@
 #   NEXTCLOUD_VERSION=34  MEMORIES_VERSION=11.1.4  RECOGNIZE_VERSION=12.0.3
 # Other knobs: COMPOSE_PROJECT_NAME (facetag-ci); FACETAG_CACHE (.cache in the repo: app tarballs,
 #   Recognize's native runtime, photos); FACETAG_NETWORK (an existing docker network to run on
-#   instead of the project's own).
+#   instead of the project's own); NC_PORT (publish Nextcloud on 127.0.0.1:NC_PORT, for a browser).
 #
 # The containers need no network access: everything is downloaded on the host into the cache.
 set -euo pipefail
@@ -39,6 +39,7 @@ APPS=/var/www/html/custom_apps
 
 COMPOSE_FILES=(-f "$HERE/compose.yml")
 if [ -n "${FACETAG_NETWORK:-}" ]; then COMPOSE_FILES+=(-f "$HERE/compose.network.yml"); fi
+if [ -n "${NC_PORT:-}" ]; then COMPOSE_FILES+=(-f "$HERE/compose.ports.yml"); fi
 compose() { docker compose "${COMPOSE_FILES[@]}" "$@"; }
 occ() { compose exec -T -u www-data nextcloud php occ "$@"; }
 psql_() { compose exec -T db psql -U nextcloud -d nextcloud -v ON_ERROR_STOP=1 -qtA "$@"; }
@@ -80,6 +81,13 @@ up() {
 	copy_app
 
 	occ app:enable memories
+	# Memories' install step records its exiftool binary in system config; once in CI it didn't
+	# (memories:index then fails with "binary path is empty"), so check, and repair if needed
+	if [ -z "$(occ config:system:get memories.exiftool || true)" ]; then
+		echo "memories.exiftool not set after enabling Memories; running occ maintenance:repair"
+		occ maintenance:repair >/dev/null
+	fi
+	echo "Memories exiftool: $(occ config:system:get memories.exiftool)"
 
 	# Recognize's install step would download node, CPU and GPU libtensorflow and ffmpeg (~650 MB)
 	# on every run. Instead: the node binary goes in first (so the step keeps it), the step's
@@ -123,6 +131,11 @@ for a in ("memories", "recognize", "memories_facetag"):
 	step "Test user $TEST_USER"
 	compose exec -T -u www-data -e OC_PASS="$(head -c 18 /dev/urandom | base64)" nextcloud php occ user:add --password-from-env "$TEST_USER" >/dev/null || true
 	occ user:info "$TEST_USER" --output=json >/dev/null
+	# Ready for a browser too: no first-run wizard, Memories' timeline set (it asks on first visit)
+	occ app:disable firstrunwizard >/dev/null || true
+	# and no sample files copied in at the first browser login
+	occ config:system:set skeletondirectory --value=''
+	occ user:setting "$TEST_USER" memories timelinePath /Photos
 }
 
 dataset() {
