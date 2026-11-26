@@ -1,0 +1,5 @@
+{
+  "nextcloud_releases": {"32": "32.0.15", "33": "33.0.11", "34": "34.0.6"},
+  "prereleases": [],
+  "store": {"hide": {"memories": ["11.1.4"]}}
+}
