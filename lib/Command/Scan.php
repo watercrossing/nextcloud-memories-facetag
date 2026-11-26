@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OCA\MemoriesFacetag\Command;
 
+use OCA\MemoriesFacetag\Service\Compatibility;
 use OCA\MemoriesFacetag\Service\Scanner;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -14,6 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class Scan extends Command {
 	public function __construct(
 		private Scanner $scanner,
+		private Compatibility $compatibility,
 	) {
 		parent::__construct();
 	}
@@ -39,6 +41,10 @@ class Scan extends Command {
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int {
+		if (!$this->compatibility->ok()) {
+			$output->writeln('<error>Switched off: ' . implode('; ', $this->compatibility->versionProblems()) . '. See occ memories_facetag:check.</error>');
+			return 1;
+		}
 		if ($input->getOption('recheck')) {
 			$r = $this->scanner->recheck((bool)$input->getOption('dry-run'), static fn (string $l) => $output->writeln($l));
 			$output->writeln(sprintf('Checked %d faces; %s %d', $r['checked'], $input->getOption('dry-run') ? 'would take out' : 'took out', $r['removed']));

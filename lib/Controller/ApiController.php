@@ -6,6 +6,7 @@ namespace OCA\MemoriesFacetag\Controller;
 
 use OCA\MemoriesFacetag\AppInfo\Application;
 use OCA\MemoriesFacetag\Service\FaceLocator;
+use OCA\MemoriesFacetag\Service\Compatibility;
 use OCA\MemoriesFacetag\Service\FaceStore;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http;
@@ -32,6 +33,7 @@ class ApiController extends Controller {
 		private IRootFolder $rootFolder,
 		private FaceStore $store,
 		private FaceLocator $locator,
+		private Compatibility $compatibility,
 		private ISecureRandom $random,
 		private LoggerInterface $logger,
 		ICacheFactory $cacheFactory,
@@ -43,6 +45,9 @@ class ApiController extends Controller {
 	/** Faces already on a photo, plus the user's named people for the picker. */
 	#[NoAdminRequired]
 	public function file(int $fileId): JSONResponse {
+		if ($off = $this->switchedOff()) {
+			return $off;
+		}
 		$uid = $this->uid();
 		if ($this->userFile($uid, $fileId) === null) {
 			return $this->error('File not found', Http::STATUS_NOT_FOUND);
@@ -56,6 +61,9 @@ class ApiController extends Controller {
 	/** Look for a face under the box the user placed, and suggest who it is. */
 	#[NoAdminRequired]
 	public function locate(int $fileId, float $x, float $y, float $width, float $height): JSONResponse {
+		if ($off = $this->switchedOff()) {
+			return $off;
+		}
 		$uid = $this->uid();
 		$file = $this->userFile($uid, $fileId);
 		if ($file === null) {
@@ -94,6 +102,9 @@ class ApiController extends Controller {
 	#[NoAdminRequired]
 	public function addTag(int $fileId, float $x, float $y, float $width, float $height,
 		?string $token = null, ?int $clusterId = null, ?string $name = null): JSONResponse {
+		if ($off = $this->switchedOff()) {
+			return $off;
+		}
 		$uid = $this->uid();
 		if ($this->userFile($uid, $fileId) === null) {
 			return $this->error('File not found', Http::STATUS_NOT_FOUND);
@@ -123,6 +134,9 @@ class ApiController extends Controller {
 	/** Suggestions for a face already in the database (e.g. one Recognize found but nobody named). */
 	#[NoAdminRequired]
 	public function suggestForDetection(int $id): JSONResponse {
+		if ($off = $this->switchedOff()) {
+			return $off;
+		}
 		$uid = $this->uid();
 		$detection = $this->ownDetection($uid, $id);
 		if ($detection === null) {
@@ -138,6 +152,9 @@ class ApiController extends Controller {
 	/** Put an existing face under a (possibly new) person. */
 	#[NoAdminRequired]
 	public function assign(int $id, ?int $clusterId = null, ?string $name = null): JSONResponse {
+		if ($off = $this->switchedOff()) {
+			return $off;
+		}
 		$uid = $this->uid();
 		$detection = $this->ownDetection($uid, $id);
 		if ($detection === null) {
@@ -153,6 +170,9 @@ class ApiController extends Controller {
 
 	#[NoAdminRequired]
 	public function remove(int $id): JSONResponse {
+		if ($off = $this->switchedOff()) {
+			return $off;
+		}
 		$uid = $this->uid();
 		$detection = $this->ownDetection($uid, $id);
 		if ($detection === null) {
@@ -160,6 +180,11 @@ class ApiController extends Controller {
 		}
 		$this->store->remove($detection);
 		return new JSONResponse(['detections' => $this->store->detectionsForFile($uid, $detection['file_id'])]);
+	}
+
+	/** A 503 when the app has switched itself off over untested Memories/Recognize versions */
+	private function switchedOff(): ?JSONResponse {
+		return $this->compatibility->ok() ? null : $this->error('Switched off: untested Memories or Recognize version', Http::STATUS_SERVICE_UNAVAILABLE);
 	}
 
 	private function uid(): string {

@@ -93,6 +93,19 @@ Photos indexed in the last 24 hours, and photos still in Recognize's queue, are 
   `facetag_manual` records which rows this app added, and how (`manual`, `scan`, `scanknn`); `facetag_scanned` is the scan's progress.
 - **Removing:** hand-placed tags and unnamed faces are deleted; a named face Recognize found is taken out of its person the way Recognize's own "remove from person" does (cluster cleared, threshold set to its distance from the centroid so it isn't put straight back).
 
+## Which Memories and Recognize versions
+
+Nextcloud has no way for one app to depend on versions of another, so this app checks for itself.
+
+- **Version guard.** `lib/Service/Compatibility.php` lists the major versions it has been tested with (Memories 11, Recognize 12). On any other major version the app switches itself off — no tag button, the API answers 503, the scan doesn't run — and says why on the admin overview page. Bug-fix and minor releases within a tested major are allowed. To try a new release anyway: `occ config:app:set memories_facetag ignore_versions --value=yes`.
+- **Self-test.** `occ memories_facetag:check` checks what the app actually relies on, whatever the version numbers say: Recognize's face tables and their columns, its clustering job, its node/TensorFlow runtime (by running the face model once), the columns of Memories' index, and the internals of Memories' viewer that the tag button hooks into. With `-q` it prints nothing when all is well and lists the problems (exit 1) when not, so it suits a cron job after the nightly app update:
+
+  ```sh
+  47 3 * * * docker exec -u www-data nextcloud php occ memories_facetag:check -q
+  ```
+
+What it is coupled to: Recognize's `recognize_face_detections` / `recognize_face_clusters` tables (the `face_vector` column exists since Recognize 10), its bundled `node` and face-api models, its `ClusterFacesJob`, and its behaviour of skipping photos that already have faces; Memories' `globalThis._m.viewer` object (`isOpen`, `currentPhoto`, `photoswipe` — Memories marks the last "debugging only"), the `.memories-viewer .top-bar` element, PhotoSwipe 5's slide and tap events, and the `indexed_at` / `datetaken` columns of its index (recent versions only).
+
 ## Caveats
 
 - Tags are per user, as Recognize's detections are: tagging a shared photo tags it for you only.

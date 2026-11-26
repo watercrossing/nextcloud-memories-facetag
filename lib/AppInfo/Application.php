@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OCA\MemoriesFacetag\AppInfo;
 
 use OCA\MemoriesFacetag\Listener\LoadViewerScript;
+use OCA\MemoriesFacetag\SetupCheck\CompatibilityCheck;
 use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
@@ -20,6 +21,7 @@ class Application extends App implements IBootstrap {
 
 	public function register(IRegistrationContext $context): void {
 		$context->registerEventListener(BeforeTemplateRenderedEvent::class, LoadViewerScript::class);
+		$context->registerSetupCheck(CompatibilityCheck::class);
 	}
 
 	public function boot(IBootContext $context): void {

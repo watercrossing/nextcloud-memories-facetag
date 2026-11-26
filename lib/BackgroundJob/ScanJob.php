@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OCA\MemoriesFacetag\BackgroundJob;
 
 use OCA\MemoriesFacetag\AppInfo\Application;
+use OCA\MemoriesFacetag\Service\Compatibility;
 use OCA\MemoriesFacetag\Service\Scanner;
 use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\BackgroundJob\IJob;
@@ -28,6 +29,7 @@ class ScanJob extends TimedJob {
 	public function __construct(
 		ITimeFactory $time,
 		private Scanner $scanner,
+		private Compatibility $compatibility,
 		private IAppConfig $appConfig,
 		private LoggerInterface $logger,
 	) {
@@ -38,7 +40,7 @@ class ScanJob extends TimedJob {
 	}
 
 	protected function run($argument): void {
-		if ($this->appConfig->getValueString(Application::APP_ID, 'scan_enabled', 'no') !== 'yes') {
+		if ($this->appConfig->getValueString(Application::APP_ID, 'scan_enabled', 'no') !== 'yes' || !$this->compatibility->ok()) {
 			return;
 		}
 		$minutes = max(1, $this->appConfig->getValueInt(Application::APP_ID, 'scan_minutes', 8));
