@@ -30,8 +30,6 @@ use Psr\Log\LoggerInterface;
  */
 class Scanner {
 	private const CLUSTER_JOB = 'OCA\Recognize\BackgroundJobs\ClusterFacesJob';
-	/** Leave freshly indexed photos to Recognize's first pass */
-	private const SETTLE_SECONDS = 86400;
 	private const RETRY_FAILED_SECONDS = 7 * 86400;
 	private const READ_TIMEOUT = 120;
 	/** The scan names nobody with fewer known faces than this */
@@ -45,6 +43,8 @@ class Scanner {
 		'file' => null,
 		'limit' => 0,
 		'deadline' => PHP_INT_MAX,
+		// Leave photos Memories indexed this recently to Recognize's first pass
+		'settleSeconds' => 86400,
 		'minScore' => 0.8,
 		'maxYaw' => 50.0,
 		'minSize' => 0.03,
@@ -174,7 +174,7 @@ class Scanner {
 			->from('memories', 'm')
 			->where($qb->expr()->eq('m.isvideo', $qb->createNamedParameter(false, IQueryBuilder::PARAM_BOOL)))
 			->andWhere($qb->expr()->eq('m.orphan', $qb->createNamedParameter(false, IQueryBuilder::PARAM_BOOL)))
-			->andWhere($qb->expr()->lt('m.indexed_at', $qb->createNamedParameter(time() - self::SETTLE_SECONDS, IQueryBuilder::PARAM_INT)))
+			->andWhere($qb->expr()->lt('m.indexed_at', $qb->createNamedParameter(time() - (int)$this->o['settleSeconds'], IQueryBuilder::PARAM_INT)))
 			// Done, or failed (faces_found -1) within the last week; older failures get another go
 			->andWhere($qb->expr()->notIn('m.fileid', $qb->createFunction('(SELECT file_id FROM *PREFIX*facetag_scanned WHERE faces_found >= 0 OR scanned_at > ' . (time() - self::RETRY_FAILED_SECONDS) . ')')))
 			->andWhere($qb->expr()->notIn('m.fileid', $qb->createFunction('(SELECT file_id FROM *PREFIX*recognize_queue_faces)')))

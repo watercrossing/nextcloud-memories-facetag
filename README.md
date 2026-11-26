@@ -74,6 +74,7 @@ Options worth knowing:
 - `--undo` removes every face the scan named itself and every face it added that has not since been put under a named person, and forgets which photos were scanned.
 
 Photos indexed in the last 24 hours, and photos still in Recognize's queue, are left for Recognize to go first.
+`--settle-hours` changes the 24 hours; `--settle-hours 0` scans a library Memories has only just indexed, once Recognize has been through it (`occ recognize:classify`).
 
 ## How it works
 
