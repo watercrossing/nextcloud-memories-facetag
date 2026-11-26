@@ -10,8 +10,8 @@ on:
   workflow_dispatch:
     inputs:
       nextcloud:
-        description: "Nextcloud image tag version (e.g. 34 or 34.0.6)"
-        default: "34"
+        description: "Nextcloud: image tag (35, 34.0.6), a prerelease (36.0.0beta1) or master (empty: every pinned major)"
+        default: ""
       memories:
         description: "Memories release (empty: every pinned one)"
         default: ""
@@ -62,9 +62,16 @@ jobs:
           cells = json.load(open("all.json"))["include"]
           nc, mem, rec = (os.environ.get(k) or "" for k in ("NC", "MEM", "REC"))
           if nc or mem or rec:
-              mems = [mem] if mem else sorted({c["memories"] for c in cells}, reverse=True)
-              recs = [rec] if rec else sorted({c["recognize"] for c in cells}, reverse=True)
-              cells = [{"nextcloud": nc or "34", "memories": m, "recognize": r} for m in mems for r in recs]
+              pinned = list(dict.fromkeys(c["nextcloud"] for c in cells))
+              out = []
+              for n in [nc] if nc else pinned:
+                  # the pinned releases for that major (an unpinned major or prerelease: the newest pinned one's)
+                  major = n.split(".")[0]
+                  same = [c for c in cells if c["nextcloud"] == (major if major in pinned else pinned[-1])]
+                  mems = [mem] if mem else list(dict.fromkeys(c["memories"] for c in same))
+                  recs = [rec] if rec else list(dict.fromkeys(c["recognize"] for c in same))
+                  out += [{"nextcloud": n, "memories": m, "recognize": r} for m in mems for r in recs]
+              cells = out
           print("matrix=" + json.dumps({"include": cells}))
           EOF
           cat "$GITHUB_OUTPUT"

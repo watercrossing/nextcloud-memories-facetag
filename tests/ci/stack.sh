@@ -15,6 +15,9 @@
 #
 # Versions (defaults: the newest pinned in tests/ci/versions.json):
 #   NEXTCLOUD_VERSION=34  MEMORIES_VERSION=11.1.4  RECOGNIZE_VERSION=12.0.3
+# NEXTCLOUD_VERSION may also be a prerelease (36.0.0beta1) or master (the daily build): the official
+#   image publishes neither, so the newest released image gets the verified server tarball swapped in,
+#   and the apps are enabled with --force (they may not declare support for it yet).
 # Other knobs: COMPOSE_PROJECT_NAME (facetag-ci); FACETAG_CACHE (.cache in the repo: app tarballs,
 #   Recognize's native runtime, photos); FACETAG_NETWORK (an existing docker network to run on
 #   instead of the project's own); NC_PORT (publish Nextcloud on 127.0.0.1:NC_PORT, for a browser).
@@ -34,6 +37,13 @@ export NEXTCLOUD_VERSION=${NEXTCLOUD_VERSION:-$(python3 -c "import json; print(j
 MEMORIES_VERSION=${MEMORIES_VERSION:-$(latest memories)}
 RECOGNIZE_VERSION=${RECOGNIZE_VERSION:-$(latest recognize)}
 NC_MAJOR=${NEXTCLOUD_VERSION%%.*}
+ENABLE=(app:enable)
+PRERELEASE=
+if [[ $NEXTCLOUD_VERSION == master || $NEXTCLOUD_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+(beta|rc|RC)[0-9]+$ ]]; then
+	PRERELEASE=1
+	ENABLE=(app:enable --force)
+	export NEXTCLOUD_IMAGE=facetag-ci-nextcloud:$NEXTCLOUD_VERSION
+fi
 
 TEST_USER=alice
 APPS=/var/www/html/custom_apps
@@ -61,7 +71,24 @@ reinstall_app() {
 	occ app:list --enabled | grep memories_facetag
 }
 
+# The official image with a prerelease's (or the daily build's) server code in place of its own
+prerelease_image() {
+	step "Nextcloud $NEXTCLOUD_VERSION: image from the server tarball"
+	local src base
+	read -r src base NC_MAJOR < <(python3 "$HERE/versions.py" server "$NEXTCLOUD_VERSION" "$FACETAG_CACHE/nextcloud")
+	echo "server code from $src (Nextcloud $NC_MAJOR) on nextcloud:$base-apache"
+	docker build -q -t "$NEXTCLOUD_IMAGE" -f - "$src" <<-EOF
+		FROM nextcloud:$base-apache
+		COPY . /usr/src/nextcloud.new
+		# keep the image's own config snippets (autoconfig, apcu, …), take everything else from the tarball
+		RUN cp -n /usr/src/nextcloud/config/*.config.php /usr/src/nextcloud/config/autoconfig.php /usr/src/nextcloud.new/config/ \\
+		 && mkdir -p /usr/src/nextcloud.new/data /usr/src/nextcloud.new/custom_apps && chmod +x /usr/src/nextcloud.new/occ \\
+		 && rm -rf /usr/src/nextcloud && mv /usr/src/nextcloud.new /usr/src/nextcloud
+	EOF
+}
+
 up() {
+	if [ -n "$PRERELEASE" ]; then prerelease_image; fi
 	step "App tarballs: Memories $MEMORIES_VERSION, Recognize $RECOGNIZE_VERSION"
 	python3 "$HERE/versions.py" fetch memories "$MEMORIES_VERSION" "$FACETAG_CACHE/apps" "$NC_MAJOR"
 	python3 "$HERE/versions.py" fetch recognize "$RECOGNIZE_VERSION" "$FACETAG_CACHE/apps" "$NC_MAJOR"
@@ -81,7 +108,7 @@ up() {
 	done
 	copy_app
 
-	occ app:enable memories
+	occ "${ENABLE[@]}" memories
 	# Memories' install step records its exiftool binary in system config; once in CI it didn't
 	# (memories:index then fails with "binary path is empty"), so check, and repair if needed
 	if [ -z "$(occ config:system:get memories.exiftool || true)" ]; then
@@ -104,7 +131,7 @@ up() {
 		mkdir -p bin && mv /tmp/$node_dir/bin/node bin/node && chmod 755 bin/node"
 	occ config:app:set recognize node_binary --lazy --value="$APPS/recognize/bin/node"
 	occ config:app:set recognize tensorflow.purejs --lazy --value=false
-	compose exec -T -u www-data -e TFJS_NODE_CDN_STORAGE=http://127.0.0.1:9/ nextcloud php occ app:enable recognize
+	compose exec -T -u www-data -e TFJS_NODE_CDN_STORAGE=http://127.0.0.1:9/ nextcloud php occ "${ENABLE[@]}" recognize
 	compose exec -T -u www-data nextcloud sh -euc "
 		cd $APPS/recognize/node_modules/@tensorflow/tfjs-node
 		rm -rf deps/lib && mkdir -p deps lib
@@ -112,7 +139,7 @@ up() {
 		tar -xzf /ci-cache/$binding -C lib
 		test -f lib/napi-v$napi/tfjs_binding.node"
 	occ config:app:set recognize nice_binary --lazy --value=/usr/bin/nice
-	occ app:enable memories_facetag
+	occ "${ENABLE[@]}" memories_facetag
 	occ app:list --output=json | python3 -c '
 import json, sys
 apps = json.load(sys.stdin)["enabled"]

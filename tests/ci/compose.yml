@@ -7,7 +7,8 @@ name: ${COMPOSE_PROJECT_NAME:-facetag-ci}
 
 services:
   nextcloud:
-    image: nextcloud:${NEXTCLOUD_VERSION:-34}-apache
+    # NEXTCLOUD_IMAGE: a prerelease built by stack.sh
+    image: ${NEXTCLOUD_IMAGE:-nextcloud:${NEXTCLOUD_VERSION:-34}-apache}
     environment:
       POSTGRES_HOST: 127.0.0.1
       POSTGRES_DB: nextcloud

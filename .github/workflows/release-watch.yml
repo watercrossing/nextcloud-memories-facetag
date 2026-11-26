@@ -1,0 +1,63 @@
+# Nightly: look for new Memories, Recognize and Nextcloud releases and test them (tests/ci/watch.py).
+# A new release within the tested majors → a re-pin PR; a new major → the matrix on a widened branch,
+# then a PR if every cell passes or an issue if not; a Nextcloud prerelease → one allowed-to-fail
+# cell, reported in an issue. Nothing new, or nothing changed since the last run → nothing.
+#
+# Its pushes and PRs start no workflows (GITHUB_TOKEN), so it dispatches compat.yml on its branches
+# itself. Needs "Allow GitHub Actions to create and approve pull requests" in the repository's
+# Settings → Actions → General; without it the run fails saying so, after pushing the branch.
+name: Release watch
+
+on:
+  schedule:
+    - cron: "17 2 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Only say what would be done"
+        type: boolean
+        default: false
+      only:
+        description: "Only these (comma-separated): repin, widen, prerelease"
+        default: ""
+      force:
+        description: "Test and propose even if nothing changed since the last run"
+        type: boolean
+        default: false
+      fixture:
+        description: "Simulate: a fixture name from tests/ci/watch-fixtures (e.g. new-minor); its branches are watch-sim/…"
+        default: ""
+
+permissions:
+  contents: write       # push the watch/… branches
+  pull-requests: write  # open and update the PRs
+  issues: write         # report failures
+  actions: write        # dispatch compat.yml on the branches
+
+concurrency:
+  group: release-watch-${{ inputs.fixture || 'live' }}
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    # mostly waiting for the dispatched matrix (9–11 min a cell, in parallel)
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - name: Watch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          WATCH_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          WATCH_BASE: ${{ github.ref_name }}
+          DRY_RUN: ${{ inputs.dry_run }}
+          ONLY: ${{ inputs.only }}
+          FORCE: ${{ inputs.force }}
+          FIXTURE: ${{ inputs.fixture }}
+        run: |
+          args=()
+          if [ "$DRY_RUN" = true ]; then args+=(--dry-run); fi
+          if [ "$FORCE" = true ]; then args+=(--force); fi
+          if [ -n "$ONLY" ]; then args+=(--only "$ONLY"); fi
+          if [ -n "$FIXTURE" ]; then args+=(--fixture "tests/ci/watch-fixtures/$FIXTURE.json"); fi
+          python3 tests/ci/watch.py run "${args[@]}"
