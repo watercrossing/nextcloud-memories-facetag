@@ -19,6 +19,7 @@ Everything else is real: the App Store, signatures, downloads, the stack.
 | --- | --- | --- |
 | `nothing-new.json` | Nextcloud 34 is the newest release, no prereleases | nothing |
 | `new-minor.json` | Memories 11.1.4 doesn't exist: the newest two are 11.1.3, 11.1.2 | re-pin PR, matrix dispatched on it |
+| `new-major-pass.json` | the real world (empty fixture): on 2026-11-26, Nextcloud 35 released and Recognize 13 only for it | matrix on the widened branch (5 cells) passes → PR |
 | `new-major-fail.json` | a "Memories 12.0.0" (really 11.1.4) | matrix on the widened branch fails → issue |
 | `prerelease.json` | September 2026: Nextcloud 35 in RC, 34 the newest release | one allowed-to-fail cell on 35.0.0rc4 → issue |
 
