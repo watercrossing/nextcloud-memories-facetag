@@ -11,6 +11,9 @@
 	const APP = 'memories_facetag'
 	/** Side of the tag square in screen pixels, like Facebook's fixed square */
 	const TAG_SIZE = 96
+	/** Gap between a box and its name label (room for the label's arrow), and the label's least distance from the overlay's edge */
+	const LABEL_GAP = 8
+	const LABEL_MARGIN = 4
 	const MAX_LIST = 60
 	/**
 	 * Suggestions scoring worse than this are dropped. The score is the mean distance to the
@@ -363,22 +366,51 @@
 		node.style.height = `${b.height * r.height}px`
 	}
 
+	/**
+	 * A tag's name label goes below its box; above it if it would leave the overlay there; and if it
+	 * fits on neither side (a face zoomed to fill the screen), inside the box at its visible bottom.
+	 * Sideways it is centred on the box, shifted to stay on screen, its arrow still at the box.
+	 * `b` is the box in layer pixels, w × h the label's size, W × H the overlay's.
+	 */
+	function placeLabel(n, b, w, h, W, H) {
+		const label = n.querySelector('.facetag-label')
+		const need = h + LABEL_GAP + LABEL_MARGIN
+		let where = 'below'
+		if (b.bottom + need > H) where = b.top - need >= 0 ? 'above' : 'inside'
+		n.classList.toggle('label-above', where === 'above')
+		n.classList.toggle('label-inside', where === 'inside')
+		label.style.top = where === 'inside' ? `${Math.min(b.bottom, H) - LABEL_MARGIN - h - b.top}px` : ''
+		const cx = (b.left + b.right) / 2
+		let shift = 0
+		if (b.right < 0 || b.left > W) shift = 0 // the face is off screen sideways: so is its label
+		else if (cx - w / 2 < LABEL_MARGIN) shift = LABEL_MARGIN - (cx - w / 2)
+		else if (cx + w / 2 > W - LABEL_MARGIN) shift = W - LABEL_MARGIN - (cx + w / 2)
+		n.style.setProperty('--facetag-shift', `${shift}px`)
+		n.style.setProperty('--facetag-arrow', `${Math.min(Math.max(w / 2 - shift, 12), w - 12)}px`)
+	}
+
 	function position() {
 		if (!state.layer) return
 		const r = layerRect()
 		state.layer.classList.toggle('no-image', !r)
 		if (!r) return
+		const W = state.layer.clientWidth
+		const H = state.layer.clientHeight
 		const byId = new Map(state.detections.map((d) => [String(d.id), d]))
-		state.layer.querySelectorAll('.facetag-tag').forEach((n) => {
+		// Place every box, then measure every label, then place the labels: one layout, not one per tag
+		const tags = [...state.layer.querySelectorAll('.facetag-tag')].filter((n) => byId.has(n.dataset.id))
+		tags.forEach((n) => place(n, byId.get(n.dataset.id), r))
+		const sizes = tags.map((n) => { const l = n.querySelector('.facetag-label'); return [l.offsetWidth, l.offsetHeight] })
+		tags.forEach((n, i) => {
 			const d = byId.get(n.dataset.id)
-			if (d) place(n, d, r)
+			const b = { left: r.left + d.x * r.width, right: r.left + (d.x + d.width) * r.width,
+				top: r.top + d.y * r.height, bottom: r.top + (d.y + d.height) * r.height }
+			placeLabel(n, b, sizes[i][0], sizes[i][1], W, H)
 		})
 		const p = state.picker
 		if (p) {
 			place(p.square, p.box, r)
 			// Below the square, flipped above it if it would leave the overlay
-			const W = state.layer.clientWidth
-			const H = state.layer.clientHeight
 			const left = Math.min(Math.max(8, r.left + (p.box.x + p.box.width / 2) * r.width - 140), W - 288)
 			let top = r.top + (p.box.y + p.box.height) * r.height + 8
 			const h = p.el.offsetHeight || 320

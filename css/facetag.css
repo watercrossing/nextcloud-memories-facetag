@@ -69,11 +69,12 @@
 	border-style: dashed;
 	border-color: rgba(255, 255, 255, 0.6);
 }
+/* --facetag-shift keeps the label on screen sideways, --facetag-arrow keeps its arrow at the box (facetag.js) */
 .facetag-label {
 	position: absolute;
 	top: calc(100% + 8px);
 	left: 50%;
-	transform: translateX(-50%);
+	transform: translateX(calc(-50% + var(--facetag-shift, 0px)));
 	padding: 6px 12px;
 	border-radius: 8px;
 	background: rgba(36, 37, 38, 0.92);
@@ -84,10 +85,25 @@
 	content: '';
 	position: absolute;
 	bottom: 100%;
-	left: 50%;
+	left: var(--facetag-arrow, 50%);
 	transform: translateX(-50%);
 	border: 6px solid transparent;
 	border-bottom-color: rgba(36, 37, 38, 0.92);
+}
+/* No room below the box (facetag.js decides): the label goes above it, arrow pointing down */
+.facetag-tag.label-above .facetag-label {
+	top: auto;
+	bottom: calc(100% + 8px);
+}
+.facetag-tag.label-above .facetag-label::before {
+	bottom: auto;
+	top: 100%;
+	border-bottom-color: transparent;
+	border-top-color: rgba(36, 37, 38, 0.92);
+}
+/* No room on either side: inside the box (facetag.js sets its top), no arrow */
+.facetag-tag.label-inside .facetag-label::before {
+	display: none;
 }
 .facetag-tag.unnamed .facetag-label {
 	font-style: italic;

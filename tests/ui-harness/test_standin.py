@@ -129,3 +129,52 @@ def test_phone_ghost_click_and_tag_tap(phone):
     page.wait_for_selector(".facetag-picker", state="detached")
     assert [c.method + " " + c.path for c in ov.saves()] == ["DELETE /detection/1"]
     assert not ov.js_errors, ov.js_errors
+
+
+def test_labels_stay_on_screen(desktop):
+    """A tag's name label goes below its box, above it when there's no room below, and inside it
+    when there's room on neither side (zoomed in on a face); sideways it stays on screen too."""
+    ov, page = desktop, desktop.page
+    page.set_viewport_size({"width": 1200, "height": 560})  # max zoom makes a face taller than this
+    on(ov)
+
+    def labels():
+        return page.evaluate("""() => {
+            const L = document.querySelector('.facetag-layer').getBoundingClientRect()
+            return [...document.querySelectorAll('.facetag-tag')].map(t => {
+                const b = t.querySelector('.facetag-box').getBoundingClientRect()
+                const l = t.querySelector('.facetag-label').getBoundingClientRect()
+                return {id: Number(t.dataset.id), W: L.right, H: L.bottom, box: [b.top, b.bottom, b.left, b.right],
+                        label: [l.top, l.bottom, l.left, l.right]}
+            })
+        }""")
+
+    assert all(t["label"][0] >= t["box"][1] for t in labels()), "at fit, labels sit below their boxes"
+    # Zoom about a point above Alice's face: it moves down and grows, so its label flips above it
+    f = face(0)
+    page.mouse.move(*ov.to_screen(f["x"] + f["width"] / 2, f["y"] - 0.01))
+    seen = set()
+
+    def check():
+        t = next(t for t in labels() if t["id"] == 1)
+        assert 0 <= t["label"][0] and t["label"][1] <= t["H"], f"Alice's label leaves the screen: {t}"
+        if t["box"][3] > 0:
+            assert 0 <= t["label"][2] and t["label"][3] <= t["W"], f"Alice's label leaves the screen sideways: {t}"
+        seen.add("below" if t["label"][0] >= t["box"][1] else "above" if t["label"][1] <= t["box"][0] else "inside")
+
+    for _ in range(20):
+        page.mouse.wheel(0, -150)
+        page.wait_for_timeout(60)
+        check()
+    # At max zoom the face is taller than the screen; drag it up until its top leaves the screen too
+    x, y = 600, 500  # on the photo; the face's centre is below the screen by now
+    page.mouse.move(x, y)
+    page.mouse.down()
+    for i in range(1, 11):
+        page.mouse.move(x, y - 40 * i)
+        page.wait_for_timeout(30)
+        check()
+    page.mouse.up()
+    ov.settle()
+    check()
+    assert seen == {"below", "above", "inside"}, seen
