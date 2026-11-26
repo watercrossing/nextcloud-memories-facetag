@@ -3,6 +3,7 @@
 import pytest
 
 from conftest import BASE, open_photo, tagging_on
+from viewer import click_control
 
 
 @pytest.fixture
@@ -23,7 +24,7 @@ def test_button_toggles_tagging(desktop, group, photos):
     assert page.locator(".facetag-tag").count() > 0, "Recognize's faces should be drawn"
     assert page.locator(".memories-viewer.facetag-on").count() == 1
 
-    button.click()
+    click_control(page, button)
     assert not ov.is_on() and not ov.button_active() and ov.stored() is None
     assert page.locator(".facetag-tag").count() == 0
     assert not ov.js_errors, ov.js_errors
@@ -35,7 +36,7 @@ def test_tagging_stays_on_across_closing_the_viewer_and_a_reload(desktop, group,
     tagging_on(ov)
 
     # Close the viewer with Memories' own Back button: the overlay goes with it
-    page.locator(".memories-viewer .top-bar-left [aria-label='Back'], .memories-viewer [aria-label='Back']").first.click()
+    click_control(page, page.locator(".memories-viewer .top-bar-left [aria-label='Back'], .memories-viewer [aria-label='Back']").first)
     page.wait_for_function("() => !globalThis._m.viewer.isOpen")
     assert not ov.is_on()
 
@@ -57,7 +58,7 @@ def test_reopening_from_the_timeline_keeps_tagging_on(desktop, group, photos):
     ov, page = desktop, desktop.page
     open_photo(ov, group, photos)
     tagging_on(ov)
-    page.locator(".memories-viewer [aria-label='Back']").first.click()
+    click_control(page, page.locator(".memories-viewer [aria-label='Back']").first)
     page.wait_for_function("() => !globalThis._m.viewer.isOpen")
     page.wait_for_selector(".img-outer")
     page.locator(".img-outer").first.click()  # a photo in the folder view

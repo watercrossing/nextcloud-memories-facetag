@@ -8,7 +8,7 @@ import pytest
 
 import stackctl as s
 from conftest import detections, open_photo, tagging_on
-from viewer import swipe
+from viewer import click_control, swipe
 
 
 @pytest.fixture
@@ -48,7 +48,7 @@ def test_arrows_and_arrow_keys(desktop, start, photos):
     tagging_on(ov)
     assert_shows(ov, start)
 
-    page.locator(".pswp__button--arrow--next").click()
+    click_control(page, page.locator(".pswp__button--arrow--next"))
     nxt = ov.wait_moved(start)
     assert ov.is_on()
     assert_shows(ov, nxt)
@@ -64,7 +64,7 @@ def test_arrows_and_arrow_keys(desktop, start, photos):
     assert_shows(ov, nxt)
     tap_locates_here(ov, nxt, page.mouse.click)
 
-    page.locator(".pswp__button--arrow--prev").click()
+    click_control(page, page.locator(".pswp__button--arrow--prev"))
     assert ov.wait_moved(nxt) == start
     assert_shows(ov, start)
     assert not ov.saves() and not ov.js_errors, (ov.saves(), ov.js_errors)

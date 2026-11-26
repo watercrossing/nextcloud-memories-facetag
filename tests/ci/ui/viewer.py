@@ -11,7 +11,7 @@ import time
 import unicodedata
 from dataclasses import dataclass, field
 
-from playwright.sync_api import CDPSession, Page
+from playwright.sync_api import CDPSession, Locator, Page
 
 API = "/apps/memories_facetag/api"
 
@@ -163,6 +163,16 @@ class Overlay:
             const part = e.closest('.facetag-item, .facetag-remove, .facetag-picker, .facetag-tag, .facetag-square')
             return e.tagName.toLowerCase() + (part ? ' in ' + part.className : '')
         }""", [x, y])
+
+
+def click_control(page: Page, control: Locator) -> None:
+    """Click one of the viewer's controls (top bar, arrows) with the mouse, as a person would: move
+    onto it first. Memories hides the controls 2 s after the mouse last moved over the photo
+    (pointer-events: none while hidden), and a move over a control shows them and keeps them."""
+    control.wait_for(state="attached")
+    box = control.bounding_box()
+    page.mouse.move(box["x"] + box["width"] / 2, box["y"] + box["height"] / 2)
+    control.click()
 
 
 def swipe(cdp: CDPSession, x0: float, x1: float, y: float, steps: int = 10) -> None:

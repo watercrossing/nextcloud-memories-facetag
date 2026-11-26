@@ -24,7 +24,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
 sys.path.insert(0, str(HERE))
 import stackctl as s  # noqa: E402
-from viewer import Overlay  # noqa: E402
+from viewer import Overlay, click_control  # noqa: E402
 
 BASE = f"http://127.0.0.1:{os.environ.get('NC_PORT', '18080')}"
 PASSWORD = "ui-tests-throwaway-" + base64.b32encode(os.urandom(10)).decode()
@@ -219,7 +219,7 @@ def tagging_on(ov: Overlay, tap: bool = False) -> None:
         ov.wait_tags()
         return
     button = page.locator(".memories-viewer .top-bar .facetag-button")
-    button.tap() if tap else button.click()
+    button.tap() if tap else click_control(page, button)
     page.wait_for_selector(".facetag-layer")
     ov.hide_hint()
     ov.wait_tags()
