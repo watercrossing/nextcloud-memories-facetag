@@ -335,6 +335,7 @@ class GitHub:
     def wait(self, urls: list[str]) -> dict[str, dict]:
         """Wait for runs to finish: {url: {"ok": bool, "failed": [job names], "conclusion": …}}."""
         done: dict[str, dict] = {}
+        retried: dict[str, list[str]] = {}
         deadline = time.time() + WAIT_MINUTES * 60
         while len(done) < len(urls):
             if time.time() > deadline:
@@ -344,11 +345,18 @@ class GitHub:
             for u in urls:
                 if u in done:
                     continue
-                v = json.loads(self.gh("run", "view", u.rsplit("/", 1)[1], "--json", "status,conclusion,jobs"))
+                rid = u.rsplit("/", 1)[1]
+                v = json.loads(self.gh("run", "view", rid, "--json", "status,conclusion,jobs,attempt"))
                 if v["status"] == "completed":
                     failed = [j["name"] for j in v["jobs"] if j["conclusion"] not in ("success", "skipped")]
-                    done[u] = {"ok": v["conclusion"] == "success", "conclusion": v["conclusion"], "failed": failed}
-                    log(f"  {u}: {v['conclusion']}" + (f" ({', '.join(failed)})" if failed else ""))
+                    log(f"  {u} (attempt {v['attempt']}): {v['conclusion']}" + (f" ({', '.join(failed)})" if failed else ""))
+                    # a runner or network hiccup shouldn't decide a major: rerun the failed jobs once
+                    if v["conclusion"] == "failure" and v["attempt"] < 2:
+                        self.gh("run", "rerun", rid, "--failed")
+                        retried[u] = failed
+                        continue
+                    done[u] = {"ok": v["conclusion"] == "success", "conclusion": v["conclusion"], "failed": failed,
+                               "retried": retried.get(u, [])}
             if len(done) < len(urls):
                 time.sleep(POLL_SECONDS)
         return done
@@ -437,14 +445,14 @@ def watch(args) -> int:
         else:
             prs = []
             issues = [i for i in gh.find_marked("issue", kind) if c is None or i["title"].endswith(gh.title(c.title))]
+        # a prerelease issue whose major is now released has done its job
+        for i in gh.find_marked("issue", kind) if kind == "prerelease" else []:
+            m = re.search(r"Nextcloud (\d+) prerelease", i["title"])
+            if i["state"] == "OPEN" and m and int(m.group(1)) <= max(int(x) for x in p["released"]):
+                gh.gh("issue", "close", str(i["number"]), "--comment",
+                      f"Nextcloud {m.group(1)} is released; the watcher now tests it as a new major.", write=True)
+                summary.append(f"prerelease: closed {i['url']} (released)")
         if c is None:
-            # a prerelease issue whose major is now released has done its job
-            for i in gh.find_marked("issue", kind) if kind == "prerelease" else []:
-                m = re.search(r"Nextcloud (\d+) prerelease", i["title"])
-                if i["state"] == "OPEN" and m and int(m.group(1)) <= max(int(x) for x in p["released"]):
-                    gh.gh("issue", "close", str(i["number"]), "--comment",
-                          f"Nextcloud {m.group(1)} is released; the watcher now tests it as a new major.", write=True)
-                    summary.append(f"prerelease: closed {i['url']} (released)")
             summary.append(f"{kind}: nothing new")
             continue
         key = c.key()
@@ -475,10 +483,13 @@ def watch(args) -> int:
             issues = [i for i in issues if i["title"].endswith(gh.title(c.title))]
         issue = issues[0] if issues else None
         verdict = "passed" if res["ok"] else f"failed ({res['conclusion']}: {', '.join(res['failed']) or 'see the run'})"
+        if res.get("retried"):
+            verdict += f" (after rerunning, once, what failed first: {', '.join(res['retried'])})"
         if c.kind == "widen" and res["ok"]:
             text = body(c, f"The release watcher found {c.what}. Every cell of the compatibility matrix passed on this "
                            "branch, the face-model test included, so this widens the tested versions.", url, gh, key, base_tree,
-                        "After merging, deploy the app (`./deploy`): until then an installation that upgrades to these "
+                        ("Some cells failed first and passed when rerun: " + ", ".join(res["retried"]) + ".\n\n" if res.get("retried") else "")
+                        + "After merging, deploy the app (`./deploy`): until then an installation that upgrades to these "
                         "versions switches the app off.")
             if open_pr:
                 gh.gh("pr", "edit", str(open_pr["number"]), "--title", gh.title(c.title), "--body-file", "-", write=True, input=text)
