@@ -324,17 +324,24 @@
 			suggestions: null, // null = loading, [] = none
 			items: [],
 			index: 0,
+			// On touch screens the tap that opened the picker is followed by a click, delivered to
+			// whatever is now under the finger — often a name in the list, or "Remove". Only clicks
+			// that began with a press inside the open picker count.
+			armed: false,
 		}
 		p.square = el('div', 'facetag-square' + (p.detection ? ' existing' : ''))
 		p.el = el('div', 'facetag-picker')
-		p.el.addEventListener('pointerdown', (e) => e.stopPropagation())
+		p.el.addEventListener('pointerdown', (e) => {
+			e.stopPropagation()
+			p.armed = true
+		})
 
 		if (p.detection) {
 			const head = el('div', 'facetag-current')
 			head.appendChild(el('span', '', p.detection.name || t('Unnamed face')))
 			const rm = el('button', 'facetag-remove', p.detection.name ? t('Remove tag') : t('Remove box'))
 			rm.type = 'button'
-			rm.addEventListener('click', () => removeDetection(p.detection))
+			rm.addEventListener('click', () => { if (p.armed) removeDetection(p.detection) })
 			head.appendChild(rm)
 			p.el.appendChild(head)
 		}
@@ -436,7 +443,7 @@
 				p.index = i
 				p.list.querySelectorAll('.facetag-item').forEach((n, j) => n.classList.toggle('selected', j === i))
 			})
-			row.addEventListener('click', () => choose(item))
+			row.addEventListener('click', () => { if (p.armed) choose(item) })
 			p.list.appendChild(row)
 		}
 	}
