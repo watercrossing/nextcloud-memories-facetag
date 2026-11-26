@@ -7,7 +7,7 @@
 	<description><![CDATA[Adds a "Tag people" mode to the Memories photo viewer.
 Click a face to tag it; the name list is your Recognize people, ranked by how much the clicked face looks like each of them.
 Tags are written into Recognize's own face tables, so they show up in Memories' People view like any detected face.]]></description>
-	<version>0.6.1</version>
+	<version>0.6.2</version>
 	<licence>agpl</licence>
 	<author>Ingolf Becker</author>
 	<namespace>MemoriesFacetag</namespace>

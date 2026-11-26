@@ -175,7 +175,9 @@
 	 */
 	function hookPhotoSwipe() {
 		const pswp = viewer() && viewer().photoswipe
-		if (!pswp || hookedSwipes.has(pswp)) return
+		// Memories publishes the instance before init() creates its element; hook only once it has
+		// one (the observer calls again), or taps would never be seen for this viewer
+		if (!pswp || !pswp.element || hookedSwipes.has(pswp)) return
 		hookedSwipes.add(pswp)
 		pswp.on('change', () => {
 			ensureButton()
@@ -186,7 +188,9 @@
 		const onPhoto = (e) => {
 			const r = imageRect()
 			const o = e.originalEvent
-			return !!r && !!o && o.clientX >= r.left && o.clientX <= r.right && o.clientY >= r.top && o.clientY <= r.bottom
+			if (!o) return false
+			return (!!r && o.clientX >= r.left && o.clientX <= r.right && o.clientY >= r.top && o.clientY <= r.bottom) ||
+				!!tagAt(o.clientX, o.clientY)
 		}
 		for (const action of ['tapAction', 'doubleTapAction', 'imageClickAction']) {
 			pswp.on(action, (e) => {
@@ -198,11 +202,10 @@
 		})
 
 		const root = pswp.element
-		if (!root) return
 		const down = new Map()
 		let multi = false
 		root.addEventListener('pointerdown', (e) => {
-			down.set(e.pointerId, { x: e.clientX, y: e.clientY, t: performance.now() })
+			down.set(e.pointerId, { x: e.clientX, y: e.clientY, t: e.timeStamp })
 			if (down.size > 1) multi = true
 		}, true)
 		const end = (e, cancelled) => {
@@ -211,12 +214,44 @@
 			const wasMulti = multi
 			if (down.size === 0) multi = false
 			if (cancelled || !start || wasMulti || !state.active || e.button > 0) return
-			// A tap: short and barely moving. Anything else is PhotoSwipe's swipe, pan or zoom.
-			if (Math.hypot(e.clientX - start.x, e.clientY - start.y) > 10 || performance.now() - start.t > 700) return
+			// A tap: short and barely moving. Anything else is PhotoSwipe's swipe, pan or zoom. Timed by
+			// the events' own timestamps: a busy page handling them late must not make a click a long press.
+			if (Math.hypot(e.clientX - start.x, e.clientY - start.y) > 10 || e.timeStamp - start.t > 700) return
 			onPhotoTap(e.clientX, e.clientY)
 		}
 		root.addEventListener('pointerup', (e) => end(e, false), true)
 		root.addEventListener('pointercancel', (e) => end(e, true), true)
+		// Tags let every pointer event through (so a swipe, pinch, drag or wheel that starts on a
+		// face still reaches PhotoSwipe); with a mouse, show which one is under the pointer
+		root.addEventListener('pointermove', (e) => { if (e.pointerType === 'mouse') hover(e.clientX, e.clientY) }, true)
+		root.addEventListener('pointerleave', () => hover(-1, -1), true)
+	}
+
+	/** The tag (its box or its label) at a screen point, the smallest box if several overlap */
+	function tagAt(x, y) {
+		if (!state.layer) return null
+		let best = null
+		let bestArea = Infinity
+		for (const node of state.layer.querySelectorAll('.facetag-tag')) {
+			const d = state.detections.find((x) => String(x.id) === node.dataset.id)
+			if (!d) continue
+			const box = node.getBoundingClientRect()
+			const label = node.querySelector('.facetag-label').getBoundingClientRect()
+			const inside = (r) => x >= r.left && x <= r.right && y >= r.top && y <= r.bottom
+			if (inside(box) || inside(label)) {
+				const area = box.width * box.height
+				if (area < bestArea) { best = d; bestArea = area }
+			}
+		}
+		return best
+	}
+
+	function hover(x, y) {
+		if (!state.layer) return
+		const d = tagAt(x, y)
+		state.layer.querySelectorAll('.facetag-tag').forEach((n) => n.classList.toggle('hover', !!d && n.dataset.id === String(d.id)))
+		const outer = document.querySelector('.memories-viewer')
+		if (outer) outer.classList.toggle('facetag-over-tag', !!d)
 	}
 
 	// ----------------------------------------------------------- tagging mode
@@ -316,13 +351,6 @@
 			const box = el('div', 'facetag-box')
 			const label = el('div', 'facetag-label', d.name || t('Who is this?'))
 			tag.append(box, label)
-			const open = (e) => {
-				e.stopPropagation()
-				e.preventDefault()
-				openPicker({ detection: d, box: d })
-			}
-			box.addEventListener('click', open)
-			label.addEventListener('click', open)
 			state.layer.insertBefore(tag, state.layer.firstChild)
 		}
 		position()
@@ -362,8 +390,13 @@
 
 	// ----------------------------------------------------------------- picker
 
-	/** A tap on the photo while tagging: close an open picker, or start a new tag there. */
+	/** A tap on the photo while tagging: open the tag tapped, close an open picker, or start a new tag there. */
 	function onPhotoTap(clientX, clientY) {
+		const tagged = tagAt(clientX, clientY)
+		if (tagged) {
+			openPicker({ detection: tagged, box: tagged })
+			return
+		}
 		if (state.picker) {
 			closePicker()
 			return

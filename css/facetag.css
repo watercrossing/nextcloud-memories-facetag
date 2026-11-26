@@ -64,8 +64,6 @@
 	border: 2px solid rgba(255, 255, 255, 0.85);
 	border-radius: 4px;
 	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.45), inset 0 0 0 1px rgba(0, 0, 0, 0.35);
-	pointer-events: auto;
-	cursor: pointer;
 }
 .facetag-tag.unnamed .facetag-box {
 	border-style: dashed;
@@ -80,8 +78,6 @@
 	border-radius: 8px;
 	background: rgba(36, 37, 38, 0.92);
 	white-space: nowrap;
-	pointer-events: auto;
-	cursor: pointer;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 .facetag-label::before {
@@ -97,7 +93,19 @@
 	font-style: italic;
 	color: #b0b3b8;
 }
-.facetag-tag:hover .facetag-box {
+/*
+ * Tags take no pointer events, so a swipe, pinch, drag or wheel that starts on a face still reaches
+ * PhotoSwipe; facetag.js finds taps on them, and marks the one under a mouse pointer .hover.
+ */
+.facetag-layer > .facetag-tag,
+.facetag-tag * {
+	pointer-events: none !important;
+}
+.memories-viewer.facetag-on.facetag-over-tag .pswp__img,
+.memories-viewer.facetag-on.facetag-over-tag .pswp__item {
+	cursor: pointer !important;
+}
+.facetag-tag.hover .facetag-box {
 	border-color: #fff;
 }
 
@@ -210,7 +218,7 @@
 
 
 /* Crowded photos: labels of neighbouring faces overlap, so whichever face is under the pointer comes to the front */
-.facetag-tag:hover {
+.facetag-tag.hover {
 	z-index: 1;
 }
 

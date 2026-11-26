@@ -1,0 +1,55 @@
+<!doctype html>
+<!-- A stand-in for Memories' viewer that js/facetag.js runs against unchanged. See ../README.md. -->
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/pswp.css"><link rel="stylesheet" href="/facetag.css">
+<style>
+body{margin:0;background:#222;font-family:sans-serif}
+.sidebar{position:fixed;right:0;top:0;width:400px;height:100vh;background:#333;color:#fff}
+/* Memories' viewer CSS (scoped rules, flattened) */
+.viewer-outer{z-index:2000;width:calc(100vw - 400px)!important;height:100vh;position:fixed;top:0;left:0;overflow:hidden;color:#fff}
+.top-bar,.top-bar-left{z-index:100001;position:absolute;top:8px}
+.top-bar{right:8px}
+.inner{width:inherit}
+.inner .pswp{contain:strict;width:inherit}
+.inner .pswp .pswp__zoom-wrap{width:100%}
+.inner .pswp div.pswp__img>img.ximg{height:100%;width:100%;object-fit:contain;position:absolute;top:0;left:0}
+@media (max-width: 700px){.sidebar{display:none}.viewer-outer{width:100vw!important}}
+.nc-actions{display:flex}
+.nc-actions span{width:44px;text-align:center;font-size:20px}
+</style></head><body>
+<div class="sidebar">sidebar</div>
+<div class="memories-viewer viewer-outer fully-opened"><div class="inner">
+  <div class="top-bar"><div class="nc-actions"><span>☆</span><span>⋯</span></div></div>
+</div></div>
+<script type="module">
+import PhotoSwipe from '/photoswipe.esm.js'
+const inner = document.querySelector('.inner')
+const pswp = new PhotoSwipe({
+  dataSource: [1, 2, 3].map((fileid) => ({ src: '/photo.jpg', width: 8192, height: 5464, photo: { fileid } })),
+  appendToEl: inner, showHideAnimationType: 'none', bgOpacity: 1, preload: [2, 2],
+  wheelToZoom: true, loop: false, // as Memories sets them
+})
+pswp.on('contentLoad', (e) => {
+  e.preventDefault()
+  const c = document.createElement('div'); c.classList.add('pswp__img'); e.content.element = c
+  const img = document.createElement('img'); img.classList.add('ximg', 'ximg--preview'); img.src = e.content.data.src
+  img.decode().then(() => { c.appendChild(img); e.content.onLoaded() })
+})
+pswp.on('contentLoadImage', (e) => e.preventDefault())
+// Like Memories: the current photo comes from Memories' own list, indexed by currIndex set in
+// slideActivate, and that list may not have the neighbouring photos loaded yet (here: only the first).
+let currIndex = 0
+const list = [{ fileid: 1 }]
+pswp.on('slideActivate', () => { currIndex = pswp.currIndex })
+// Like Memories (Viewer.vue createBase/openDynamic): the instance is published, and the page
+// re-rendered, before init() gives it its element — a script hooking in early sees no element yet
+globalThis._m = { viewer: { get isOpen() { return true }, get currentPhoto() { return list[currIndex] ?? null }, photoswipe: pswp } }
+inner.appendChild(document.createElement('div'))
+await new Promise((resolve) => setTimeout(resolve, 50))
+pswp.init()
+// Like Memories: PhotoSwipe's focus trap, letting only Memories' own nested traps keep focus
+const _onFocusIn = pswp.keyboard['_onFocusIn']
+pswp.keyboard['_onFocusIn'] = (e) => { if (e.target.closest && e.target.closest('#app-sidebar-vue,.v-popper__popper,.modal-mask')) return; _onFocusIn.call(pswp.keyboard, e) }
+window.__ready = true
+</script>
+<script src="/facetag.js"></script></body></html>
