@@ -13,10 +13,11 @@
 	const TAG_SIZE = 96
 	const MAX_LIST = 60
 	/**
-	 * Suggestions further than this from a person (mean distance to their 5 nearest faces) are
-	 * dropped: in testing, the right person scored 0.17-0.43 and the best wrong one about 0.5.
+	 * Suggestions scoring worse than this are dropped. The score is the mean distance to the
+	 * person's 5 nearest faces, less a bonus for being tagged in photos from the days around this
+	 * one; in testing, the right person's distance was 0.17-0.43 and the best wrong one's about 0.5.
 	 */
-	const SUGGEST_MAX_DISTANCE = 0.55
+	const SUGGEST_MAX_SCORE = 0.55
 	const SUGGEST_COUNT = 3
 
 	// ---------------------------------------------------------------- helpers
@@ -465,7 +466,7 @@
 				items.push({ kind: 'note', text: p.detection ? t('Finding suggestions…') : t('Looking for a face…') })
 			} else {
 				const good = p.suggestions
-					.filter((s) => s.id !== current && s.distance < SUGGEST_MAX_DISTANCE)
+					.filter((s) => s.id !== current && (s.score ?? s.distance) < SUGGEST_MAX_SCORE)
 					.slice(0, SUGGEST_COUNT)
 				for (const s of good) {
 					items.push({ kind: 'person', id: s.id, name: s.name, suggested: true })

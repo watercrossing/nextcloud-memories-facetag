@@ -34,10 +34,19 @@ class Scan extends Command {
 			->addOption('assign-margin', null, InputOption::VALUE_REQUIRED, '...and at least this much closer than the next person', (string)$d['assignMargin'])
 			->addOption('dry-run', null, InputOption::VALUE_NONE, 'Report what would be added; write nothing')
 			->addOption('no-cluster', null, InputOption::VALUE_NONE, 'Do not queue Recognize\'s ClusterFacesJob afterwards')
+			->addOption('recheck', null, InputOption::VALUE_NONE, 'Re-test the faces the scan put under named people against the current known faces, and take out those that no longer qualify (with --dry-run: only report)')
 			->addOption('undo', null, InputOption::VALUE_NONE, 'Delete every face the scan named itself, and every face it added that is not now under a named person; forget which photos were scanned');
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int {
+		if ($input->getOption('recheck')) {
+			$r = $this->scanner->recheck((bool)$input->getOption('dry-run'), static fn (string $l) => $output->writeln($l));
+			$output->writeln(sprintf('Checked %d faces; %s %d', $r['checked'], $input->getOption('dry-run') ? 'would take out' : 'took out', $r['removed']));
+			foreach ($r['byPerson'] as $name => $n) {
+				$output->writeln(sprintf('  %-30s %d', $name, $n));
+			}
+			return 0;
+		}
 		if ($input->getOption('undo')) {
 			$output->writeln($this->scanner->undo());
 			return 0;

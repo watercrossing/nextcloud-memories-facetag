@@ -34,6 +34,8 @@ class Scanner {
 	private const SETTLE_SECONDS = 86400;
 	private const RETRY_FAILED_SECONDS = 7 * 86400;
 	private const READ_TIMEOUT = 120;
+	/** The scan names nobody with fewer known faces than this */
+	private const MIN_REFERENCE_FACES = 3;
 	/** Reference faces per user are reloaded this often, so new names are picked up */
 	private const REFS_TTL = 900;
 
@@ -240,11 +242,15 @@ class Scanner {
 
 		$rows = 0;
 		$named = [];
+		// Nobody is on a photo twice: people already tagged here, or named by this pass, are out
+		$onPhoto = [];
 		foreach ($new as $f) {
 			foreach ($users as $uid) {
-				$who = $this->confidentMatch($uid, $f['vector']);
+				$onPhoto[$uid] ??= $new ? $this->store->peopleOnFile($uid, $fileId) : [];
+				$who = $this->confidentMatch($uid, $f['vector'], $onPhoto[$uid]);
 				if ($who !== null) {
 					$named[] = $who['name'];
+					$onPhoto[$uid][] = $who['id'];
 				}
 				if (!$this->o['dryRun']) {
 					$this->store->insertScanned($uid, $fileId, $f, $f['vector'], $who['id'] ?? null);
@@ -269,15 +275,19 @@ class Scanner {
 	 * @param list<float> $vector
 	 * @return array{id: int, name: string, distance: float}|null
 	 */
-	private function confidentMatch(string $uid, array $vector): ?array {
+	private function confidentMatch(string $uid, array $vector, array $exclude = []): ?array {
 		if ($this->o['assignDistance'] <= 0) {
 			return null;
 		}
 		if (!isset($this->refs[$uid]) || $this->refs[$uid]['at'] < time() - self::REFS_TTL) {
 			$this->refs[$uid] = ['at' => time(), 'refs' => $this->store->referenceFaces($uid)];
 		}
-		$ranked = FaceStore::rank($vector, $this->refs[$uid]['refs'], 2);
+		$ranked = FaceStore::rank($vector, $this->refs[$uid]['refs'], 2, [], $exclude);
 		if (!$ranked || $ranked[0]['distance'] > $this->o['assignDistance']) {
+			return null;
+		}
+		// Too few faces of a person to be sure what they look like
+		if (count($this->refs[$uid]['refs']['vectors'][$ranked[0]['id']] ?? []) < self::MIN_REFERENCE_FACES) {
 			return null;
 		}
 		$runnerUp = $ranked[1]['distance'] ?? INF;
@@ -305,6 +315,61 @@ class Scanner {
 				'scanned_at' => $qb->createNamedParameter(time(), IQueryBuilder::PARAM_INT),
 			])
 			->executeStatement();
+	}
+
+	/**
+	 * Re-test every face the scan added that is now under a named person, against the current
+	 * reference faces (Recognize's and hand-placed ones only). A face the scan named itself must
+	 * still pass the naming rule; a face Recognize's clustering placed must at least have that
+	 * person as its nearest match. Faces that fail are taken out of the person the way Recognize's
+	 * "remove from person" does, and stay on the photo, unassigned.
+	 *
+	 * @return array{checked: int, removed: int, byPerson: array<string, int>}
+	 */
+	public function recheck(bool $dryRun, ?callable $log = null): array {
+		$this->o = array_merge(self::DEFAULTS, ['dryRun' => $dryRun]);
+		$this->refs = [];
+		$out = ['checked' => 0, 'removed' => 0, 'byPerson' => []];
+		if (!$this->acquireLock()) {
+			$log && $log('A scan is running; try again when it has finished.', false);
+			return $out;
+		}
+		try {
+			$rows = $this->db->executeQuery('SELECT d.id, d.user_id, d.file_id, d.cluster_id, d.face_vector, c.title, m.source
+				FROM *PREFIX*facetag_manual m
+				JOIN *PREFIX*recognize_face_detections d ON d.id = m.detection_id
+				JOIN *PREFIX*recognize_face_clusters c ON c.id = d.cluster_id
+				WHERE m.source IN (\'scan\', \'scanknn\') AND c.title <> \'\'')->fetchAll();
+			foreach ($rows as $r) {
+				$out['checked']++;
+				$uid = (string)$r['user_id'];
+				$cid = (int)$r['cluster_id'];
+				$vector = array_map('floatval', json_decode((string)$r['face_vector'], true) ?: []);
+				$others = array_values(array_diff($this->store->peopleOnFile($uid, (int)$r['file_id'], (int)$r['id']), [$cid]));
+				if ($r['source'] === 'scanknn') {
+					$who = $this->confidentMatch($uid, $vector, $others);
+					$keep = $who !== null && $who['id'] === $cid;
+				} else {
+					if (!isset($this->refs[$uid])) {
+						$this->confidentMatch($uid, $vector); // loads the reference faces
+					}
+					$ranked = FaceStore::rank($vector, $this->refs[$uid]['refs'], 1, [], $others);
+					$keep = $ranked && $ranked[0]['id'] === $cid;
+				}
+				if ($keep) {
+					continue;
+				}
+				$out['removed']++;
+				$out['byPerson'][(string)$r['title']] = ($out['byPerson'][(string)$r['title']] ?? 0) + 1;
+				if (!$dryRun) {
+					$this->store->remove(['id' => (int)$r['id'], 'cluster_id' => $cid, 'face_vector' => (string)$r['face_vector'], 'manual' => false]);
+				}
+			}
+		} finally {
+			$this->releaseLock();
+		}
+		arsort($out['byPerson']);
+		return $out;
 	}
 
 	/**

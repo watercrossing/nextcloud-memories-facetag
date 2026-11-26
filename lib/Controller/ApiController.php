@@ -81,7 +81,7 @@ class ApiController extends Controller {
 		return new JSONResponse([
 			'face' => $face,
 			'token' => $token,
-			'suggestions' => $this->store->suggest($uid, $vector),
+			'suggestions' => $this->store->suggest($uid, $vector, 5, null, $fileId),
 		]);
 	}
 
@@ -132,7 +132,7 @@ class ApiController extends Controller {
 		if (!is_array($vector) || !array_filter($vector)) {
 			return new JSONResponse(['suggestions' => []]);
 		}
-		return new JSONResponse(['suggestions' => $this->store->suggest($uid, array_map('floatval', $vector), 5, $id)]);
+		return new JSONResponse(['suggestions' => $this->store->suggest($uid, array_map('floatval', $vector), 5, $id, $detection['file_id'])]);
 	}
 
 	/** Put an existing face under a (possibly new) person. */

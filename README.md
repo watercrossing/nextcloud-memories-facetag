@@ -70,6 +70,7 @@ Options worth knowing:
   On a library of ~55,000 photos and 128 named people this named 63% of faces and disagreed with the existing name on 1.3% of them — some of which were Recognize's own mistakes.
   Recognize's clustering alone placed 18 of 75 new faces on a trial folder (all correctly) and rejected the rest, many of them unambiguous.
 - `--min-score`, `--max-yaw`, `--min-size` change the detection limits.
+- `--recheck` re-tests every face the scan put under a named person against the current known faces and takes out those that no longer qualify (`--dry-run` to see what it would do). Run it after cleaning up a person in Memories.
 - `--undo` removes every face the scan named itself and every face it added that has not since been put under a named person, and forgets which photos were scanned.
 
 Photos indexed in the last 24 hours, and photos still in Recognize's queue, are left for Recognize to go first.
@@ -82,7 +83,10 @@ Photos indexed in the last 24 hours, and photos still in Recognize's queue, are 
 - **Finding a face** (`bin/face-locate.cjs`) runs under Recognize's `node` with Recognize's `node_modules`, so it uses the same models (face-api SSD-MobileNet, 68-point landmarks, 128-d recognition net) and its descriptors live in the space Recognize clusters in.
   It looks at a 2048px preview: first the whole image with a 0.3 confidence floor, taking the face nearest the click; failing that, a crop five tag-boxes wide around the click.
   About 1.2 s per click.
-- **Suggestions** score each named person by the mean distance to their 5 nearest faces among their 60 newest, and offer people under 0.55.
+- **Suggestions** score each named person by the mean distance to their 5 nearest faces among their 60 newest, less a bonus for how many photos from two days either side they are tagged in; people already tagged on the photo are left out, and people scoring under 0.55 are offered.
+  On 1,500 named faces the context bonus took the right person first from 94% to 96% of the time, and on the uncertain faces (nearest person further than 0.42) from 82% to 90%.
+- **Only faces Recognize found or you tagged count as evidence** — for suggestions, for the context bonus and for the scan's naming. Faces the scan added are inferences; letting them count fed back, and one person's group grew from 30 faces to 399 of mostly strangers before this was fixed.
+- **A messy person poisons suggestions.** If Recognize lumped unclear faces (babies, profiles, goggles) into one group and that group got a name, that name will be suggested for strangers; clean the person up in Memories, then run `--recheck`.
   Tested against 80 faces Recognize had already named: right person first 95% of the time, in the top three every time.
 - **Storing:** a tag is a row in `recognize_face_detections` with `cluster_id` set.
   Its descriptor is the one found under the click; if none was found, the person's centroid (zeros for a brand-new person), so it neither drags Recognize's clustering nor attracts strangers.
