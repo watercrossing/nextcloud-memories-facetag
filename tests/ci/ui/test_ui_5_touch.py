@@ -9,7 +9,11 @@ def test_ghost_click_after_a_tap_picks_nothing(phone_landscape, missed, photos):
     """Landscape phone: the picker opens over the finger (no room below the face, so it flips up)."""
     ov, page = phone_landscape, phone_landscape.page
     hits = []
-    for fid, person in missed[:6]:
+    # The biggest missed faces come first; on some, the tap point below the face is below the
+    # picker too (it is as tall as the screen allows), so try further down the list
+    for fid, person in missed[:15]:
+        if len(hits) >= 3:
+            break
         open_photo(ov, fid, photos)
         tagging_on(ov, tap=True)
         r = ov.image_rect()

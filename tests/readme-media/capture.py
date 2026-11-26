@@ -9,10 +9,10 @@ stack's Nextcloud published on 127.0.0.1:NC_PORT, Playwright's Chromium, and ffm
 It changes the stack (enables/disables the app, runs the scan, tags faces); --reset undoes an
 earlier run's scan and tags first, so it can run again on the same stack. Writes into docs/media/:
 
-- before.webp  stock Memories (this app disabled): a photo with four people, the sidebar's
-               People section naming one
-- after.webp   the same photo with this app and its scan: tagging mode, Recognize's named face,
-               and "Who is this?" boxes — one of them a face Recognize missed and the scan found
+- before.webp  stock Memories (this app disabled): a photo with four people; Recognize found
+               three faces, named none, and missed the player's
+- after.webp   the same photo with this app and its scan: tagging mode, and "Who is this?"
+               boxes — one of them the face Recognize missed and the scan found
 - picker.webp  tapping that face: the name picker, the likeliest people first (★)
 - tagging.webp a few seconds of tagging a face neither Recognize nor the scan found: zoom in,
                tap, the picker finds the face and suggests who it is, pick the name
@@ -33,6 +33,7 @@ import time
 from pathlib import Path
 
 from playwright.sync_api import Page, sync_playwright
+from playwright.sync_api import TimeoutError as PlaywrightTimeout
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "ci"))
 import stackctl as s  # noqa: E402
@@ -44,10 +45,10 @@ PASSWORD = "readme-media-throwaway-" + base64.b32encode(os.urandom(10)).decode()
 VIEWPORT = {"width": 1280, "height": 800}
 
 # Manifest files (stable names) of the two photos, and who in them is acted on
-BEFORE_AFTER = "groups/G7Biarritz_48616290793_d0b933b8.jpg"      # Recognize names 1 of 4; misses Macron
-BEFORE_AFTER_PERSON = "Emmanuel Macron"                            # ...whom the scan then finds
-ANIMATION = "groups/State_Dinner_The_Official_State_Visit_of_France_26832278157_23fcfeb1.jpg"
-ANIMATION_PERSON = "Emmanuel Macron"                               # missed by Recognize and the scan
+BEFORE_AFTER = "portraits/Rafael_Nadal_BNP_Paribas_Showdown_2013_004_95f33058.jpg"  # Recognize finds 3 of 4, names none
+BEFORE_AFTER_PERSON = "Rafael Nadal"                                                   # ...misses him; the scan finds him
+ANIMATION = "groups/Sydney_International_WTA_Players_Cruise_46000968805_a6a9c473.jpg"
+ANIMATION_PERSON = "Petra Kvitová"                                                     # missed by Recognize and the scan
 FPS = 20
 
 
@@ -102,7 +103,10 @@ def on_screen(page: Page, p: dict) -> tuple[float, float]:
 
 def sidebar(page: Page) -> None:
     page.locator(".memories-viewer .top-bar [aria-label='Info']").first.click()
-    page.wait_for_selector("text=People", timeout=15000)
+    try:
+        page.wait_for_selector("text=People", timeout=15000)
+    except PlaywrightTimeout:
+        pass  # nobody on the photo is named: Memories shows no People section
     time.sleep(2)  # face thumbnails
 
 
