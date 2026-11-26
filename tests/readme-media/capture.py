@@ -14,8 +14,9 @@ earlier run's scan and tags first, so it can run again on the same stack. Writes
 - after.webp   the same photo with this app and its scan: tagging mode, and "Who is this?"
                boxes — one of them the face Recognize missed and the scan found
 - picker.webp  tapping that face: the name picker, the likeliest people first (★)
-- tagging.webp a few seconds of tagging a face neither Recognize nor the scan found: zoom in,
-               tap, the picker finds the face and suggests who it is, pick the name
+- tagging.webp a few seconds of tagging a face neither Recognize nor the scan found: switch
+               tagging mode on (the faces Recognize found are outlined), zoom in, tap, the
+               picker finds the face and suggests who it is, pick the name
 
 The photos are from Wikimedia Commons (credits in tests/data/ATTRIBUTION.md); the README credits
 the two used here.
@@ -187,10 +188,38 @@ def animation(page: Page) -> None:
     fid, p = photo(ANIMATION)
     who = person(p, ANIMATION_PERSON)
     open_photo(page, fid, ANIMATION.split("/")[0])
-    tagging_on(page)
-    page.mouse.move(5, VIEWPORT["height"] - 5)  # out of the way: hovering a row would select it
+    button = page.locator(".facetag-button")
+    if button.get_attribute("aria-pressed") == "true":  # tagging mode is remembered: start without it
+        button.click()
+        page.wait_for_selector(".facetag-layer", state="detached")
     rec = Recorder(page)
-    rec.snap(0.6)
+
+    # The finger rests on the photo, then goes up to the tagging button and presses it
+    x, y = VIEWPORT["width"] / 2, VIEWPORT["height"] / 2
+    page.mouse.move(x, y)
+    page.evaluate(FINGER_JS, [x, y, False])
+    rec.snap(0.8)
+    box = button.bounding_box()
+    bx, by = box["x"] + box["width"] / 2, box["y"] + box["height"] / 2
+    steps = 12
+    for k in range(1, steps + 1):
+        e = ease(k / steps)
+        page.mouse.move(x + (bx - x) * e, y + (by - y) * e)  # the real pointer too, for the button's hover
+        page.evaluate(FINGER_JS, [x + (bx - x) * e, y + (by - y) * e, False])
+        rec.snap()
+    rec.snap(0.25)
+    page.evaluate(FINGER_JS, [bx, by, True])
+    rec.snap(0.12)
+    button.click()
+    page.evaluate(FINGER_JS, [bx, by, False])
+    page.evaluate("() => document.querySelector('.facetag-hint')?.remove()")
+    rec.wait_until("() => document.querySelectorAll('.facetag-tag').length > 0")
+    page.evaluate("() => document.querySelector('.facetag-hint')?.remove()")
+    rec.snap(0.3)
+    # The finger leaves; the outlines on the faces Recognize found stay a moment on their own
+    page.evaluate("() => document.getElementById('readme-finger')?.remove()")
+    page.mouse.move(5, VIEWPORT["height"] - 5)  # out of the way: hovering a row would select it
+    rec.snap(0.5)
 
     # Zoom in towards the face, in even steps (PhotoSwipe's own transition is not captured)
     x0, y0 = on_screen(page, who)

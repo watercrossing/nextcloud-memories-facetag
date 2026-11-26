@@ -6,7 +6,7 @@ It addresses recognize issue [#611](https://github.com/nextcloud/recognize/issue
 Recognize misses a lot of faces in group photos: it detects on a 1024px preview, drops any face it scores under 0.9 or that is tilted more than 30°, and never revisits a photo once it has found a face in it.
 On one 12-person group photo it kept 8.
 
-![Tagging a face Recognize missed: zoom in, tap the face, pick the suggested name](docs/media/tagging.webp)
+![Tagging a face Recognize missed: switch tagging on, zoom in, tap the face, pick the suggested name](docs/media/tagging.webp)
 
 | Memories and Recognize alone | With this app, after its scan, tagging on |
 |---|---|
