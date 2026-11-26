@@ -5,6 +5,7 @@
 #   tests/ci/stack.sh up         # Nextcloud, Memories, Recognize, this app; faces on (tfjs-node)
 #   tests/ci/stack.sh dataset    # photos into the test user, index them, run Recognize, name its clusters
 #   tests/ci/stack.sh test       # the server-side tests (pytest; extra args go to pytest)
+#   tests/ci/stack.sh ui         # the UI tests in Chromium against the real Memories (needs NC_PORT)
 #   tests/ci/stack.sh app        # re-install this app from the checkout into the running stack
 #   tests/ci/stack.sh all        # up + dataset + test
 #   tests/ci/stack.sh occ ARGS…  # occ in the stack, as www-data
@@ -157,6 +158,15 @@ dataset() {
 	python3 "$ROOT/tests/ci/name_clusters.py"
 }
 
+# Pinned so CI's browser cache matches; Chromium for it: `playwright install chromium`
+PLAYWRIGHT=playwright==1.65.2
+
+run_ui() {
+	step "UI tests (Playwright, Chromium)"
+	: "${NC_PORT:?set NC_PORT when bringing the stack up: the browser needs Nextcloud published}"
+	uv run --no-project --with pytest --with "$PLAYWRIGHT" python -m pytest "$ROOT/tests/ci/ui" -v --tb=short -p no:cacheprovider "$@"
+}
+
 run_tests() {
 	step "Server-side tests"
 	uv run --no-project --with pytest --with requests python -m pytest "$ROOT/tests/ci/server" -v --tb=short -p no:cacheprovider "$@"
@@ -176,7 +186,8 @@ up) up ;;
 app) reinstall_app ;;
 dataset) dataset ;;
 test) shift; run_tests "$@" ;;
-all) up; dataset; run_tests ;;
+ui) shift; run_ui "$@" ;;
+all) up; dataset; run_tests; if [ -n "${NC_PORT:-}" ]; then run_ui; fi ;;
 occ) shift; occ "$@" ;;
 psql) shift; psql_ -c "$*" ;;
 logs) logs "${2:?directory}" ;;
@@ -185,5 +196,5 @@ env)
 	# for the Python tests and helper scripts
 	echo "COMPOSE_PROJECT_NAME=$COMPOSE_PROJECT_NAME TEST_USER=$TEST_USER"
 	;;
-*) sed -n '2,20p' "$0"; exit 1 ;;
+*) sed -n '2,21p' "$0"; exit 1 ;;
 esac

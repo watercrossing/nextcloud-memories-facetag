@@ -27,7 +27,7 @@ Open a photo in Memories and press the tag button in the viewer's top bar; it tu
   A fixed-size square appears; the app looks for a face under it with Recognize's own model, snaps the square onto it if it finds one, and puts the most likely people at the top of the list (★).
   Below that is every named person, filtered as you type; a name that doesn't exist yet creates that person.
 - **Tap a tag** to change who it is, or to remove it.
-- **Tagging stays on while you browse**: swipe, the arrows, the arrow keys and zoom all work as usual, and each photo shows its tags as it comes up.
+- **Tagging stays on while you browse**: swipe, the arrows, the arrow keys and zoom (pinch, wheel, drag) all work as usual, also when they start on a face, and each photo shows its tags as it comes up.
   It stays on across closing and reopening the viewer too (remembered per browser), until you press the tag button again or Esc.
 
 Tags are ordinary Recognize face detections, so they appear in Memories' People views like any other face.
@@ -115,6 +115,7 @@ Nextcloud has no way for one app to depend on versions of another, so this app c
   ```sh
   47 3 * * * docker exec -u www-data nextcloud php occ memories_facetag:check -q
   ```
+- **Compatibility tests.** Every tested combination runs in GitHub Actions against a real Nextcloud with Memories, Recognize and a set of freely licensed photos with known faces: the API and the scan, the viewer in Chromium on a desktop and an emulated phone (tapping, typing, swiping, zooming), and Recognize's face model against a stored baseline — the distance limits above were tuned on that model, so a release that changes it fails the tests rather than quietly making suggestions worse.
 
 What it is coupled to: Recognize's `recognize_face_detections` / `recognize_face_clusters` tables (the `face_vector` column exists since Recognize 10), its bundled `node` and face-api models, its `ClusterFacesJob`, and its behaviour of skipping photos that already have faces; Memories' `globalThis._m.viewer` object (`isOpen`, `currentPhoto`, `photoswipe` — Memories marks the last "debugging only"), the `.memories-viewer .top-bar` element, PhotoSwipe 5's slide and tap events, and the `indexed_at` / `datetaken` columns of its index (recent versions only).
 

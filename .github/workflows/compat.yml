@@ -82,6 +82,9 @@ jobs:
       MEMORIES_VERSION: ${{ matrix.memories }}
       RECOGNIZE_VERSION: ${{ matrix.recognize }}
       FACETAG_CACHE: ${{ github.workspace }}/.cache
+      NC_PORT: "18080"  # Nextcloud on the runner's 127.0.0.1, for the UI tests' browser
+      UI_TRACE: retain-on-failure
+      UI_ARTIFACTS: ${{ github.workspace }}/ui-artifacts
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
@@ -105,12 +108,31 @@ jobs:
           path: .cache/photos
           key: photos-${{ hashFiles('tests/data/manifest.json', 'tests/data/fetch.py') }}
 
+      - name: Cache Chromium for Playwright
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ hashFiles('tests/ci/stack.sh') }}
+      - name: Chromium
+        # in the background: it is only needed once the stack is up
+        run: |
+          nohup uv run --no-project --with "$(sed -n 's/^PLAYWRIGHT=//p' tests/ci/stack.sh)" \
+            python -m playwright install --with-deps chromium > playwright-install.log 2>&1 &
+
       - name: Bring up Nextcloud, Memories, Recognize, memories_facetag
         run: tests/ci/stack.sh up
       - name: Load photos, run Recognize, name its clusters
+        id: dataset
         run: tests/ci/stack.sh dataset
       - name: Server-side tests
         run: tests/ci/stack.sh test --junitxml=test-results.xml
+      - name: UI tests
+        if: ${{ !cancelled() && steps.dataset.outcome == 'success' }}
+        run: |
+          # wait for the background Chromium install
+          while pgrep -f "playwright install" >/dev/null; do sleep 1; done
+          cat playwright-install.log | tail -3
+          tests/ci/stack.sh ui --junitxml=ui-results.xml
 
       - name: Summary
         if: always()
@@ -121,11 +143,16 @@ jobs:
             tests/ci/stack.sh occ status 2>/dev/null | grep versionstring || true
             python3 - <<'EOF' || true
           import xml.etree.ElementTree as ET
-          root = ET.parse("test-results.xml").getroot()
-          s = root if root.tag == "testsuite" else root.find("testsuite")
-          print(f"tests: {s.get('tests')}, failures: {s.get('failures')}, errors: {s.get('errors')}, time: {float(s.get('time')):.0f}s")
+          for name, f in (("server", "test-results.xml"), ("ui", "ui-results.xml")):
+              try:
+                  root = ET.parse(f).getroot()
+              except OSError:
+                  print(f"{name}: did not run")
+                  continue
+              s = root if root.tag == "testsuite" else root.find("testsuite")
+              print(f"{name}: tests {s.get('tests')}, failures {s.get('failures')}, errors {s.get('errors')}, time {float(s.get('time')):.0f}s")
           EOF
-            du -sh .cache/apps .cache/runtime .cache/photos 2>/dev/null || true
+            du -sh .cache/apps .cache/runtime .cache/photos ~/.cache/ms-playwright 2>/dev/null || true
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
       - name: Collect logs
@@ -139,9 +166,39 @@ jobs:
           path: |
             ci-logs
             test-results.xml
+            ui-results.xml
+            playwright-install.log
+      # Screenshots and Playwright traces of failing UI tests (npx playwright show-trace X.trace.zip,
+      # or trace.playwright.dev)
+      - name: Upload UI failures
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-nc${{ matrix.nextcloud }}-memories${{ matrix.memories }}-recognize${{ matrix.recognize }}
+          path: ui-artifacts
+          if-no-files-found: ignore
       - name: Tear down
         if: always()
         run: tests/ci/stack.sh down
+
+  # js/facetag.js in the stand-in viewer (tests/ui-harness/): no stack, a minute
+  ui-standin:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - name: Cache Chromium and PhotoSwipe
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/ms-playwright
+            .cache/ui-harness
+          key: standin-${{ hashFiles('tests/ci/stack.sh', 'tests/ui-harness/conftest.py') }}
+      - run: uv run --no-project --with "$(sed -n 's/^PLAYWRIGHT=//p' tests/ci/stack.sh)" python -m playwright install --with-deps chromium
+      - run: >
+          uv run --no-project --with pytest --with pillow --with "$(sed -n 's/^PLAYWRIGHT=//p' tests/ci/stack.sh)"
+          python -m pytest tests/ui-harness -v -p no:cacheprovider
 
   # By hand only: the README's screenshots and animation from the real Memories, as an artifact
   # to commit into docs/media/ (newest pinned versions). See CLAUDE.md.

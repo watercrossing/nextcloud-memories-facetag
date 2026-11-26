@@ -59,11 +59,13 @@ def photos() -> dict[int, dict]:
 
 @pytest.fixture(scope="session")
 def people() -> dict[str, int]:
-    """Named person → their cluster id (as name_clusters.py named them; the largest if several)."""
+    """Ground-truth person → their cluster id (as name_clusters.py named them; the largest if several).
+    Other named clusters — test_2 leaves an empty one — are left out, so reruns on one stack work."""
     rows = s.sql(f"""SELECT c.id, c.title, count(d.id) AS n FROM oc_recognize_face_clusters c
                      LEFT JOIN oc_recognize_face_detections d ON d.cluster_id = c.id
                      WHERE c.user_id = '{s.TEST_USER}' AND c.title <> '' GROUP BY c.id, c.title ORDER BY n""")
-    return {r["title"]: int(r["id"]) for r in rows}
+    identities = set(s.manifest()["identities"].values())
+    return {r["title"]: int(r["id"]) for r in rows if r["title"] in identities}
 
 
 def detections(file_id: int) -> list[dict]:
