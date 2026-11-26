@@ -50,14 +50,17 @@ occ memories_facetag:scan --user alice --path "Photos/2023 Holiday" --dry-run -v
 occ memories_facetag:scan --user alice --path "Photos/2023 Holiday" -v
 ```
 
-Then either run it over everything (`occ memories_facetag:scan --max-minutes 600`, resumable), or switch on the background job, which works through the backlog in 8-minute slices every 10 minutes and afterwards gives each new photo its second pass a day after Recognize's first:
+Then either run it over everything (`occ memories_facetag:scan --max-minutes 600`, resumable), or switch on the background job, which works through the backlog in 8-minute slices every 10 minutes and afterwards gives each new photo its second pass a day after Recognize's first (it is off until you do):
 
 ```sh
 occ config:app:set memories_facetag scan_enabled --value=yes
 occ config:app:set memories_facetag scan_minutes --value=8     # optional; minutes per 10-minute slot
 ```
 
-Throughput is about 1.5–2 photos a second on a modern CPU, with the detector at `nice 19`.
+The job is time-insensitive: if your Nextcloud has a maintenance window (`maintenance_window_start`), it only runs inside it, like Recognize's own heavy jobs.
+
+Throughput is about 1 photo a second on a modern CPU, with the detector at `nice 19`.
+JPEG and PNG originals are decoded directly rather than through Nextcloud previews, and other formats use previews that are not stored, so a scan leaves no extra previews behind.
 
 Options worth knowing:
 
