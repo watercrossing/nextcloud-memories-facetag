@@ -3,7 +3,9 @@
 name: Compatibility
 
 on:
+  # Branches are covered by their pull request; pushing to both would run every cell twice
   push:
+    branches: [main]
   pull_request:
   workflow_dispatch:
     inputs:
