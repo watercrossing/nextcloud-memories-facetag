@@ -15,6 +15,12 @@ APP=memories_facetag
 DEST=$APPS/$APP
 occ() { docker exec -u www-data "$CONTAINER" php occ "$@"; }
 
+# Don't swap the code (and run occ upgrade) under a running library scan; FORCE=1 to do it anyway
+if [ -z "${FORCE:-}" ] && docker exec "$CONTAINER" pgrep -f face-scan.cjs >/dev/null 2>&1; then
+	echo "A library scan is running in $CONTAINER; deploy again when it has finished (or FORCE=1)." >&2
+	exit 1
+fi
+
 docker exec -u www-data "$CONTAINER" sh -c "rm -rf $DEST.new && mkdir -p $DEST.new"
 tar -cf - appinfo lib js css bin | docker exec -i -u www-data "$CONTAINER" tar -C "$DEST.new" -xf -
 docker exec -u www-data "$CONTAINER" sh -c "rm -rf $DEST.old; if [ -d $DEST ]; then mv $DEST $DEST.old; fi; mv $DEST.new $DEST; rm -rf $DEST.old"

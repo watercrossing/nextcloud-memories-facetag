@@ -9,14 +9,15 @@ On one 12-person group photo it kept 8.
 ## What you get
 
 **Tagging in the viewer.**
-Open a photo in Memories and press the tag button in the viewer's top bar.
+Open a photo in Memories and press the tag button in the viewer's top bar; it turns blue while tagging is on.
 
 - Every face already on the photo shows a box and a name; faces Recognize found but nobody named are dashed, with "Who is this?".
-- **Click anywhere on the photo** to tag someone.
+- **Tap or click a face** to tag someone.
   A fixed-size square appears; the app looks for a face under it with Recognize's own model, snaps the square onto it if it finds one, and puts the most likely people at the top of the list (★).
   Below that is every named person, filtered as you type; a name that doesn't exist yet creates that person.
-- **Click a tag** to change who it is, or to remove it.
-- **Finished tagging** or Esc to leave. The arrow keys still move between photos while you tag.
+- **Tap a tag** to change who it is, or to remove it.
+- **Tagging stays on while you browse**: swipe, the arrows, the arrow keys and zoom all work as usual, and each photo shows its tags as it comes up.
+  It stays on across closing and reopening the viewer too (remembered per browser), until you press the tag button again or Esc.
 
 Tags are ordinary Recognize face detections, so they appear in Memories' People views like any other face.
 

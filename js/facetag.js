@@ -110,6 +110,19 @@
 		raf: 0,
 		lastRect: '',
 		loadSeq: 0,
+		hintTimer: 0,
+	}
+
+	// Tagging stays on — across photos, and across closing and reopening the viewer — until it is
+	// switched off. Remembered per browser; storage can be unavailable, so every access is guarded.
+	const STICKY_KEY = 'memories_facetag:on'
+	function sticky(value) {
+		try {
+			if (value === undefined) return localStorage.getItem(STICKY_KEY) === '1'
+			if (value) localStorage.setItem(STICKY_KEY, '1')
+			else localStorage.removeItem(STICKY_KEY)
+		} catch (e) { /* private mode etc.: tagging just isn't remembered */ }
+		return !!value
 	}
 
 	// ------------------------------------------------------------- top button
@@ -128,54 +141,94 @@
 			btn.innerHTML = TAG_ICON
 			btn.addEventListener('click', (e) => {
 				e.stopPropagation()
-				state.active ? stop() : start()
+				if (state.active) {
+					sticky(false)
+					stop()
+				} else {
+					sticky(true)
+					start()
+				}
 			})
 			bar.insertBefore(btn, bar.firstChild)
 		}
 		btn.hidden = isVideo(currentPhoto())
 		btn.classList.toggle('active', state.active)
+		btn.setAttribute('aria-pressed', state.active ? 'true' : 'false')
+		btn.title = state.active ? t('Stop tagging people') : t('Tag people')
 	}
 
 	const hookedSwipes = new WeakSet()
+
+	/**
+	 * While tagging, PhotoSwipe keeps every gesture — swipe, arrows, pinch, wheel zoom — and only
+	 * a plain tap or click on the photo itself is taken for tagging. PhotoSwipe's own reactions to
+	 * that tap (toggle controls, double-tap zoom, close on background click) are cancelled; a tap
+	 * beside the photo still toggles the controls on a phone, so the tag button can be reached.
+	 */
 	function hookPhotoSwipe() {
 		const pswp = viewer() && viewer().photoswipe
 		if (!pswp || hookedSwipes.has(pswp)) return
 		hookedSwipes.add(pswp)
 		pswp.on('change', () => {
 			ensureButton()
-			if (!state.active) return
-			if (isVideo(currentPhoto())) stop()
-			else load()
+			if (state.active) load()
 		})
 		pswp.on('close', () => stop())
+
+		const onPhoto = (e) => {
+			const r = imageRect()
+			const o = e.originalEvent
+			return !!r && !!o && o.clientX >= r.left && o.clientX <= r.right && o.clientY >= r.top && o.clientY <= r.bottom
+		}
+		for (const action of ['tapAction', 'doubleTapAction', 'imageClickAction']) {
+			pswp.on(action, (e) => {
+				if (state.active && onPhoto(e)) e.preventDefault()
+			})
+		}
+		pswp.on('bgClickAction', (e) => {
+			if (state.active) e.preventDefault()
+		})
+
+		const root = pswp.element
+		if (!root) return
+		const down = new Map()
+		let multi = false
+		root.addEventListener('pointerdown', (e) => {
+			down.set(e.pointerId, { x: e.clientX, y: e.clientY, t: performance.now() })
+			if (down.size > 1) multi = true
+		}, true)
+		const end = (e, cancelled) => {
+			const start = down.get(e.pointerId)
+			down.delete(e.pointerId)
+			const wasMulti = multi
+			if (down.size === 0) multi = false
+			if (cancelled || !start || wasMulti || !state.active || e.button > 0) return
+			// A tap: short and barely moving. Anything else is PhotoSwipe's swipe, pan or zoom.
+			if (Math.hypot(e.clientX - start.x, e.clientY - start.y) > 10 || performance.now() - start.t > 700) return
+			onPhotoTap(e.clientX, e.clientY)
+		}
+		root.addEventListener('pointerup', (e) => end(e, false), true)
+		root.addEventListener('pointercancel', (e) => end(e, true), true)
 	}
 
 	// ----------------------------------------------------------- tagging mode
 
 	function start() {
-		const photo = currentPhoto()
-		if (!photo || isVideo(photo)) return
+		if (state.active || !viewer() || !viewer().isOpen) return
 		const outer = document.querySelector('.memories-viewer')
 		if (!outer) return
 		state.active = true
+		outer.classList.add('facetag-on')
 
+		// The layer lets pointer events through to PhotoSwipe; only its tags, picker and hint take them
 		const layer = el('div', 'facetag-layer')
-		layer.addEventListener('pointerdown', onLayerPointerDown)
-		for (const ev of ['pointerup', 'pointermove', 'click', 'dblclick', 'wheel', 'touchstart', 'touchmove', 'touchend', 'contextmenu']) {
-			layer.addEventListener(ev, (e) => e.stopPropagation(), { passive: ev !== 'wheel' && ev !== 'contextmenu' })
-		}
-		layer.addEventListener('wheel', (e) => e.preventDefault(), { passive: false })
-
-		const bar = el('div', 'facetag-bar')
-		bar.appendChild(el('span', 'facetag-hint', t('Click on the photo to tag someone. Click on a tag to change or remove it.')))
-		const done = el('button', 'facetag-done', t('Finished tagging'))
-		done.type = 'button'
-		done.addEventListener('click', stop)
-		bar.appendChild(done)
-		layer.appendChild(bar)
-
+		const hint = el('div', 'facetag-hint', t('Tap a face to tag someone, or a tag to change it. Tagging stays on until you switch it off with the tag button.'))
+		layer.appendChild(hint)
 		outer.appendChild(layer)
 		state.layer = layer
+		clearTimeout(state.hintTimer)
+		state.hintTimer = setTimeout(() => hint.classList.add('gone'), 5000)
+
 		window.addEventListener('keydown', onKey, true)
 		window.addEventListener('keyup', swallowKeys, true)
 		window.addEventListener('keypress', swallowKeys, true)
@@ -189,13 +242,17 @@
 		state.active = false
 		closePicker()
 		cancelAnimationFrame(state.raf)
+		clearTimeout(state.hintTimer)
 		window.removeEventListener('keydown', onKey, true)
 		window.removeEventListener('keyup', swallowKeys, true)
 		window.removeEventListener('keypress', swallowKeys, true)
 		if (state.layer) state.layer.remove()
+		const outer = document.querySelector('.memories-viewer')
+		if (outer) outer.classList.remove('facetag-on')
 		state.layer = null
 		state.detections = []
 		state.fileId = null
+		state.lastRect = ''
 		ensureButton()
 	}
 
@@ -207,6 +264,7 @@
 		state.fileId = photo.fileid
 		state.detections = []
 		render()
+		if (isVideo(photo)) return // no tags on videos; tagging carries on with the next photo
 		try {
 			const data = await api('GET', `/file/${photo.fileid}`)
 			if (seq !== state.loadSeq) return
@@ -252,8 +310,8 @@
 				e.preventDefault()
 				openPicker({ detection: d, box: d })
 			}
-			box.addEventListener('pointerdown', open)
-			label.addEventListener('pointerdown', open)
+			box.addEventListener('click', open)
+			label.addEventListener('click', open)
 			state.layer.insertBefore(tag, state.layer.firstChild)
 		}
 		position()
@@ -293,19 +351,17 @@
 
 	// ----------------------------------------------------------------- picker
 
-	function onLayerPointerDown(e) {
-		e.stopPropagation()
-		if (e.target.closest('.facetag-picker, .facetag-bar, .facetag-tag')) return
+	/** A tap on the photo while tagging: close an open picker, or start a new tag there. */
+	function onPhotoTap(clientX, clientY) {
 		if (state.picker) {
 			closePicker()
 			return
 		}
 		const r = imageRect()
 		if (!r) return
-		const px = e.clientX - r.left
-		const py = e.clientY - r.top
+		const px = clientX - r.left
+		const py = clientY - r.top
 		if (px < 0 || py < 0 || px > r.width || py > r.height) return
-		e.preventDefault()
 		const side = Math.min(TAG_SIZE, r.width, r.height)
 		const bx = Math.min(Math.max(px - side / 2, 0), r.width - side)
 		const by = Math.min(Math.max(py - side / 2, 0), r.height - side)
@@ -502,7 +558,12 @@
 		if (e.key === 'Escape') {
 			e.stopPropagation()
 			e.preventDefault()
-			p ? closePicker() : stop()
+			if (p) {
+				closePicker()
+			} else {
+				sticky(false)
+				stop()
+			}
 			return
 		}
 		if (!p) return // arrows etc. still move between photos
@@ -543,6 +604,9 @@
 		}
 		hookPhotoSwipe()
 		ensureButton()
+		if (!state.active && sticky() && viewer() && viewer().isOpen && viewer().photoswipe && document.querySelector('.memories-viewer .top-bar')) {
+			start()
+		}
 	})
 	function boot() {
 		observer.observe(document.body, { childList: true, subtree: true })

@@ -19,25 +19,39 @@
 	cursor: pointer;
 	vertical-align: middle;
 }
-.memories-viewer .top-bar .facetag-button:hover,
-.memories-viewer .top-bar .facetag-button.active {
+.memories-viewer .top-bar .facetag-button:hover {
 	background: rgba(255, 255, 255, 0.18);
+}
+/* Tagging is on: say so clearly, since it now stays on while browsing */
+.memories-viewer .top-bar .facetag-button.active {
+	background: #0866ff;
+	color: #fff;
 }
 .memories-viewer .top-bar .facetag-button[hidden] {
 	display: none;
 }
 
-/* Covers the viewer; everything inside is positioned in the layer's own coordinates */
+/*
+ * Covers the viewer (it sits inside .memories-viewer, which is position: fixed) but lets pointer
+ * events through to PhotoSwipe, so swiping, arrows and zoom keep working while tagging.
+ * Its tags, picker and hint take events themselves. Everything inside is positioned in the
+ * layer's own coordinates.
+ */
 .facetag-layer {
-	position: absolute; /* inside .memories-viewer, which is position: fixed — so it covers the viewer, not the sidebar */
+	position: absolute;
 	inset: 0;
 	z-index: 2147483000;
-	cursor: crosshair;
-	touch-action: none;
+	pointer-events: none;
 	user-select: none;
 	font-family: var(--font-face, system-ui, sans-serif);
 	font-size: 14px;
 	color: #e4e6eb;
+}
+.facetag-layer > * {
+	pointer-events: auto;
+}
+.memories-viewer.facetag-on .pswp__img {
+	cursor: crosshair !important;
 }
 
 .facetag-tag {
@@ -89,6 +103,7 @@
 
 .facetag-square {
 	position: absolute;
+	pointer-events: none !important;
 	border: 2px solid #fff;
 	border-radius: 4px;
 	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5), 0 0 0 9999px rgba(0, 0, 0, 0.25);
@@ -190,43 +205,26 @@
 	background: #3e4042;
 }
 
-.facetag-bar {
-	position: absolute;
-	left: 50%;
-	bottom: 24px;
-	transform: translateX(-50%);
-	display: flex;
-	align-items: center;
-	gap: 16px;
-	max-width: calc(100vw - 32px);
-	padding: 10px 12px 10px 18px;
-	border-radius: 12px;
-	background: rgba(24, 25, 26, 0.9);
-	cursor: default;
-}
-.facetag-hint {
-	color: #e4e6eb;
-}
-.facetag-done {
-	flex: none;
-	padding: 8px 18px;
-	border: none;
-	border-radius: 8px;
-	background: #0866ff;
-	color: #fff;
-	font-weight: 600;
-	cursor: pointer;
-}
-.facetag-done:hover {
-	background: #1877f2;
-}
-@media (max-width: 600px) {
-	.facetag-hint {
-		display: none;
-	}
-}
 
 /* Crowded photos: labels of neighbouring faces overlap, so whichever face is under the pointer comes to the front */
 .facetag-tag:hover {
 	z-index: 1;
+}
+
+/* A hint when tagging starts, then it fades away */
+.facetag-hint {
+	position: absolute;
+	left: 50%;
+	bottom: 96px;
+	transform: translateX(-50%);
+	max-width: min(560px, calc(100% - 32px));
+	padding: 10px 16px;
+	border-radius: 12px;
+	background: rgba(24, 25, 26, 0.9);
+	text-align: center;
+	pointer-events: none !important;
+	transition: opacity 0.6s;
+}
+.facetag-hint.gone {
+	opacity: 0;
 }
