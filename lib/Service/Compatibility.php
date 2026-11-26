@@ -28,7 +28,7 @@ class Compatibility {
 	/** Major versions tested; a new major switches the app off until it has been tested. */
 	public const TESTED_MAJORS = [
 		'memories' => [11],
-		'recognize' => [12],
+		'recognize' => [12, 13],
 	];
 
 	/** Columns this app reads or writes, by table */
