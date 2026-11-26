@@ -54,9 +54,16 @@
 
 	const viewer = () => (globalThis._m && globalThis._m.viewer) || null
 
+	/**
+	 * The photo on screen. PhotoSwipe's current slide carries it; Memories' own `currentPhoto` is
+	 * looked up in Memories' loaded list, which can lag behind or be empty right after a swipe.
+	 */
 	function currentPhoto() {
 		const v = viewer()
-		return v && v.isOpen ? v.currentPhoto : null
+		if (!v || !v.isOpen) return null
+		const slide = v.photoswipe && v.photoswipe.currSlide
+		const photo = slide && slide.data && slide.data.photo
+		return photo && photo.fileid ? photo : v.currentPhoto
 	}
 
 	function isVideo(photo) {
@@ -283,6 +290,9 @@
 			stop()
 			return
 		}
+		// The photo can change without a 'change' event (Memories refreshing a slide), so check
+		const photo = currentPhoto()
+		if (photo && photo.fileid !== state.fileId) load()
 		const r = imageRect()
 		const key = r ? `${r.left},${r.top},${r.width},${r.height}` : ''
 		if (key !== state.lastRect) {
@@ -610,6 +620,12 @@
 	})
 	function boot() {
 		observer.observe(document.body, { childList: true, subtree: true })
+		// PhotoSwipe traps focus inside its own element and takes it back from anything else —
+		// including the name box. Memories exempts its own sidebar and popups; exempt the overlay
+		// the same way by keeping its focus events from reaching PhotoSwipe.
+		window.addEventListener('focusin', (e) => {
+			if (e.target instanceof Element && e.target.closest('.facetag-layer')) e.stopImmediatePropagation()
+		}, true)
 	}
 	if (document.body) boot()
 	else document.addEventListener('DOMContentLoaded', boot)
