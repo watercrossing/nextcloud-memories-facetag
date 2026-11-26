@@ -11,10 +11,6 @@ name: Release watch
 on:
   schedule:
     - cron: "17 2 * * *"
-  # TEMPORARY (until this workflow is on main, where workflow_dispatch needs it): pushing
-  # watch-test/FIXTURE runs a simulation with that fixture
-  push:
-    branches: ["watch-test/**"]
   workflow_dispatch:
     inputs:
       dry_run:
@@ -59,7 +55,6 @@ jobs:
           FORCE: ${{ inputs.force }}
           FIXTURE: ${{ inputs.fixture }}
         run: |
-          if [ -z "$FIXTURE" ] && [[ $GITHUB_REF_NAME == watch-test/* ]]; then FIXTURE=${GITHUB_REF_NAME#watch-test/}; fi
           args=()
           if [ "$DRY_RUN" = true ]; then args+=(--dry-run); fi
           if [ "$FORCE" = true ]; then args+=(--force); fi
