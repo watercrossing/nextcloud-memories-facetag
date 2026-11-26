@@ -33,7 +33,13 @@ NC_PORT=18080 MEMORIES_VERSION=11.1.3 RECOGNIZE_VERSION=12.0.2 tests/ci/stack.sh
 
 ## Session 3: watching for new releases
 
-- **New versions:** `versions.py pin` re-resolves the matrix from `TESTED_MAJORS`; `versions.py resolve APP VERSION` checks one release.
+Not built yet. Starting points:
+
+- **New versions:** `versions.py pin` re-resolves the matrix from `TESTED_MAJORS` (latest two releases per app and Nextcloud major, from the App Store, signatures checked); `versions.py resolve APP VERSION` checks one release. CI already takes unpinned releases through workflow_dispatch (`memories`, `recognize`, `nextcloud` inputs), so a watcher only has to decide what to run.
+- **Watcher:** a scheduled workflow that runs `versions.py pin` and diffs `versions.json`. A new release *within* the tested majors → a PR re-pinning (its own CI run is the test). A release of a new *major* → dispatch the matrix for it; if green, a PR widening `Compatibility::TESTED_MAJORS` and re-pinning. `test_1_model` is the gate that matters for Recognize majors: if it fails, the PR should say so and not widen.
+- **Trap: PRs and pushes made with the workflow's `GITHUB_TOKEN` start no workflows**, so an auto-PR would sit without checks. Either dispatch the compat workflow on the PR's branch explicitly (`gh workflow run compat.yml --ref <branch>` is allowed with `GITHUB_TOKEN` and `actions: write`), or use a GitHub App / fine-grained token as a secret. Needs `contents: write` and `pull-requests: write`.
+- **Nextcloud's next major:** `NEXTCLOUD` in `versions.py` lists majors; `appinfo/info.xml` caps `max-version="34"`, so Nextcloud 35 refuses to enable the app until that is raised too. Memories and Recognize must have App Store releases compatible with 35 (`versions.py` asks the store per platform version). Prereleases: whether the `nextcloud` Docker image publishes beta/RC tags (unverified), and whether the apps install on a prerelease (`app:enable --force` may be needed) — find out before building on it.
+- **Time per cell** is about 12 minutes (below), so a nightly full matrix is fine; don't add cells without need.
 
 ## README screenshots and animation (`tests/readme-media/`)
 

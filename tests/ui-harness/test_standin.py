@@ -67,7 +67,7 @@ def test_next_photo_typing_and_escape(desktop):
     ov, page = desktop, desktop.page
     on(ov)
     page.keyboard.press("ArrowRight")
-    ov.settle()
+    ov.wait_moved(1)
     ov.wait_tags(2)
     assert ov.labels() == ["Bob"], "the next photo's tags (Memories' currentPhoto lags here)"
     page.mouse.click(*ov.to_screen(0.6, 0.8))
@@ -101,8 +101,7 @@ def test_phone_swipe_from_a_face_then_tap(phone):
     on(ov, tap=True)
     x, y = centre(ov, face(0))  # start the swipe on Alice's tag
     swipe(cdp, x + 150, x - 150, y)
-    ov.settle()
-    assert ov.current_fileid() == 2 and not ov.picker_open()
+    assert ov.wait_moved(1) == 2 and not ov.picker_open()
     ov.wait_tags(2)
     assert ov.labels() == ["Bob"]
     page.touchscreen.tap(*ov.to_screen(0.5, 0.8))

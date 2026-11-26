@@ -49,27 +49,23 @@ def test_arrows_and_arrow_keys(desktop, start, photos):
     assert_shows(ov, start)
 
     page.locator(".pswp__button--arrow--next").click()
-    ov.settle()
-    nxt = ov.current_fileid()
-    assert nxt != start and ov.is_on()
+    nxt = ov.wait_moved(start)
+    assert ov.is_on()
     assert_shows(ov, nxt)
     tap_locates_here(ov, nxt, page.mouse.click)
 
     page.keyboard.press("ArrowRight")
-    ov.settle()
-    third = ov.current_fileid()
-    assert third not in (start, nxt)
+    third = ov.wait_moved(nxt)
+    assert third != start
     assert_shows(ov, third)
 
     page.keyboard.press("ArrowLeft")
-    ov.settle()
-    assert ov.current_fileid() == nxt
+    assert ov.wait_moved(third) == nxt
     assert_shows(ov, nxt)
     tap_locates_here(ov, nxt, page.mouse.click)
 
     page.locator(".pswp__button--arrow--prev").click()
-    ov.settle()
-    assert ov.current_fileid() == start
+    assert ov.wait_moved(nxt) == start
     assert_shows(ov, start)
     assert not ov.saves() and not ov.js_errors, (ov.saves(), ov.js_errors)
 
@@ -85,9 +81,7 @@ def test_touch_swipe_on_a_phone(phone, start, photos):
     y = r["y"] + r["height"] / 2
 
     swipe(cdp, vw * 0.85, vw * 0.1, y)
-    ov.settle()
-    nxt = ov.current_fileid()
-    assert nxt != start, "the swipe should move to the next photo"
+    nxt = ov.wait_moved(start)  # times out if the swipe did nothing
     assert ov.is_on() and not ov.picker_open(), "a swipe is not a tap"
     assert_shows(ov, nxt)
     tap_locates_here(ov, nxt, page.touchscreen.tap)
@@ -99,8 +93,7 @@ def test_touch_swipe_on_a_phone(phone, start, photos):
         swipe(cdp, t["x"] + t["width"] / 2, t["x"] + t["width"] / 2 + vw * 0.75, t["y"] + t["height"] / 2)
     else:
         swipe(cdp, vw * 0.1, vw * 0.85, y)
-    ov.settle()
-    assert ov.current_fileid() == start, "swiping back (starting on a face) should return to the first photo"
+    assert ov.wait_moved(nxt) == start, "swiping back (starting on a face) should return to the first photo"
     assert not ov.picker_open()
     assert_shows(ov, start)
     tap_locates_here(ov, start, page.touchscreen.tap)

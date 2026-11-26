@@ -85,6 +85,7 @@ jobs:
       NC_PORT: "18080"  # Nextcloud on the runner's 127.0.0.1, for the UI tests' browser
       UI_TRACE: retain-on-failure
       UI_ARTIFACTS: ${{ github.workspace }}/ui-artifacts
+      MODEL_REPORT: ${{ github.workspace }}/model-report.json
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
@@ -152,9 +153,17 @@ jobs:
               s = root if root.tag == "testsuite" else root.find("testsuite")
               print(f"{name}: tests {s.get('tests')}, failures {s.get('failures')}, errors {s.get('errors')}, time {float(s.get('time')):.0f}s")
           EOF
+            python3 - <<'EOF' || true
+          import json
+          r = json.load(open("model-report.json"))
+          print(f"face model: {r['detected']}/{r['ground_truth_faces']} ground-truth faces detected, {r['total_faces']} in all; "
+                f"within-person median {r['within_person']['p50']}, between {r['between_people']['p50']}; "
+                f"nearest person {r['nearest_person_accuracy']:.1%}; reference descriptors differ by up to {r['reference_descriptor_max_diff']:.2g}"
+                + ("; DIFFERS: " + "; ".join(r["problems"]) if r["problems"] else ""))
+          EOF
             du -sh .cache/apps .cache/runtime .cache/photos ~/.cache/ms-playwright 2>/dev/null || true
             echo '```'
-          } >> "$GITHUB_STEP_SUMMARY"
+          } | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Collect logs
         if: failure()
         run: tests/ci/stack.sh logs ci-logs

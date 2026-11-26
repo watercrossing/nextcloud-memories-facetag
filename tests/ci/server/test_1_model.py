@@ -6,6 +6,8 @@ tests/ci/model_baseline.py for what is measured and the tolerances.
 """
 
 import json
+import os
+from pathlib import Path
 
 import model_baseline as mb
 
@@ -20,6 +22,9 @@ def test_face_model_matches_the_baseline():
     if moved:
         print(f"reference descriptors vs baseline: max distance {max(moved):.6f}, mean {sum(moved) / len(moved):.6f}")
     problems = mb.compare(now, base)
+    if os.environ.get("MODEL_REPORT"):  # CI shows it in the job summary
+        Path(os.environ["MODEL_REPORT"]).write_text(json.dumps(
+            {**shown, "reference_descriptor_max_diff": max(moved) if moved else None, "problems": problems}, indent=1))
     rec = base["recorded"]
     assert not problems, (
         f"Recognize's face model differs from the baseline (recorded {rec['date']} with Recognize {rec['recognize']}, "

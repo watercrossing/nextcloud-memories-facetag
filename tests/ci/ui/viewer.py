@@ -116,6 +116,14 @@ class Overlay:
             self.page.wait_for_timeout(100)
         raise AssertionError("the image never settled")
 
+    def wait_moved(self, away_from: int, timeout: float = 15) -> int:
+        """After an arrow, key or swipe: wait until another photo is current, then for it to settle.
+        (Settling alone can pass before a slow page has even started the transition.)"""
+        self.page.wait_for_function("(fid) => globalThis._m.viewer.photoswipe?.currSlide?.data?.photo?.fileid !== fid",
+                                    arg=away_from, timeout=timeout * 1000)
+        self.settle()
+        return self.current_fileid()
+
     # -------------------------------------------------------------- actions
 
     def hide_hint(self) -> None:
