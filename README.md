@@ -38,7 +38,7 @@ A new face whose nearest named person is a clear match is put under that person;
 
 ## Requirements
 
-- Nextcloud <!--tested:nextcloud-->34<!--/tested-->, with Memories <!--tested:memories-->11<!--/tested--> and Recognize <!--tested:recognize-->12<!--/tested-->, face recognition enabled and running on Recognize's **tfjs-node** backend (not the pure-JS/WASM fallback).
+- Nextcloud <!--tested:nextcloud-->34 or 35<!--/tested-->, with Memories <!--tested:memories-->11<!--/tested--> and Recognize <!--tested:recognize-->12 or 13<!--/tested-->, face recognition enabled and running on Recognize's **tfjs-node** backend (not the pure-JS/WASM fallback).
 - The app runs Recognize's bundled `node` and models; it ships no models of its own.
 
 ## Installing
@@ -109,7 +109,7 @@ Photos indexed in the last 24 hours, and photos still in Recognize's queue, are 
 
 Nextcloud has no way for one app to depend on versions of another, so this app checks for itself.
 
-- **Version guard.** `lib/Service/Compatibility.php` lists the major versions it has been tested with (Memories <!--tested:memories-->11<!--/tested-->, Recognize <!--tested:recognize-->12<!--/tested-->). On any other major version the app switches itself off — no tag button, the API answers 503, the scan doesn't run — and says why on the admin overview page. Bug-fix and minor releases within a tested major are allowed. To try a new release anyway: `occ config:app:set memories_facetag ignore_versions --value=yes`.
+- **Version guard.** `lib/Service/Compatibility.php` lists the major versions it has been tested with (Memories <!--tested:memories-->11<!--/tested-->, Recognize <!--tested:recognize-->12 or 13<!--/tested-->). On any other major version the app switches itself off — no tag button, the API answers 503, the scan doesn't run — and says why on the admin overview page. Bug-fix and minor releases within a tested major are allowed. To try a new release anyway: `occ config:app:set memories_facetag ignore_versions --value=yes`.
 - **Self-test.** `occ memories_facetag:check` checks what the app actually relies on, whatever the version numbers say: Recognize's face tables and their columns, its clustering job, its node/TensorFlow runtime (by running the face model once), the columns of Memories' index, and the internals of Memories' viewer that the tag button hooks into. With `-q` it prints nothing when all is well and lists the problems (exit 1) when not, so it suits a cron job after the nightly app update:
 
   ```sh
@@ -125,7 +125,7 @@ What it is coupled to: Recognize's `recognize_face_detections` / `recognize_face
 - Recognize skips any photo that already has a face, so a manual tag on a photo Recognize has *not yet processed* means it never auto-detects that photo.
 - `occ recognize:reset-faces` and `reset-face-clusters` delete these tags along with everything else.
 - Recognize has no PHP API for faces; `lib/Service/FaceStore.php` reads and writes its tables directly, so re-check them on a Recognize major release.
-- `appinfo/info.xml` caps Nextcloud at <!--tested:nextcloud-max-->34<!--/tested-->: a major upgrade disables the app until the cap is raised and it is retested.
+- `appinfo/info.xml` caps Nextcloud at <!--tested:nextcloud-max-->35<!--/tested-->: a major upgrade disables the app until the cap is raised and it is retested.
 
 ## Licence
 
